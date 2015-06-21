@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6AE6737-CDF4-4F8C-A343-632C6FF4E970}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1284106-CA74-466C-8385-ABAFE034749F}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BootstrapTagHelpers", "src\BootstrapTagHelpers\BootstrapTagHelpers.xproj", "{F4055DDC-E8B4-48F4-8495-DF868FBFF229}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BootstrapTagHelpersDemo", "src\BootstrapTagHelpersDemo\BootstrapTagHelpersDemo.xproj", "{58C34C18-2653-4EFA-AF26-223EF0550F40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4055DDC-E8B4-48F4-8495-DF868FBFF229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4055DDC-E8B4-48F4-8495-DF868FBFF229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4055DDC-E8B4-48F4-8495-DF868FBFF229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4055DDC-E8B4-48F4-8495-DF868FBFF229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58C34C18-2653-4EFA-AF26-223EF0550F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C34C18-2653-4EFA-AF26-223EF0550F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C34C18-2653-4EFA-AF26-223EF0550F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C34C18-2653-4EFA-AF26-223EF0550F40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F4055DDC-E8B4-48F4-8495-DF868FBFF229} = {C6AE6737-CDF4-4F8C-A343-632C6FF4E970}
+		{58C34C18-2653-4EFA-AF26-223EF0550F40} = {C6AE6737-CDF4-4F8C-A343-632C6FF4E970}
+	EndGlobalSection
+EndGlobal
