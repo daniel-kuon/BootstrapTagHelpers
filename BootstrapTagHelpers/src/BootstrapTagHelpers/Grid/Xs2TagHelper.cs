@@ -1,0 +1,7 @@
+namespace BootstrapTagHelpers.Grid {
+    public class Xs2TagHelper:SizedColTagHelper {
+
+        protected override int Size => 2;
+        protected override string Type => "xs";
+    }
+}
