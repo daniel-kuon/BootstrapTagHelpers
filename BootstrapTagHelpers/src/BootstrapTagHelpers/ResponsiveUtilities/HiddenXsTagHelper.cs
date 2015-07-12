@@ -1,14 +1,12 @@
-﻿namespace BootstrapTagHelpers.ResponsiveUtilities {
+namespace BootstrapTagHelpers.ResponsiveUtilities {
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
-    
-    [TargetElement("SrOnly")]
-public class SrOnlyTagHelper:BootstrapTagHelper {
+    [TargetElement("HiddenXs")]
+    public class HiddenXsTagHelper:BootstrapTagHelper {
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "div";
-            output.AddCssClass("sr-only");
+            output.AddCssClass("hidden-xs");
         }
     }
-
 }
