@@ -7,7 +7,7 @@ namespace BootstrapTagHelpers.Grid {
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "div";
-            output.AddCssClass(this.IsSet(()=>this.Fluid,context)? "container-fluid": "container");
+            output.AddCssClass(context.IsSet(()=> Fluid) ? "container-fluid": "container");
         }
     }
 }

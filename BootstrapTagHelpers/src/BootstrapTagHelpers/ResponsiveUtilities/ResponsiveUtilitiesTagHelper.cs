@@ -34,17 +34,17 @@ namespace BootstrapTagHelpers.ResponsiveUtilities {
         public bool SrOnly { get; set; }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            if (this.IsSet(()=> this.HiddenXs, context))
+            if (context.IsSet(()=> this.HiddenXs))
                 output.AddCssClass("hidden-xs");
-            if (this.IsSet(()=> this.HiddenSm, context))
+            if (context.IsSet(()=> this.HiddenSm))
                 output.AddCssClass("hidden-sm");
-            if (this.IsSet(()=> this.HiddenMd, context))
+            if (context.IsSet(()=> this.HiddenMd))
                 output.AddCssClass("hidden-md");
-            if (this.IsSet(()=> this.HiddenLg, context))
+            if (context.IsSet(()=> this.HiddenLg))
                 output.AddCssClass("hidden-lg");
-            if (this.IsSet(()=> this.HiddenPrint, context))
+            if (context.IsSet(()=> this.HiddenPrint))
                 output.AddCssClass("hidden-print");
-            if (this.IsSet(()=> this.SrOnly, context))
+            if (context.IsSet(()=> this.SrOnly))
                 output.AddCssClass("sr-only");
             if (this.VisibleXs != null)
                 output.AddCssClass("visible-xs-" + this.VisibleXs.Value.GetDescription());
