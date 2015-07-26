@@ -1,10 +1,11 @@
 ﻿namespace BootstrapTagHelpers {
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
-    [TargetElement("pre",Attributes = AttributePrefix+"scrollable")]
+    [TargetElement("pre",Attributes = ScrollableAttributeName)]
     public class PreTagHelper :BootstrapTagHelper{
+        public const string ScrollableAttributeName = AttributePrefix+"scrollable";
 
-        [HtmlAttributeName(AttributePrefix+"scrollable")]
+        [HtmlAttributeName(ScrollableAttributeName)]
         public bool Scrollable { get; set; }
 
         

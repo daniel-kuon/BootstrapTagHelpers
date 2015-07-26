@@ -4,14 +4,16 @@
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
 
-    [TargetElement("*", Attributes = AttributePrefix + "text-alignment")]
-    [TargetElement("*", Attributes = AttributePrefix + "text-transformation")]
+    [TargetElement("*", Attributes = TextAlignmentAttributeName)]
+    [TargetElement("*", Attributes = TextTransformationAttributeName)]
     public class TextUtilityTagHelper:BootstrapTagHelper {
+        public const string TextAlignmentAttributeName = AttributePrefix + "text-alignment";
+        public const string TextTransformationAttributeName = AttributePrefix + "text-transformation";
 
-        [HtmlAttributeName(AttributePrefix+"text-alignment")]
+        [HtmlAttributeName(TextAlignmentAttributeName)]
         public BootstrapTextAlignmentMode? TextAlignment { get; set; }
 
-        [HtmlAttributeName(AttributePrefix + "text-transformation")]
+        [HtmlAttributeName(TextTransformationAttributeName)]
         public BootstrapTextTransformationMode? TextTransformation { get; set; }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {

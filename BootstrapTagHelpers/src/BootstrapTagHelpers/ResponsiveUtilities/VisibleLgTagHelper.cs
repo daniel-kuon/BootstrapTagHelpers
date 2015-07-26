@@ -3,8 +3,9 @@ namespace BootstrapTagHelpers.ResponsiveUtilities {
 
     [TargetElement("VisibleLg")]
     public class VisibleLgTagHelper:BootstrapTagHelper {
+        public const string DisplayModeAttributeName = "display-mode";
 
-        [HtmlAttributeName("display-mode")]
+        [HtmlAttributeName(DisplayModeAttributeName)]
         public BootstrapResponsiveUtilitiesDisplayMode DisplayMode { get; set; }=BootstrapResponsiveUtilitiesDisplayMode.Block;
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {

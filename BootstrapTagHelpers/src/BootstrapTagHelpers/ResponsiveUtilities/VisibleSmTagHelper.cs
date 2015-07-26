@@ -4,7 +4,7 @@ namespace BootstrapTagHelpers.ResponsiveUtilities {
     [TargetElement("VisibleSm")]
     public class VisibleSmTagHelper:BootstrapTagHelper {
 
-        [HtmlAttributeName("display-mode")]
+        [HtmlAttributeName(VisibleLgTagHelper.DisplayModeAttributeName)]
         public BootstrapResponsiveUtilitiesDisplayMode DisplayMode { get; set; }=BootstrapResponsiveUtilitiesDisplayMode.Block;
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
