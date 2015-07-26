@@ -11,8 +11,8 @@ namespace BootstrapTagHelpers {
         /// </summary>
         public static void MergeAttribute(this TagHelperOutput output, string key, object value)
         {
-            if (output.Attributes.ContainsKey(key))
-                output.Attributes[key] = value;
+            if (output.Attributes.ContainsName(key))
+                output.Attributes[key].Value = value;
             else
                 output.Attributes.Add(key, value);
         }
@@ -49,7 +49,7 @@ namespace BootstrapTagHelpers {
         /// <param name="separator">Is inserted between the old value and the appended value</param>
         public static void MergeAttribute(this TagHelperOutput output, string key, string value, bool appendText, string separator)
         {
-            if (output.Attributes.ContainsKey(key))
+            if (output.Attributes.ContainsName(key))
                 if (appendText)
                     output.Attributes[key] = output.Attributes[key] == null ? value : output.Attributes[key] + separator + value;
                 else
@@ -70,13 +70,13 @@ namespace BootstrapTagHelpers {
         /// </summary>
         public static void AddCssClass(this TagHelperOutput output, IEnumerable<string> cssClasses)
         {
-            if (output.Attributes.ContainsKey("class") && output.Attributes["class"] != null) {
+            if (output.Attributes.ContainsName("class") && output.Attributes["class"] != null) {
                 var classes = output.Attributes["class"].ToString().Split(' ').ToList();
                 foreach (var cssClass in cssClasses.Where(cssClass => !classes.Contains(cssClass))) {
                     classes.Add(cssClass);
                 }
                 output.Attributes["class"] = classes.Aggregate((s, s1) => s + " " + s1);
-            } else if (output.Attributes.ContainsKey("class"))
+            } else if (output.Attributes.ContainsName("class"))
                 output.Attributes["class"]= cssClasses.Aggregate((s, s1) => s + " " + s1);
             else
                 output.Attributes.Add("class", cssClasses.Aggregate((s, s1) => s + " " + s1));
@@ -86,7 +86,7 @@ namespace BootstrapTagHelpers {
         /// Adds an style entry
         /// </summary>
         public static void AddCssStyle(this TagHelperOutput output, string name,  string value) {
-            if (output.Attributes.ContainsKey("style")) {
+            if (output.Attributes.ContainsName("style")) {
                 if (string.IsNullOrEmpty(output.Attributes["style"].ToString()))
                     output.Attributes["style"] = name + ": " + value +";";
                 else

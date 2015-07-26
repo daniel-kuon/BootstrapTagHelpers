@@ -18,7 +18,7 @@ namespace BootstrapTagHelpers {
             var attrName = memberExpression?.Member.GetCustomAttribute<HtmlAttributeNameAttribute>()?.Name;
             if (string.IsNullOrEmpty(attrName))
                 attrName = memberExpression?.Member.Name;
-            return expression.Compile()() || context.AllAttributes.ContainsKey(attrName) && (string)context.AllAttributes[attrName] != "false";
+            return expression.Compile()() || context.AllAttributes.ContainsName(attrName) && (string)context.AllAttributes[attrName].Value != "false";
         }
     }
 }
