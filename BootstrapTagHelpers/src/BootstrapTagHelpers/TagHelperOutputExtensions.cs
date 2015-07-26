@@ -18,6 +18,24 @@ namespace BootstrapTagHelpers {
         }
 
         /// <summary>
+        /// Adds an aria attribute
+        /// </summary>
+        /// <param name="name">Name of the attribute. "aria-" is prepended.</param>
+        /// <param name="value"></param>
+        public static void AddAriaAttribute(this TagHelperOutput output, string name, object value) {
+            output.MergeAttribute("aria-" + name, value);
+        }
+
+        /// <summary>
+        /// Adds an aria attribute
+        /// </summary>
+        /// <param name="name">Name of the attribute. "aria-" is prepended.</param>
+        /// <param name="value"></param>
+        public static void AddDataAttribute(this TagHelperOutput output, string name, object value) {
+            output.MergeAttribute("data-" + name, value);
+        }
+
+        /// <summary>
         /// Adds an attribute to the Attributes collection. Existing Attributes are overwritten.
         /// </summary>
         public static void MergeAttribute(this TagHelperOutput output, string key, string value)
