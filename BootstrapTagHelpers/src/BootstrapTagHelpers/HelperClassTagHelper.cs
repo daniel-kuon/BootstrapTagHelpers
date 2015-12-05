@@ -1,16 +1,16 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
-    [TargetElement("*", Attributes = TextContextAttributeName)]
-    [TargetElement("*", Attributes = BackgroundContextAttributeName)]
-    [TargetElement("*", Attributes = PullLeftAttributeName)]
-    [TargetElement("*", Attributes = PullRightAttributeName)]
-    [TargetElement("*", Attributes = CenterBlockAttributeName)]
-    [TargetElement("*", Attributes = ClearfixAttributeName)]
-    [TargetElement("*", Attributes = ShowAttributeName)]
-    [TargetElement("*", Attributes = HiddenAttributeName)]
-    [TargetElement("*", Attributes = InvisibleAttributeName)]
-    [TargetElement("*", Attributes = TextHideAttributeName)]
+namespace BootstrapTagHelpers {
+    [HtmlTargetElement("*", Attributes = TextContextAttributeName)]
+    [HtmlTargetElement("*", Attributes = BackgroundContextAttributeName)]
+    [HtmlTargetElement("*", Attributes = PullLeftAttributeName)]
+    [HtmlTargetElement("*", Attributes = PullRightAttributeName)]
+    [HtmlTargetElement("*", Attributes = CenterBlockAttributeName)]
+    [HtmlTargetElement("*", Attributes = ClearfixAttributeName)]
+    [HtmlTargetElement("*", Attributes = ShowAttributeName)]
+    [HtmlTargetElement("*", Attributes = HiddenAttributeName)]
+    [HtmlTargetElement("*", Attributes = InvisibleAttributeName)]
+    [HtmlTargetElement("*", Attributes = TextHideAttributeName)]
     public class HelperClassTagHelper : BootstrapTagHelper {
         public enum BackgroundContexts {
             Primary,

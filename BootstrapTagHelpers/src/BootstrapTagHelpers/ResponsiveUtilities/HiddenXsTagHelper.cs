@@ -1,7 +1,7 @@
-namespace BootstrapTagHelpers.ResponsiveUtilities {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
-    [TargetElement("HiddenXs")]
+namespace BootstrapTagHelpers.ResponsiveUtilities {
+    [HtmlTargetElement("HiddenXs")]
     public class HiddenXsTagHelper:BootstrapTagHelper {
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {

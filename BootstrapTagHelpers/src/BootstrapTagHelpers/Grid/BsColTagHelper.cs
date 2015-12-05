@@ -1,11 +1,9 @@
-﻿namespace BootstrapTagHelpers.Grid
+﻿using Microsoft.AspNet.Razor.TagHelpers;
+
+namespace BootstrapTagHelpers.Grid
 {
     using System.Collections.Generic;
     using System.Linq;
-
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Mvc.Rendering;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
     public class BsColTagHelper : BootstrapTagHelper
     {

@@ -1,7 +1,7 @@
-namespace BootstrapTagHelpers.ResponsiveUtilities {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
-    [TargetElement("VisibleMd")]
+namespace BootstrapTagHelpers.ResponsiveUtilities {
+    [HtmlTargetElement("VisibleMd")]
     public class VisibleMdTagHelper:BootstrapTagHelper {
 
         [HtmlAttributeName(VisibleLgTagHelper.DisplayModeAttributeName)]

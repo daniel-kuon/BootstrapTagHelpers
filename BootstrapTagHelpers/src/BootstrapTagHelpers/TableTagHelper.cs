@@ -1,7 +1,7 @@
-﻿namespace BootstrapTagHelpers {
-    using System.Collections.Generic;
+﻿using Microsoft.AspNet.Razor.TagHelpers;
 
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+namespace BootstrapTagHelpers {
+    using System.Collections.Generic;
 
     public class TableTagHelper : BootstrapTagHelper {
         public const string StrippedAttributeName = AttributePrefix + "stripped";

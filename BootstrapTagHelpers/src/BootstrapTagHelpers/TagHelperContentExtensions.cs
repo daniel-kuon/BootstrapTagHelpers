@@ -1,6 +1,6 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers {
     public static class TagHelperContentExtensions {
 
         public static void Prepend(this TagHelperContent content, string value) {
@@ -8,6 +8,6 @@ namespace BootstrapTagHelpers {
                 content.SetContent(value);
             else
                 content.SetContent(value + content.GetContent());
-        } 
+        }
     }
 }

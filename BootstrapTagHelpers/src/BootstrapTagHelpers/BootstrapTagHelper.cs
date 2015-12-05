@@ -1,10 +1,7 @@
+using Microsoft.AspNet.Razor.TagHelpers;
+
 namespace BootstrapTagHelpers
 {
-    using System.Linq;
-
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
-
     public abstract class BootstrapTagHelper : TagHelper { 
 
         public const string AttributePrefix="b-";

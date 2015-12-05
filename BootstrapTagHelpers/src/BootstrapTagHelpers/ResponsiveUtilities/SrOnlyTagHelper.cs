@@ -1,8 +1,7 @@
-﻿namespace BootstrapTagHelpers.ResponsiveUtilities {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+﻿using Microsoft.AspNet.Razor.TagHelpers;
 
-    
-    [TargetElement("SrOnly")]
+namespace BootstrapTagHelpers.ResponsiveUtilities {
+    [HtmlTargetElement("SrOnly")]
 public class SrOnlyTagHelper:BootstrapTagHelper {
         private const string FocusableAttributeName=AttributePrefix + "focusable";
 

@@ -1,11 +1,8 @@
-﻿namespace BootstrapTagHelpers {
-    using System.ComponentModel;
+﻿using Microsoft.AspNet.Razor.TagHelpers;
 
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
-
-
-    [TargetElement("*", Attributes = TextAlignmentAttributeName)]
-    [TargetElement("*", Attributes = TextTransformationAttributeName)]
+namespace BootstrapTagHelpers {
+    [HtmlTargetElement("*", Attributes = TextAlignmentAttributeName)]
+    [HtmlTargetElement("*", Attributes = TextTransformationAttributeName)]
     public class TextUtilityTagHelper:BootstrapTagHelper {
         public const string TextAlignmentAttributeName = AttributePrefix + "text-alignment";
         public const string TextTransformationAttributeName = AttributePrefix + "text-transformation";

@@ -1,6 +1,6 @@
-namespace BootstrapTagHelpers.Grid {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Grid {
     public class ContainerTagHelper:BootstrapTagHelper{
 
         public bool Fluid { get; set; }

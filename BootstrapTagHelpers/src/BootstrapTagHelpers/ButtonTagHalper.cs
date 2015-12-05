@@ -1,10 +1,10 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
-    [TargetElement("a", Attributes = ButtonAttributeName)]
-    [TargetElement("input", Attributes = TypeAttributeName)]
-    [TargetElement("button")]
-    public class ButtonTagHalper : BootstrapTagHelper {
+namespace BootstrapTagHelpers {
+    [HtmlTargetElement("a", Attributes = ButtonAttributeName)]
+    [HtmlTargetElement("input", Attributes = TypeAttributeName)]
+    [HtmlTargetElement("button")]
+    public class ButtonTagHelper : BootstrapTagHelper {
         public const string TypeAttributeName = "type";
         public const string ButtonAttributeName = AttributePrefix + "button";
         public const string ContextAttributeName = AttributePrefix + "context";

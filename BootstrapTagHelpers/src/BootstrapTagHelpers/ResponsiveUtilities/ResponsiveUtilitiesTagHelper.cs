@@ -1,19 +1,18 @@
+using Microsoft.AspNet.Razor.TagHelpers;
+
 namespace BootstrapTagHelpers.ResponsiveUtilities {
-
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
-
-    [TargetElement("*",Attributes = HiddenXsAttributeName)]
-    [TargetElement("*",Attributes = HiddenSmAttributeName)]
-    [TargetElement("*",Attributes = HiddenMdAttributeName)]
-    [TargetElement("*",Attributes = HiddenLgAttributeName)]
-    [TargetElement("*",Attributes = HiddenPrintAttributeName)]
-    [TargetElement("*", Attributes = VisibleXsAttributeName)]
-    [TargetElement("*",Attributes = VisibleSmAttributeName)]
-    [TargetElement("*",Attributes = VisibleMdAttributeName)]
-    [TargetElement("*",Attributes = VisibleLgAttributeName)]
-    [TargetElement("*",Attributes = VisiblePrintAttributeName)]
-    [TargetElement("*",Attributes = SrOnlyAttributeName)]
-    [TargetElement("*",Attributes = SrOnlyFocusableAttributeName)]
+    [HtmlTargetElement("*",Attributes = HiddenXsAttributeName)]
+    [HtmlTargetElement("*",Attributes = HiddenSmAttributeName)]
+    [HtmlTargetElement("*",Attributes = HiddenMdAttributeName)]
+    [HtmlTargetElement("*",Attributes = HiddenLgAttributeName)]
+    [HtmlTargetElement("*",Attributes = HiddenPrintAttributeName)]
+    [HtmlTargetElement("*", Attributes = VisibleXsAttributeName)]
+    [HtmlTargetElement("*",Attributes = VisibleSmAttributeName)]
+    [HtmlTargetElement("*",Attributes = VisibleMdAttributeName)]
+    [HtmlTargetElement("*",Attributes = VisibleLgAttributeName)]
+    [HtmlTargetElement("*",Attributes = VisiblePrintAttributeName)]
+    [HtmlTargetElement("*",Attributes = SrOnlyAttributeName)]
+    [HtmlTargetElement("*",Attributes = SrOnlyFocusableAttributeName)]
     public class ResponsiveUtilitiesTagHelper : BootstrapTagHelper
     {
         public const string HiddenXsAttributeName = AttributePrefix + "hidden-xs";

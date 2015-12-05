@@ -1,6 +1,6 @@
-namespace BootstrapTagHelpers.Grid {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Grid {
     public class RowTagHelper : BootstrapTagHelper
     {
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output)

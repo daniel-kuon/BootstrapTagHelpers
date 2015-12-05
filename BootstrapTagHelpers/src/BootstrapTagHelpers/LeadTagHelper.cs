@@ -1,7 +1,7 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
-    [TargetElement("lead")]
+namespace BootstrapTagHelpers {
+    [HtmlTargetElement("lead")]
     public class LeadTagHelper : BootstrapTagHelper {
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {

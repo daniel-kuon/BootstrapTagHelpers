@@ -1,9 +1,9 @@
+using Microsoft.AspNet.Razor.TagHelpers;
+
 namespace BootstrapTagHelpers {
     using System;
     using System.Linq.Expressions;
     using System.Reflection;
-
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
     public static class TagHelperContextExtensions {
 

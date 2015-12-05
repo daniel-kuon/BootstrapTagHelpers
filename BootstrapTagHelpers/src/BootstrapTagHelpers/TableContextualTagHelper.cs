@@ -1,9 +1,9 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
-    [TargetElement("tr", Attributes =ContextualStateAttributeName )]
-    [TargetElement("td", Attributes =ContextualStateAttributeName )]
-    [TargetElement("th", Attributes =ContextualStateAttributeName )]
+namespace BootstrapTagHelpers {
+    [HtmlTargetElement("tr", Attributes =ContextualStateAttributeName )]
+    [HtmlTargetElement("td", Attributes =ContextualStateAttributeName )]
+    [HtmlTargetElement("th", Attributes =ContextualStateAttributeName )]
     public class TableContextualTagHelper:BootstrapTagHelper{
         public const string ContextualStateAttributeName = AttributePrefix + "contextual-state";
 

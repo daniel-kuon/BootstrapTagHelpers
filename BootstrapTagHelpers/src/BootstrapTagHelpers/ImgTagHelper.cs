@@ -1,10 +1,10 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
-    [TargetElement("img", Attributes = ResponsiveAttributeName)]
-    [TargetElement("img", Attributes = CircleAttributeName)]
-    [TargetElement("img", Attributes = ThumbnailAttributeName)]
-    [TargetElement("img", Attributes = RoundedAttributeName)]
+namespace BootstrapTagHelpers {
+    [HtmlTargetElement("img", Attributes = ResponsiveAttributeName)]
+    [HtmlTargetElement("img", Attributes = CircleAttributeName)]
+    [HtmlTargetElement("img", Attributes = ThumbnailAttributeName)]
+    [HtmlTargetElement("img", Attributes = RoundedAttributeName)]
     public class ImgTagHelper : BootstrapTagHelper {
         public const string RoundedAttributeName = AttributePrefix + "rounded";
         public const string CircleAttributeName = AttributePrefix + "circle";

@@ -1,7 +1,7 @@
+using Microsoft.AspNet.Razor.TagHelpers;
+
 namespace BootstrapTagHelpers.Grid {
     using System.Collections.Generic;
-
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
     public abstract class SizedColTagHelper : BootstrapTagHelper {
 

@@ -1,11 +1,10 @@
-﻿namespace BootstrapTagHelpers {
+﻿using Microsoft.AspNet.Razor.TagHelpers;
 
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
-
-    [TargetElement("ul",Attributes = UnstyledAttributeName)]
-    [TargetElement("ul",Attributes = InlineAttributeName)]
-    [TargetElement("ol",Attributes = UnstyledAttributeName)]
-    [TargetElement("ol",Attributes = InlineAttributeName)]
+namespace BootstrapTagHelpers {
+    [HtmlTargetElement("ul",Attributes = UnstyledAttributeName)]
+    [HtmlTargetElement("ul",Attributes = InlineAttributeName)]
+    [HtmlTargetElement("ol",Attributes = UnstyledAttributeName)]
+    [HtmlTargetElement("ol",Attributes = InlineAttributeName)]
     public class ListTagHelper:BootstrapTagHelper {
         public const string InlineAttributeName = AttributePrefix + "inline";
         public const string UnstyledAttributeName = AttributePrefix + "unstyled";
@@ -15,7 +14,7 @@
 
         [HtmlAttributeName(InlineAttributeName)]
         public bool Inline { get; set; }
-        
+
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             if (context.IsSet(()=>Unstyled))
                 output.AddCssClass("list-unstyled");

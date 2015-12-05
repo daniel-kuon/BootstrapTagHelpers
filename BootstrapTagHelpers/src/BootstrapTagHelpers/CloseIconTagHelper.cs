@@ -1,6 +1,6 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers {
     public class CloseIconTagHelper:BootstrapTagHelper {
         private const  string TextAttributeName=AttributePrefix+ "text";
 
@@ -15,7 +15,7 @@ namespace BootstrapTagHelpers {
             output.MergeAttribute("type", "button");
             output.AddAriaAttribute("label", this.Text);
             output.Content.SetContent("<span aria-hidden=\"true\">&times;</span>");
-            output.SelfClosing = false;
+            output.TagMode=TagMode.StartTagAndEndTag;
         }
     }
 }

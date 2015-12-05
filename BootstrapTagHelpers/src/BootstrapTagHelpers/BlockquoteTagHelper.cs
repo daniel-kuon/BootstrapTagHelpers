@@ -1,7 +1,7 @@
-﻿namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+﻿using Microsoft.AspNet.Razor.TagHelpers;
 
-    [TargetElement("blockquote",Attributes = ReverseAttributeName)]
+namespace BootstrapTagHelpers {
+    [HtmlTargetElement("blockquote",Attributes = ReverseAttributeName)]
     public class BlockquoteTagHelper:BootstrapTagHelper
     {
         public const string ReverseAttributeName = AttributePrefix + "reverse";
