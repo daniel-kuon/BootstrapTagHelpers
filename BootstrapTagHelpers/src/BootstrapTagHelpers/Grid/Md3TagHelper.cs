@@ -1,6 +1,8 @@
 namespace BootstrapTagHelpers.Grid {
-    public class Md3TagHelper:SizedColTagHelper {
+    using Microsoft.AspNet.Razor.TagHelpers;
 
+    [OutputElementHint("div")]
+    public class Md3TagHelper : SizedColTagHelper {
         protected override int Size => 3;
         protected override string Type => "md";
     }

@@ -13,6 +13,7 @@ namespace BootstrapTagHelpers.ResponsiveUtilities {
     [HtmlTargetElement("*", Attributes = VisiblePrintAttributeName)]
     [HtmlTargetElement("*", Attributes = SrOnlyAttributeName)]
     [HtmlTargetElement("*", Attributes = SrOnlyFocusableAttributeName)]
+    [OutputElementHint("div")]
     public class ResponsiveUtilitiesTagHelper : BootstrapTagHelper {
         public const string HiddenXsAttributeName = AttributePrefix + "hidden-xs";
         public const string HiddenSmAttributeName = AttributePrefix + "hidden-sm";

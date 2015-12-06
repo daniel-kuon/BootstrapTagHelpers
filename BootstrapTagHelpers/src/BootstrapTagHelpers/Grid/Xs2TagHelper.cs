@@ -1,6 +1,8 @@
 namespace BootstrapTagHelpers.Grid {
-    public class Xs2TagHelper:SizedColTagHelper {
+    using Microsoft.AspNet.Razor.TagHelpers;
 
+    [OutputElementHint("div")]
+    public class Xs2TagHelper : SizedColTagHelper {
         protected override int Size => 2;
         protected override string Type => "xs";
     }

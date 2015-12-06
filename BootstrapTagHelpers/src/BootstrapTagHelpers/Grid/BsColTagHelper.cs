@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNet.Razor.TagHelpers;
-
-namespace BootstrapTagHelpers.Grid
-{
+﻿namespace BootstrapTagHelpers.Grid {
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
-    public class BsColTagHelper : BootstrapTagHelper
-    {
-
+    [OutputElementHint("div")]
+    public class BsColTagHelper : BootstrapTagHelper {
         [HtmlAttributeName("xs-size")]
         public int XsSize { get; set; }
 
@@ -31,6 +28,7 @@ namespace BootstrapTagHelpers.Grid
 
         [HtmlAttributeName("lg-push")]
         public int LgPush { get; set; }
+
         [HtmlAttributeName("xs-pull")]
         public int XsPull { get; set; }
 
@@ -56,46 +54,43 @@ namespace BootstrapTagHelpers.Grid
         public int LgOffset { get; set; }
 
 
-
-
-        protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output)
-        {
+        protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "div";
             var classes = new List<string>();
-            if (XsSize>0 && XsSize <= 12)
+            if (XsSize > 0 && XsSize <= 12)
                 classes.Add("col-xs-" + XsSize);
-            if (SmSize>0 && SmSize <= 12)
+            if (SmSize > 0 && SmSize <= 12)
                 classes.Add("col-sm-" + SmSize);
-            if (MdSize>0 && MdSize <= 12)
+            if (MdSize > 0 && MdSize <= 12)
                 classes.Add("col-md-" + MdSize);
-            if (LgSize>0 && LgSize<=12)
+            if (LgSize > 0 && LgSize <= 12)
                 classes.Add("col-lg-" + LgSize);
 
-            if (XsOffset>0 && XsOffset <= 12)
+            if (XsOffset > 0 && XsOffset <= 12)
                 classes.Add("col-xs-offset-" + XsOffset);
-            if (SmOffset>0 && SmOffset <= 12)
+            if (SmOffset > 0 && SmOffset <= 12)
                 classes.Add("col-sm-offset-" + SmOffset);
-            if (MdOffset>0 && MdOffset <= 12)
+            if (MdOffset > 0 && MdOffset <= 12)
                 classes.Add("col-md-offset-" + MdOffset);
-            if (LgOffset>0 && LgOffset<=12)
+            if (LgOffset > 0 && LgOffset <= 12)
                 classes.Add("col-lg-offset-" + LgOffset);
 
-            if (XsPull>0 && XsPull <= 12)
+            if (XsPull > 0 && XsPull <= 12)
                 classes.Add("col-xs-pull-" + XsPull);
-            if (SmPull>0 && SmPull <= 12)
+            if (SmPull > 0 && SmPull <= 12)
                 classes.Add("col-sm-pull-" + SmPull);
-            if (MdPull>0 && MdPull <= 12)
+            if (MdPull > 0 && MdPull <= 12)
                 classes.Add("col-md-pull-" + MdPull);
-            if (LgPull>0 && LgPull<=12)
+            if (LgPull > 0 && LgPull <= 12)
                 classes.Add("col-lg-pull-" + LgPull);
 
-            if (XsPush>0 && XsPush <= 12)
+            if (XsPush > 0 && XsPush <= 12)
                 classes.Add("col-xs-push-" + XsPush);
-            if (SmPush>0 && SmPush <= 12)
+            if (SmPush > 0 && SmPush <= 12)
                 classes.Add("col-sm-push-" + SmPush);
-            if (MdPush>0 && MdPush <= 12)
+            if (MdPush > 0 && MdPush <= 12)
                 classes.Add("col-md-push-" + MdPush);
-            if (LgPush>0 && LgPush<=12)
+            if (LgPush > 0 && LgPush <= 12)
                 classes.Add("col-lg-push-" + LgPush);
 
             if (classes.Any())

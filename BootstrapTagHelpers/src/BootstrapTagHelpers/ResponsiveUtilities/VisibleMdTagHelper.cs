@@ -1,15 +1,15 @@
-using Microsoft.AspNet.Razor.TagHelpers;
-
 namespace BootstrapTagHelpers.ResponsiveUtilities {
-    [HtmlTargetElement("VisibleMd")]
-    public class VisibleMdTagHelper:BootstrapTagHelper {
+    using Microsoft.AspNet.Razor.TagHelpers;
 
+    [OutputElementHint("div")]
+    public class VisibleMdTagHelper : BootstrapTagHelper {
         [HtmlAttributeName(VisibleLgTagHelper.DisplayModeAttributeName)]
-        public BootstrapResponsiveUtilitiesDisplayMode DisplayMode { get; set; }=BootstrapResponsiveUtilitiesDisplayMode.Block;
+        public BootstrapResponsiveUtilitiesDisplayMode DisplayMode { get; set; } =
+            BootstrapResponsiveUtilitiesDisplayMode.Block;
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            output.TagName = this.DisplayMode==BootstrapResponsiveUtilitiesDisplayMode.Inline?"span":"div";
-            output.AddCssClass("visible-md-" + this.DisplayMode.GetDescription());
+            output.TagName = DisplayMode == BootstrapResponsiveUtilitiesDisplayMode.Inline ? "span" : "div";
+            output.AddCssClass("visible-md-" + DisplayMode.GetDescription());
         }
     }
 }
