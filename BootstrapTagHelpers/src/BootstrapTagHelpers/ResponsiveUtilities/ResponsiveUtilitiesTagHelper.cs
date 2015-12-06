@@ -1,20 +1,19 @@
-using Microsoft.AspNet.Razor.TagHelpers;
-
 namespace BootstrapTagHelpers.ResponsiveUtilities {
-    [HtmlTargetElement("*",Attributes = HiddenXsAttributeName)]
-    [HtmlTargetElement("*",Attributes = HiddenSmAttributeName)]
-    [HtmlTargetElement("*",Attributes = HiddenMdAttributeName)]
-    [HtmlTargetElement("*",Attributes = HiddenLgAttributeName)]
-    [HtmlTargetElement("*",Attributes = HiddenPrintAttributeName)]
+    using Microsoft.AspNet.Razor.TagHelpers;
+
+    [HtmlTargetElement("*", Attributes = HiddenXsAttributeName)]
+    [HtmlTargetElement("*", Attributes = HiddenSmAttributeName)]
+    [HtmlTargetElement("*", Attributes = HiddenMdAttributeName)]
+    [HtmlTargetElement("*", Attributes = HiddenLgAttributeName)]
+    [HtmlTargetElement("*", Attributes = HiddenPrintAttributeName)]
     [HtmlTargetElement("*", Attributes = VisibleXsAttributeName)]
-    [HtmlTargetElement("*",Attributes = VisibleSmAttributeName)]
-    [HtmlTargetElement("*",Attributes = VisibleMdAttributeName)]
-    [HtmlTargetElement("*",Attributes = VisibleLgAttributeName)]
-    [HtmlTargetElement("*",Attributes = VisiblePrintAttributeName)]
-    [HtmlTargetElement("*",Attributes = SrOnlyAttributeName)]
-    [HtmlTargetElement("*",Attributes = SrOnlyFocusableAttributeName)]
-    public class ResponsiveUtilitiesTagHelper : BootstrapTagHelper
-    {
+    [HtmlTargetElement("*", Attributes = VisibleSmAttributeName)]
+    [HtmlTargetElement("*", Attributes = VisibleMdAttributeName)]
+    [HtmlTargetElement("*", Attributes = VisibleLgAttributeName)]
+    [HtmlTargetElement("*", Attributes = VisiblePrintAttributeName)]
+    [HtmlTargetElement("*", Attributes = SrOnlyAttributeName)]
+    [HtmlTargetElement("*", Attributes = SrOnlyFocusableAttributeName)]
+    public class ResponsiveUtilitiesTagHelper : BootstrapTagHelper {
         public const string HiddenXsAttributeName = AttributePrefix + "hidden-xs";
         public const string HiddenSmAttributeName = AttributePrefix + "hidden-sm";
         public const string HiddenMdAttributeName = AttributePrefix + "hidden-md";
@@ -29,40 +28,69 @@ namespace BootstrapTagHelpers.ResponsiveUtilities {
         public const string SrOnlyFocusableAttributeName = AttributePrefix + "sr-only-focusable";
 
         [HtmlAttributeName(HiddenXsAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool HiddenXs { get; set; }
 
         [HtmlAttributeName(HiddenSmAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool HiddenSm { get; set; }
 
         [HtmlAttributeName(HiddenMdAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool HiddenMd { get; set; }
 
         [HtmlAttributeName(HiddenLgAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool HiddenLg { get; set; }
 
         [HtmlAttributeName(HiddenPrintAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool HiddenPrint { get; set; }
 
         [HtmlAttributeName(SrOnlyAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool SrOnly { get; set; }
 
         [HtmlAttributeName(SrOnlyFocusableAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool SrOnlyFocusable { get; set; }
 
+        [HtmlAttributeName(VisibleXsAttributeName)]
+        public BootstrapResponsiveUtilitiesDisplayMode? VisibleXs { get; set; }
+
+        [HtmlAttributeName(VisibleSmAttributeName)]
+        public BootstrapResponsiveUtilitiesDisplayMode? VisibleSm { get; set; }
+
+        [HtmlAttributeName(VisibleMdAttributeName)]
+        public BootstrapResponsiveUtilitiesDisplayMode? VisibleMd { get; set; }
+
+        [HtmlAttributeName(VisibleLgAttributeName)]
+        public BootstrapResponsiveUtilitiesDisplayMode? VisibleLg { get; set; }
+
+        [HtmlAttributeName(VisiblePrintAttributeName)]
+        public BootstrapResponsiveUtilitiesDisplayMode? VisiblePrint { get; set; }
+
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            if (context.IsSet(()=> HiddenXs))
+            if (HiddenXs)
                 output.AddCssClass("hidden-xs");
-            if (context.IsSet(()=> HiddenSm))
+            if (HiddenSm)
                 output.AddCssClass("hidden-sm");
-            if (context.IsSet(()=> HiddenMd))
+            if (HiddenMd)
                 output.AddCssClass("hidden-md");
-            if (context.IsSet(()=> HiddenLg))
+            if (HiddenLg)
                 output.AddCssClass("hidden-lg");
-            if (context.IsSet(()=> HiddenPrint))
+            if (HiddenPrint)
                 output.AddCssClass("hidden-print");
-            if (context.IsSet(()=> SrOnly) || context.IsSet(()=> SrOnlyFocusable ))
+            if (SrOnly || SrOnlyFocusable)
                 output.AddCssClass("sr-only");
-            if (context.IsSet(()=> SrOnlyFocusable ))
+            if (SrOnlyFocusable)
                 output.AddCssClass("sr-only-focusable");
             if (VisibleXs != null)
                 output.AddCssClass("visible-xs-" + VisibleXs.Value.GetDescription());
@@ -75,17 +103,5 @@ namespace BootstrapTagHelpers.ResponsiveUtilities {
             if (VisiblePrint != null)
                 output.AddCssClass("visible-print-" + VisiblePrint.Value.GetDescription());
         }
-
-        [HtmlAttributeName(VisibleXsAttributeName)]
-        public BootstrapResponsiveUtilitiesDisplayMode? VisibleXs { get; set; }
-        [HtmlAttributeName(VisibleSmAttributeName)]
-        public BootstrapResponsiveUtilitiesDisplayMode? VisibleSm { get; set; }
-        [HtmlAttributeName(VisibleMdAttributeName)]
-        public BootstrapResponsiveUtilitiesDisplayMode? VisibleMd { get; set; }
-        [HtmlAttributeName(VisibleLgAttributeName)]
-        public BootstrapResponsiveUtilitiesDisplayMode? VisibleLg { get; set; }
-        [HtmlAttributeName(VisiblePrintAttributeName)]
-        public BootstrapResponsiveUtilitiesDisplayMode? VisiblePrint { get; set; }
     }
-
 }

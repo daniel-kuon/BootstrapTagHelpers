@@ -1,6 +1,6 @@
-using Microsoft.AspNet.Razor.TagHelpers;
-
 namespace BootstrapTagHelpers {
+    using Microsoft.AspNet.Razor.TagHelpers;
+
     [HtmlTargetElement("a", Attributes = ButtonAttributeName)]
     [HtmlTargetElement("input", Attributes = TypeAttributeName)]
     [HtmlTargetElement("button")]
@@ -17,6 +17,8 @@ namespace BootstrapTagHelpers {
         public string Type { get; set; }
 
         [HtmlAttributeName(ButtonAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Button { get; set; }
 
         [HtmlAttributeName(ContextAttributeName)]
@@ -26,36 +28,43 @@ namespace BootstrapTagHelpers {
         public Size Size { get; set; }
 
         [HtmlAttributeName(BlockStyleAttrbibuteName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool BlockStyle { get; set; }
 
         [HtmlAttributeName(PressesAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Pressed { get; set; }
 
         [HtmlAttributeName(DisabledAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Disabled { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output) {
-            this.Type = this.Type?.ToLower() ?? "";
+            Type = Type?.ToLower() ?? "";
             output.TagName = output.TagName.ToLower();
-            if (context.IsSet(() => this.Button) || output.TagName == "button" || output.TagName == "input" && (this.Type == "button" || this.Type == "submit" || this.Type == "reset"))
+            if (Button || output.TagName == "button" ||
+                output.TagName == "input" && (Type == "button" || Type == "submit" || Type == "reset"))
                 base.Process(context, output);
         }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.AddCssClass("btn");
-            output.AddCssClass("btn-" + this.Context.ToString().ToLower());
-            if (this.Size!=Size.Default)
-                output.AddCssClass("btn-" + this.Size.ToString().ToLower());
-            if (context.IsSet(()=>this.BlockStyle))
+            output.AddCssClass("btn-" + Context.ToString().ToLower());
+            if (Size != Size.Default)
+                output.AddCssClass("btn-" + Size.ToString().ToLower());
+            if (BlockStyle)
                 output.AddCssClass("btn-block");
-            if (context.IsSet(() => this.Pressed)) {
+            if (Pressed) {
                 output.AddAriaAttribute("pressed", "true");
                 output.AddCssClass("active");
             }
-            if (context.IsSet(()=>this.Disabled)) {
-                if (output.TagName=="a")
+            if (Disabled) {
+                if (output.TagName == "a")
                     output.AddCssClass("disabled");
-                output.MergeAttribute("role","button");
+                output.MergeAttribute("role", "button");
             }
         }
     }

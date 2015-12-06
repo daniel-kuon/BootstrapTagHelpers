@@ -1,6 +1,6 @@
-using Microsoft.AspNet.Razor.TagHelpers;
-
 namespace BootstrapTagHelpers {
+    using Microsoft.AspNet.Razor.TagHelpers;
+
     [HtmlTargetElement("*", Attributes = TextContextAttributeName)]
     [HtmlTargetElement("*", Attributes = BackgroundContextAttributeName)]
     [HtmlTargetElement("*", Attributes = PullLeftAttributeName)]
@@ -47,49 +47,65 @@ namespace BootstrapTagHelpers {
         public BackgroundContexts? BackgroundContext { get; set; }
 
         [HtmlAttributeName(PullLeftAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool PullLeft { get; set; }
 
         [HtmlAttributeName(PullRightAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool PullRight { get; set; }
 
         [HtmlAttributeName(CenterBlockAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool CenterBlock { get; set; }
 
         [HtmlAttributeName(ClearfixAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Cleafix { get; set; }
 
         [HtmlAttributeName(ShowAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Show { get; set; }
 
         [HtmlAttributeName(HiddenAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Hidden { get; set; }
 
         [HtmlAttributeName(InvisibleAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Invisible { get; set; }
 
         [HtmlAttributeName(TextHideAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool TextHide { get; set; }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            if (this.TextContext!=null)
-                output.AddCssClass("text-" + this.TextContext.Value.ToString().ToLower());
-            if (this.BackgroundContext!=null)
-                output.AddCssClass("bg-" + this.BackgroundContext.Value.ToString().ToLower());
-            if (context.IsSet(()=>this.PullLeft))
+            if (TextContext != null)
+                output.AddCssClass("text-" + TextContext.Value.ToString().ToLower());
+            if (BackgroundContext != null)
+                output.AddCssClass("bg-" + BackgroundContext.Value.ToString().ToLower());
+            if (PullLeft)
                 output.AddCssClass("pull-left");
-            if (context.IsSet(()=>this.PullRight))
+            if (PullRight)
                 output.AddCssClass("pull-right");
-            if (context.IsSet(()=>this.CenterBlock))
+            if (CenterBlock)
                 output.AddCssClass("center-block");
-            if (context.IsSet(()=>this.Cleafix))
+            if (Cleafix)
                 output.AddCssClass("clearfix");
-            if (context.IsSet(()=>this.Show))
+            if (Show)
                 output.AddCssClass("show");
-            if (context.IsSet(()=>this.Hidden))
+            if (Hidden)
                 output.AddCssClass("hidden");
-            if (context.IsSet(()=>this.Invisible))
+            if (Invisible)
                 output.AddCssClass("invisible");
-            if (context.IsSet(()=>this.TextHide))
+            if (TextHide)
                 output.AddCssClass("text-hide");
         }
     }

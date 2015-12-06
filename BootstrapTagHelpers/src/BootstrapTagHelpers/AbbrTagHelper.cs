@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNet.Razor.TagHelpers;
+﻿namespace BootstrapTagHelpers {
+    using Microsoft.AspNet.Razor.TagHelpers;
 
-namespace BootstrapTagHelpers {
-    [HtmlTargetElement("abbr",Attributes = InitialismAttributeName)]
-    public class AbbrTagHelper:BootstrapTagHelper {
+    [HtmlTargetElement("abbr", Attributes = InitialismAttributeName)]
+    public class AbbrTagHelper : BootstrapTagHelper {
         public const string InitialismAttributeName = AttributePrefix + "initialism";
 
         [HtmlAttributeName(InitialismAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Initialism { get; set; }
 
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            if (context.IsSet(()=>Initialism))
+            if (Initialism)
                 output.AddCssClass("initialism");
         }
     }
-
 }

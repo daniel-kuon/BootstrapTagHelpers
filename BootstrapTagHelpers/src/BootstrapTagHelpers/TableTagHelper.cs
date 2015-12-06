@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNet.Razor.TagHelpers;
-
-namespace BootstrapTagHelpers {
+﻿namespace BootstrapTagHelpers {
     using System.Collections.Generic;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     public class TableTagHelper : BootstrapTagHelper {
         public const string StrippedAttributeName = AttributePrefix + "stripped";
@@ -11,36 +10,45 @@ namespace BootstrapTagHelpers {
         public const string HoverAttributeName = AttributePrefix + "hover";
 
         [HtmlAttributeName(StrippedAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Stripped { get; set; }
 
         [HtmlAttributeName(CondensedAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Condensed { get; set; }
 
         [HtmlAttributeName(BorderedAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Bordered { get; set; }
 
         [HtmlAttributeName(ResponsiveAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Responsive { get; set; }
 
         [HtmlAttributeName(HoverAttributeName)]
+        [HtmlAttributeNotBound]
+        [HtmlAttributeMinimizable]
         public bool Hover { get; set; }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            var classes = new List<string>() { "table"};
-            if (context.IsSet(()=>Stripped))
+            var classes = new List<string> {"table"};
+            if (Stripped)
                 classes.Add("table-stripped");
-            if (context.IsSet(()=>Condensed))
+            if (Condensed)
                 classes.Add("table-condensed");
-            if (context.IsSet(()=>Bordered))
+            if (Bordered)
                 classes.Add("table-bordered");
-            if (context.IsSet(()=>Hover))
+            if (Hover)
                 classes.Add("table-hover");
-            if (context.IsSet(()=>Responsive)) {
+            if (Responsive) {
                 output.PreElement.Append("<div class=\"table-responsive\">");
                 output.PostElement.Prepend("</div>");
             }
             output.AddCssClass(classes);
         }
     }
-
 }
