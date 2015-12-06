@@ -3,6 +3,8 @@ namespace BootstrapTagHelpers {
     using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using Microsoft.AspNet.Mvc.Rendering;
     using Microsoft.AspNet.Razor.TagHelpers;
 
     public abstract class BootstrapTagHelper : TagHelper {
@@ -25,6 +27,14 @@ namespace BootstrapTagHelpers {
             }
         }
 
+        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output) {
+            FillMinimizableAttributes(context);
+            if (!DisableBootstrap) {
+                await BootstrapProcessAsync(context, output);
+                RemoveMinimizableAttributes(output);
+            }
+        }
+
         private void RemoveMinimizableAttributes(TagHelperOutput output) {
             output.Attributes.RemoveAll(GetType()
                                             .GetProperties()
@@ -35,7 +45,13 @@ namespace BootstrapTagHelpers {
                                             .ToArray());
         }
 
-        protected abstract void BootstrapProcess(TagHelperContext context, TagHelperOutput output);
+        protected virtual void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
+
+        }
+
+        protected virtual async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
+           BootstrapProcess(context,output);
+        }
 
         private void FillMinimizableAttributes(TagHelperContext context) {
             IEnumerable<PropertyInfo> minimizableProperties =
