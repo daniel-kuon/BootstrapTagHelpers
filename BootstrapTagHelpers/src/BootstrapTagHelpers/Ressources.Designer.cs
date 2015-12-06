@@ -11,8 +11,8 @@
 namespace BootstrapTagHelpers {
     using System;
     using System.Reflection;
-    
-    
+
+
     /// <summary>
     ///    Eine stark typisierte Ressourcenklasse zum Suchen nach lokalisierten Zeichenfolgen usw.
     /// </summary>
@@ -23,14 +23,14 @@ namespace BootstrapTagHelpers {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Ressources {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         internal Ressources() {
         }
-        
+
         /// <summary>
         ///    Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
         /// </summary>
@@ -44,7 +44,7 @@ namespace BootstrapTagHelpers {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///    Überschreibt die Eigenschaft 'CurrentUICulture' des aktuellen Threads für alle
         ///    Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
@@ -58,7 +58,16 @@ namespace BootstrapTagHelpers {
                 resourceCulture = value;
             }
         }
-        
+
+        /// <summary>
+        ///    Sucht nach einer lokalisierten Zeichenfolge, die 'Close' ähnelt.
+        /// </summary>
+        internal static string CloseIconText {
+            get {
+                return ResourceManager.GetString("CloseIconText", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///    Sucht nach einer lokalisierten Zeichenfolge, die 'Complete' ähnelt.
         /// </summary>

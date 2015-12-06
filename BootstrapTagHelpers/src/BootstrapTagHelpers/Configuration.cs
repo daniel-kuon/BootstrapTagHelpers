@@ -2,7 +2,7 @@
 {
     public static class Configuration {
 
-        public static string CloseIconText { get; set; } = "Close";
+        public static string CloseIconText { get; set; } = Ressources.CloseIconText;
 
 
     }
