@@ -3,16 +3,16 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     public class TableTagHelper : BootstrapTagHelper {
-        public const string StrippedAttributeName = AttributePrefix + "stripped";
+        public const string StripedAttributeName = AttributePrefix + "striped";
         public const string CondensedAttributeName = AttributePrefix + "condensed";
         public const string BorderedAttributeName = AttributePrefix + "bordered";
         public const string ResponsiveAttributeName = AttributePrefix + "responsive";
         public const string HoverAttributeName = AttributePrefix + "hover";
 
-        [HtmlAttributeName(StrippedAttributeName)]
+        [HtmlAttributeName(StripedAttributeName)]
         [HtmlAttributeNotBound]
         [HtmlAttributeMinimizable]
-        public bool Stripped { get; set; }
+        public bool Striped { get; set; }
 
         [HtmlAttributeName(CondensedAttributeName)]
         [HtmlAttributeNotBound]
@@ -36,8 +36,8 @@
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             var classes = new List<string> {"table"};
-            if (Stripped)
-                classes.Add("table-stripped");
+            if (Striped)
+                classes.Add("table-striped");
             if (Condensed)
                 classes.Add("table-condensed");
             if (Bordered)
