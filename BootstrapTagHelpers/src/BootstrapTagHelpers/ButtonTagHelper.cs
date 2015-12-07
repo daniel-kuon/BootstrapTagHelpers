@@ -54,7 +54,7 @@ namespace BootstrapTagHelpers {
             output.AddCssClass("btn");
             output.AddCssClass("btn-" + Context.ToString().ToLower());
             if (Size != Size.Default)
-                output.AddCssClass("btn-" + Size.ToString().ToLower());
+                output.AddCssClass("btn-" + Size.GetDescription());
             if (BlockStyle)
                 output.AddCssClass("btn-block");
             if (Pressed) {
