@@ -4,9 +4,7 @@ namespace BootstrapTagHelpers {
 
     public static class TagHelperAttributeListExtensions {
         public static bool RemoveAll(this TagHelperAttributeList attributeList, params string[] attributeNames) {
-            return attributeNames.Aggregate(false,
-                                            (current, attributeName) =>
-                                            current || attributeList.RemoveAll(attributeName));
+            return attributeNames.Aggregate(false, (current, name) => attributeList.RemoveAll(name) || current);
         }
 
         public static void AddAriaAttribute(this TagHelperAttributeList attributeList, string attributeName,
