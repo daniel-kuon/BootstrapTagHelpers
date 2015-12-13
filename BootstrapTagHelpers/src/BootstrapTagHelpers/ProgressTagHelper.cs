@@ -28,14 +28,8 @@ namespace BootstrapTagHelpers {
 
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            DisplayValue = DisplayValue;
-            Striped = Striped;
-            Animated = Animated;
-
-            context.Items.Add("ProgressContext", this);
+            context.SetProgressContext(this);
             output.TagName = "div";
-            output.Attributes.RemoveAll(DisplayValueAttributeName, SrTextAttributeName, AnimatedAttributeName,
-                                        StripedAttributeName);
             output.AddCssClass("progress");
         }
     }

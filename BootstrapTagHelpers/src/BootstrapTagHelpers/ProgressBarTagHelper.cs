@@ -17,8 +17,8 @@ namespace BootstrapTagHelpers {
 
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            if (context.Items.ContainsKey("ProgressContext") && context.Items["ProgressContext"] is ProgressTagHelper) {
-                var progressContext = (ProgressTagHelper) context.Items["ProgressContext"];
+            if (context.HasProgressContext()) {
+                ProgressTagHelper progressContext = context.GetProgressContext();
                 if (!context.AllAttributes.ContainsName(AnimatedAttributeName))
                     Animated = progressContext.Animated;
                 if (!context.AllAttributes.ContainsName(StripedAttributeName))
@@ -33,7 +33,7 @@ namespace BootstrapTagHelpers {
                 output.PostElement.SetHtmlContent("</div>");
             }
             output.TagName = "div";
-            output.TagMode=TagMode.StartTagAndEndTag;
+            output.TagMode = TagMode.StartTagAndEndTag;
             output.Attributes.RemoveAll(DisplayValueAttributeName, SrTextAttributeName, AnimatedAttributeName,
                                         StripedAttributeName);
             output.AddCssClass("progress-bar");
@@ -43,9 +43,11 @@ namespace BootstrapTagHelpers {
             output.Attributes.Add("role", "progressbar");
             output.AddCssStyle("width", Value + "%");
             if (SrText == null)
-                SrText=Ressources.PorgressBarCompleteSrHint;
+                SrText = Ressources.PorgressBarCompleteSrHint;
             if (DisplayValue ?? false) {
-                output.Content.AppendHtml(string.IsNullOrWhiteSpace(SrText) ? Value.ToString() : Value + @" %<span class=""sr-only""> " + SrText + "</span>");
+                output.Content.AppendHtml(string.IsNullOrWhiteSpace(SrText)
+                                              ? Value.ToString()
+                                              : Value + @" %<span class=""sr-only""> " + SrText + "</span>");
                 output.AddCssStyle("min-width", "2em");
             }
             else
