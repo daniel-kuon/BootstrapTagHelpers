@@ -120,7 +120,13 @@
   <data name="CloseIconText" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="PorgressBarCompleteSrHint" xml:space="preserve">
     <value>Complete</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
   </data>
 </root>
