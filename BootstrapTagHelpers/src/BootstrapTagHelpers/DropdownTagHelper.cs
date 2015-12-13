@@ -1,4 +1,5 @@
 namespace BootstrapTagHelpers {
+    using System;
     using Microsoft.AspNet.Mvc.Rendering;
     using Microsoft.AspNet.Razor.TagHelpers;
 
@@ -17,7 +18,7 @@ namespace BootstrapTagHelpers {
         [HtmlAttributeNotBound]
         public bool Dropup { get; set; }
 
-        public Size Size { get; set; }
+        public Size? Size { get; set; }
 
         public string Text { get; set; }
 
@@ -26,19 +27,38 @@ namespace BootstrapTagHelpers {
         public string ButtonId { get; set; }
 
 
-        public ButtonContext Context { get; set; }
+        public ButtonContext? Context { get; set; }
+
+        public override void Init(TagHelperContext context) {
+            base.Init(context);
+            if (context.HasButtonGroupContext()) {
+                ButtonGroupTagHelper buttonGroupContext = context.GetButtonGroupContext();
+                Size = buttonGroupContext.Size;
+                if (!Context.HasValue)
+                    Context = buttonGroupContext.Context;
+                if (buttonGroupContext.Vertical && Splitted)
+                    throw new Exception("Splitted dropdowns are not supported inside vertical button groups");
+            }
+            else if (context.HasButtonToolbarContext()) {
+                ButtonToolbarTagHelper buttonToolbarContext = context.GetButtonToolbarContext();
+                if (!Context.HasValue)
+                    Context = buttonToolbarContext.Context;
+                if (!Size.HasValue)
+                    Size = buttonToolbarContext.Size;
+            }
+        }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "div";
             output.AddCssClass("btn-group");
             if (Dropup)
                 output.AddCssClass("dropup");
-            if (Size != Size.Default)
-                output.AddCssClass("btn-group-" + Size.GetDescription());
+            if (Size.HasValue && Size != BootstrapTagHelpers.Size.Default)
+                output.AddCssClass("btn-group-" + Size.Value.GetDescription());
             var buttonBuilder = new TagBuilder(Href == null ? "button" : "a");
             buttonBuilder.InnerHtml.AppendHtml(Text);
             buttonBuilder.AddCssClass("btn");
-            buttonBuilder.AddCssClass("btn-" + Context.ToString().ToLower());
+            buttonBuilder.AddCssClass("btn-" + (Context ?? ButtonContext.Default).ToString().ToLower());
             if (ButtonId != null)
                 buttonBuilder.Attributes.Add("id", ButtonId);
             if (Href == null)
@@ -51,7 +71,10 @@ namespace BootstrapTagHelpers {
             if (Splitted) {
                 output.PreContent.Append(buttonBuilder);
                 buttonBuilder = new TagBuilder("button") {
-                    Attributes = {{"type", "button"}, {"class", "btn btn-" + Context.ToString().ToLower()}}
+                    Attributes = {
+                        {"type", "button"},
+                        {"class", "btn btn-" + (Context ?? ButtonContext.Default).ToString().ToLower()}
+                    }
                 };
             }
             else

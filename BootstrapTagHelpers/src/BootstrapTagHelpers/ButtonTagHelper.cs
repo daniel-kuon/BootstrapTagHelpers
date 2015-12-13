@@ -1,9 +1,14 @@
 namespace BootstrapTagHelpers {
+    using System;
     using Microsoft.AspNet.Razor.TagHelpers;
 
     [HtmlTargetElement("a", Attributes = ButtonAttributeName)]
     [HtmlTargetElement("input", Attributes = TypeAttributeName)]
     [HtmlTargetElement("button")]
+    [HtmlTargetElement("a", ParentTag = "button-group")]
+    [HtmlTargetElement("a", ParentTag = "button-toolbar")]
+    [HtmlTargetElement("button", ParentTag = "button-group")]
+    [HtmlTargetElement("button", ParentTag = "button-toolbar")]
     public class ButtonTagHelper : BootstrapTagHelper {
         public const string TypeAttributeName = "type";
         public const string ButtonAttributeName = AttributePrefix + "button";
@@ -22,10 +27,10 @@ namespace BootstrapTagHelpers {
         public bool Button { get; set; }
 
         [HtmlAttributeName(ContextAttributeName)]
-        public ButtonContext Context { get; set; }
+        public ButtonContext? Context { get; set; }
 
         [HtmlAttributeName(SizeAttributeName)]
-        public Size Size { get; set; }
+        public Size? Size { get; set; }
 
         [HtmlAttributeName(BlockStyleAttrbibuteName)]
         [HtmlAttributeNotBound]
@@ -42,6 +47,31 @@ namespace BootstrapTagHelpers {
         [HtmlAttributeMinimizable]
         public bool Disabled { get; set; }
 
+        private bool WrapInButtonGroup { get; set; }
+
+        private bool ButtonGroupJustified { get; set; }
+
+        public override void Init(TagHelperContext context) {
+            base.Init(context);
+            if (context.HasButtonGroupContext()) {
+                ButtonGroupTagHelper buttonGroupContext = context.GetButtonGroupContext();
+                Button = true;
+                ButtonGroupJustified = buttonGroupContext.Justified;
+                Size = ButtonGroupJustified ?  buttonGroupContext.Size : BootstrapTagHelpers.Size.Default;
+                if (!Context.HasValue)
+                    Context = buttonGroupContext.Context;
+            }
+            else if (context.HasButtonToolbarContext()) {
+                ButtonToolbarTagHelper buttonToolbarContext = context.GetButtonToolbarContext();
+                Button = true;
+                WrapInButtonGroup = true;
+                if (!Context.HasValue)
+                    Context = buttonToolbarContext.Context;
+                if (!Size.HasValue)
+                    Size = buttonToolbarContext.Size;
+            }
+        }
+
         public override void Process(TagHelperContext context, TagHelperOutput output) {
             Type = Type?.ToLower() ?? "";
             output.TagName = output.TagName.ToLower();
@@ -52,9 +82,19 @@ namespace BootstrapTagHelpers {
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.AddCssClass("btn");
-            output.AddCssClass("btn-" + Context.ToString().ToLower());
-            if (Size != Size.Default)
-                output.AddCssClass("btn-" + Size.GetDescription());
+            output.AddCssClass("btn-" + (Context ?? ButtonContext.Default).ToString().ToLower());
+            if (WrapInButtonGroup ||
+                !output.TagName.Equals("a", StringComparison.CurrentCultureIgnoreCase) && ButtonGroupJustified) {
+                if (Size.HasValue && Size.Value != BootstrapTagHelpers.Size.Default)
+                    output.PreElement.SetHtmlContent(
+                                                     $"<div class=\"btn-group btn-group-{Size.Value.GetDescription()}\" role=\"group\">");
+                else
+                    output.PreElement.SetHtmlContent(
+                                                     $"<div class=\"btn-group\" role=\"group\">");
+                output.PostElement.SetHtmlContent("</div>");
+            }
+            else if (Size.HasValue && Size.Value != BootstrapTagHelpers.Size.Default)
+                output.AddCssClass("btn-" + Size.Value.GetDescription());
             if (BlockStyle)
                 output.AddCssClass("btn-block");
             if (Pressed) {
@@ -62,8 +102,13 @@ namespace BootstrapTagHelpers {
                 output.AddCssClass("active");
             }
             if (Disabled) {
-                if (output.TagName == "a")
+                if (output.TagName == "a") {
                     output.AddCssClass("disabled");
+                    if (context.AllAttributes.ContainsName("href")) {
+                        output.Attributes.RemoveAll("href");
+                        output.Attributes.Add("data-href", context.AllAttributes["href"].Value);
+                    }
+                }
                 output.MergeAttribute("role", "button");
             }
         }
