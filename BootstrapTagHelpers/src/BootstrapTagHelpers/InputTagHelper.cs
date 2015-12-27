@@ -5,6 +5,7 @@ namespace BootstrapTagHelpers {
     public class InputTagHelper : BootstrapTagHelper {
         public const string PreAddonTextAttributeName = AttributePrefix + "pre-addon-text";
         public const string PostAddonTextAttributeName = AttributePrefix + "post-addon-text";
+        public const string HelpContentAttributeName = AttributePrefix + "help-content";
 
         [HtmlAttributeName(PreAddonTextAttributeName)]
         public string PreAddonText { get; set; }
@@ -13,6 +14,9 @@ namespace BootstrapTagHelpers {
         public string PostAddonText { get; set; }
 
         public string Type { get; set; }
+
+        [HtmlAttributeName(HelpContentAttributeName)]
+        public string HelpContent { get; set; }
 
 
         public override void Init(TagHelperContext context) {
@@ -23,6 +27,8 @@ namespace BootstrapTagHelpers {
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.AddCssClass("form-control");
+            Type = Type ?? "";
+            if (!string.IsNullOrEmpty(Type))
             output.Attributes.Add("type", Type.ToLower());
             if (!string.IsNullOrEmpty(PostAddonText) || !string.IsNullOrEmpty(PreAddonText)) {
                 output.PreElement.SetHtmlContent("<div class=\"input-group\">");
@@ -39,7 +45,11 @@ namespace BootstrapTagHelpers {
                     output.PostElement.AppendHtml("</span>");
                     output.RemoveCssClass("form-control");
                 }
-
+            if (!string.IsNullOrEmpty(HelpContent))
+                if (context.HasInputGroupContext())
+                    context.GetInputGroupContext().HelpContent = HelpContent;
+                else
+                    output.PostElement.AppendHtml(HelpBlockTagHelper.GenerateHelpBlock(HelpContent));
         }
     }
 }
