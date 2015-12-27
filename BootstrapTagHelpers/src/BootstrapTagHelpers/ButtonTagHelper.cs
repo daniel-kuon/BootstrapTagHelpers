@@ -1,5 +1,6 @@
 namespace BootstrapTagHelpers {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.AspNet.Razor.TagHelpers;
 
     [HtmlTargetElement("a", Attributes = ButtonAttributeName)]
@@ -72,17 +73,25 @@ namespace BootstrapTagHelpers {
             }
         }
 
-        public override void Process(TagHelperContext context, TagHelperOutput output) {
+        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        {
             Type = Type?.ToLower() ?? "";
             output.TagName = output.TagName.ToLower();
             if (Button || output.TagName == "button" ||
                 output.TagName == "input" && (Type == "button" || Type == "submit" || Type == "reset"))
-                base.Process(context, output);
+                await base.ProcessAsync(context, output);
         }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.AddCssClass("btn");
             output.AddCssClass("btn-" + (Context ?? ButtonContext.Default).ToString().ToLower());
+            if (context.HasInputGroupContext()) {
+                Size=BootstrapTagHelpers.Size.Default;
+                if (!context.HasInputGroupAddonContext()) {
+                    output.PreElement.PrependHtml("<span class=\"input-group-btn\">");
+                    output.PostElement.AppendHtml("</span>");
+                }
+            }
             if (WrapInButtonGroup ||
                 !output.TagName.Equals("a", StringComparison.CurrentCultureIgnoreCase) && ButtonGroupJustified) {
                 if (Size.HasValue && Size.Value != BootstrapTagHelpers.Size.Default)

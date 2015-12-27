@@ -29,16 +29,28 @@ namespace BootstrapTagHelpers {
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             context.SetButtonGroupContext(this);
-            output.TagName = "div";
-            if (Vertical)
-                output.AddCssClass("btn-group-vertical");
-            else
-                output.AddCssClass("btn-group");
             output.Attributes.Add("role", "group");
-            if (Size.HasValue)
-                output.AddCssClass("btn-group-" + Size.Value.GetDescription());
-            if (Justified)
-                output.AddCssClass("btn-group-justified");
+            if (context.HasInputGroupContext())
+            {
+                Size = BootstrapTagHelpers.Size.Default;
+                if (!context.HasInputGroupAddonContext())
+                {
+                    output.TagName = "span";
+                    output.AddCssClass("input-group-btn");
+                }
+                context.RemoveInputGroupContext();
+            }
+            else {
+                output.TagName = "div";
+                if (Vertical)
+                    output.AddCssClass("btn-group-vertical");
+                else
+                    output.AddCssClass("btn-group");
+                if (Size.HasValue)
+                    output.AddCssClass("btn-group-" + Size.Value.GetDescription());
+                if (Justified)
+                    output.AddCssClass("btn-group-justified");
+            }
         }
     }
 }

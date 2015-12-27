@@ -51,6 +51,15 @@ namespace BootstrapTagHelpers {
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "div";
             output.AddCssClass("btn-group");
+            if (context.HasInputGroupContext())
+            {
+                Size = BootstrapTagHelpers.Size.Default;
+                if (!context.HasInputGroupAddonContext())
+                {
+                    output.TagName = "span";
+                    output.AddCssClass("input-group-btn");
+                }
+            }
             if (Dropup)
                 output.AddCssClass("dropup");
             if (Size.HasValue && Size != BootstrapTagHelpers.Size.Default)
