@@ -103,6 +103,18 @@ namespace BootstrapTagHelpers {
                 output.Attributes.Add("class", cssClasses.Aggregate((s, s1) => s + " " + s1));
         }
 
+        public static void RemoveCssClass(this TagHelperOutput output, string cssClass) {
+            if (output.Attributes.ContainsName("class")) {
+                List<string> classes = output.Attributes["class"].Value.ToString().Split(' ').ToList();
+                classes.Remove(cssClass);
+                if (classes.Count == 0)
+                    output.Attributes.RemoveAll("class");
+                else
+                output.Attributes["class"].Value=classes.Aggregate((s, s1) => s + " " + s1);
+            }
+
+        }
+
         /// <summary>
         ///     Adds an style entry
         /// </summary>
