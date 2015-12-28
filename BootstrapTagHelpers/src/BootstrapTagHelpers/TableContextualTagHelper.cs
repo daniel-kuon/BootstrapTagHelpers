@@ -8,7 +8,7 @@ namespace BootstrapTagHelpers {
         public const string ContextualStateAttributeName = AttributePrefix + "contextual-state";
 
         [HtmlAttributeName(ContextualStateAttributeName)]
-        public BootstrapTaleContextualState? ContextualState { get; set; }
+        public BootstrapTableContextualState? ContextualState { get; set; }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             if (ContextualState.HasValue)

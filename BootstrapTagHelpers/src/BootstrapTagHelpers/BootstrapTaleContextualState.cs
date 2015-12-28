@@ -1,5 +1,5 @@
 namespace BootstrapTagHelpers {
-    public enum BootstrapTaleContextualState {
+    public enum BootstrapTableContextualState {
         Active,
         Success,
         Warning,
