@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.Extensions {
     public static class EnumExtensions
     {
         public static string GetDescription<T>(this T enumerationValue)

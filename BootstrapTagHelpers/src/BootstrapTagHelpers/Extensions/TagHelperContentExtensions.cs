@@ -1,8 +1,7 @@
+using Microsoft.AspNet.Html.Abstractions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Html.Abstractions;
-
+namespace BootstrapTagHelpers.Extensions {
     public static class TagHelperContentExtensions {
 
         public static void Prepend(this TagHelperContent content, string value) {

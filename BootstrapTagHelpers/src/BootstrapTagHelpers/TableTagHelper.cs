@@ -1,4 +1,6 @@
-﻿namespace BootstrapTagHelpers {
+﻿using BootstrapTagHelpers.Extensions;
+
+namespace BootstrapTagHelpers {
     using System.Collections.Generic;
     using Microsoft.AspNet.Razor.TagHelpers;
 

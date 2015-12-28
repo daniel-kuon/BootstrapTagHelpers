@@ -1,3 +1,5 @@
+using BootstrapTagHelpers.Extensions;
+
 namespace BootstrapTagHelpers.Grid {
     using Microsoft.AspNet.Razor.TagHelpers;
 

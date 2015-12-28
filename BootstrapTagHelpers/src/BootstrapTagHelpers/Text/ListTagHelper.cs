@@ -1,6 +1,7 @@
-﻿namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.TagHelpers;
+﻿using BootstrapTagHelpers.Extensions;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Text {
     [HtmlTargetElement("ul", Attributes = UnstyledAttributeName)]
     [HtmlTargetElement("ul", Attributes = InlineAttributeName)]
     [HtmlTargetElement("ol", Attributes = UnstyledAttributeName)]

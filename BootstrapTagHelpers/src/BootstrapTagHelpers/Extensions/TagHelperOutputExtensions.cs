@@ -1,8 +1,8 @@
-namespace BootstrapTagHelpers {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.AspNet.Razor.TagHelpers;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Extensions {
     public static class TagHelperOutputExtensions {
         /// <summary>
         ///     Adds an attribute to the Attributes collection. Existing Attributes are overwritten.

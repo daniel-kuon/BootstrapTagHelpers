@@ -1,3 +1,6 @@
+using BootstrapTagHelpers.Extensions;
+using BootstrapTagHelpers.Forms;
+
 namespace BootstrapTagHelpers {
     using System;
     using Microsoft.AspNet.Mvc.Rendering;

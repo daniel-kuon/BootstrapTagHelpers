@@ -1,4 +1,4 @@
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.Text {
     public enum BLabelContext {
         Default,
         Warning,

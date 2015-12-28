@@ -1,7 +1,9 @@
-namespace BootstrapTagHelpers {
-    using System.Threading.Tasks;
-    using Microsoft.AspNet.Razor.TagHelpers;
+using System.Threading.Tasks;
+using BootstrapTagHelpers.Extensions;
+using BootstrapTagHelpers.Navigation;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Forms {
     [RestrictChildren("button", "button-group", "input", "addon", "dropdown", "input", "a")]
     [OutputElementHint("div")]
     public class InputGroupTagHelper : BootstrapTagHelper {

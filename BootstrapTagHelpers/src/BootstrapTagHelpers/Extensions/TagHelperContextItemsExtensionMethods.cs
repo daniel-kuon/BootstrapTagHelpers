@@ -1,8 +1,8 @@
-namespace BootstrapTagHelpers {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.AspNet.Razor.TagHelpers;
+using BootstrapTagHelpers.Forms;
+using BootstrapTagHelpers.Navigation;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Extensions {
     public static class TagHelperContextItemsExtensionMethods {
         private const string ProgressContext = "ProgressContext";
 

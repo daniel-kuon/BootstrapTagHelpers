@@ -1,7 +1,7 @@
-namespace BootstrapTagHelpers {
-    using System.Linq;
-    using Microsoft.AspNet.Razor.TagHelpers;
+using System.Linq;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Extensions {
     public static class TagHelperAttributeListExtensions {
         public static bool RemoveAll(this TagHelperAttributeList attributeList, params string[] attributeNames) {
             return attributeNames.Aggregate(false, (current, name) => attributeList.RemoveAll(name) || current);

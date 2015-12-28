@@ -1,4 +1,4 @@
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.Forms {
     public enum ButtonContext {
         Default,
         Primary,

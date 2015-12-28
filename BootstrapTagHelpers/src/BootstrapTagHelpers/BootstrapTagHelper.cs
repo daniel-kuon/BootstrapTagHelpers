@@ -1,3 +1,5 @@
+using BootstrapTagHelpers.Extensions;
+
 namespace BootstrapTagHelpers {
     using System.Collections.Generic;
     using System.Linq;

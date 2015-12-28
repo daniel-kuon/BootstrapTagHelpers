@@ -1,3 +1,5 @@
+using BootstrapTagHelpers.Extensions;
+
 namespace BootstrapTagHelpers {
     using Microsoft.AspNet.Razor.TagHelpers;
 

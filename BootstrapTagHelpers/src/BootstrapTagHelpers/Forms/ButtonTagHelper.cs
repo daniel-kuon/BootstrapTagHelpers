@@ -1,8 +1,9 @@
-namespace BootstrapTagHelpers {
-    using System;
-    using System.Threading.Tasks;
-    using Microsoft.AspNet.Razor.TagHelpers;
+using System;
+using System.Threading.Tasks;
+using BootstrapTagHelpers.Extensions;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Forms {
     [HtmlTargetElement("a", Attributes = ButtonAttributeName)]
     [HtmlTargetElement("input", Attributes = TypeAttributeName)]
     [HtmlTargetElement("button")]

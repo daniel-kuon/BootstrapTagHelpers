@@ -1,6 +1,7 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.TagHelpers;
+using BootstrapTagHelpers.Extensions;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Forms {
     [HtmlTargetElement("*", Attributes = TextContextAttributeName)]
     [HtmlTargetElement("*", Attributes = BackgroundContextAttributeName)]
     [HtmlTargetElement("*", Attributes = PullLeftAttributeName)]

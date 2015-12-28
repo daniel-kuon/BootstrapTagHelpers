@@ -1,6 +1,7 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.TagHelpers;
+using BootstrapTagHelpers.Extensions;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Text {
     [OutputElementHint("span")]
     public class BLabelTagHelper : BootstrapTagHelper {
         public BLabelContext Context { get; set; }

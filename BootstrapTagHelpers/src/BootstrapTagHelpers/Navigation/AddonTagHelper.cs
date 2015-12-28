@@ -1,6 +1,7 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.TagHelpers;
+using BootstrapTagHelpers.Extensions;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Navigation {
     [HtmlTargetElement("addon", ParentTag = "input-group")]
     [OutputElementHint("span")]
     public class AddonTagHelper : BootstrapTagHelper {

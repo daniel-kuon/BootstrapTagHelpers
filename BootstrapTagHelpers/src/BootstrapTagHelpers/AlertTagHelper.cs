@@ -1,3 +1,5 @@
+using BootstrapTagHelpers.Extensions;
+
 namespace BootstrapTagHelpers {
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;

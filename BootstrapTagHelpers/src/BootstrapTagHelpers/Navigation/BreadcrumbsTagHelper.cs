@@ -1,6 +1,7 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.TagHelpers;
+using BootstrapTagHelpers.Extensions;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Navigation {
     [OutputElementHint("ol")]
     [RestrictChildren("breadcrumb")]
     public class BreadcrumbsTagHelper : BootstrapTagHelper {

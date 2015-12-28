@@ -1,7 +1,7 @@
-namespace BootstrapTagHelpers {
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
+namespace BootstrapTagHelpers.Extensions {
     public static class ExpressionExtensionMethods {
 
         public static MemberExpression GetMemberName(this Expression body) {

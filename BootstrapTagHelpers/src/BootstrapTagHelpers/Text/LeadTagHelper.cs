@@ -1,6 +1,7 @@
+using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.Text {
     [OutputElementHint("p")]
     public class LeadTagHelper : BootstrapTagHelper {
 

@@ -1,7 +1,9 @@
-namespace BootstrapTagHelpers {
-    using System;
-    using Microsoft.AspNet.Razor.TagHelpers;
+using System;
+using BootstrapTagHelpers.Extensions;
+using BootstrapTagHelpers.Navigation;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Forms {
     public class InputTagHelper : BootstrapTagHelper {
         public const string PreAddonTextAttributeName = AttributePrefix + "pre-addon-text";
         public const string PostAddonTextAttributeName = AttributePrefix + "post-addon-text";

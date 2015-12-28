@@ -1,6 +1,6 @@
-namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
+namespace BootstrapTagHelpers.Navigation {
     [OutputElementHint("nav")]
     public class PagerTagHelper : BootstrapTagHelper {
         public string PrevHref { get; set; }

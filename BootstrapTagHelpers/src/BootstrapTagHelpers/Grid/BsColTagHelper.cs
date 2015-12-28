@@ -1,4 +1,6 @@
-﻿namespace BootstrapTagHelpers.Grid {
+﻿using BootstrapTagHelpers.Extensions;
+
+namespace BootstrapTagHelpers.Grid {
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNet.Razor.TagHelpers;

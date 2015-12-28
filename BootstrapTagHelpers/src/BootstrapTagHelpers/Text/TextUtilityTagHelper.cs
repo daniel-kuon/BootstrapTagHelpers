@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNet.Razor.TagHelpers;
+﻿using BootstrapTagHelpers.Extensions;
+using Microsoft.AspNet.Razor.TagHelpers;
 
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.Text {
     [HtmlTargetElement("*", Attributes = TextAlignmentAttributeName)]
     [HtmlTargetElement("*", Attributes = TextTransformationAttributeName)]
     public class TextUtilityTagHelper:BootstrapTagHelper {

@@ -1,4 +1,6 @@
-﻿namespace BootstrapTagHelpers.ResponsiveUtilities {
+﻿using BootstrapTagHelpers.Extensions;
+
+namespace BootstrapTagHelpers.ResponsiveUtilities {
     using Microsoft.AspNet.Razor.TagHelpers;
 
     [OutputElementHint("div")]
