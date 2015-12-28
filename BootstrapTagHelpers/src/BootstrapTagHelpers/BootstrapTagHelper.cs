@@ -20,18 +20,34 @@ namespace BootstrapTagHelpers {
         [HtmlAttributeMinimizable]
         public bool DisableBootstrap { get; set; }
 
+        [HtmlAttributeNotBound]
+        public TagHelperOutput Output { get; set; }
+
         public override void Init(TagHelperContext context) {
             FillMinimizableAttributes(context);
         }
 
-        public override void Process(TagHelperContext context, TagHelperOutput output) {
+        public override void Process(TagHelperContext context, TagHelperOutput output)
+        {
+            Output = output;
+            CopyPropertiesToOutput();
             if (!DisableBootstrap) {
                 BootstrapProcess(context, output);
                 RemoveMinimizableAttributes(output);
             }
         }
 
+        private void CopyPropertiesToOutput() {
+            foreach (PropertyInfo propertyInfo in GetType().GetProperties().Where(pI=>pI.HasCustomAttribute<CopyToOutputAttribute>())) {
+                object value = propertyInfo.GetValue(this);
+                if (value!=null)
+                    Output.Attributes.Add(GetAttributeName(propertyInfo), value);
+            }
+        }
+
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output) {
+            Output = output;
+            CopyPropertiesToOutput();
             if (!DisableBootstrap) {
                 await BootstrapProcessAsync(context, output);
                 RemoveMinimizableAttributes(output);
