@@ -1,7 +1,7 @@
 using System.ComponentModel;
 
 namespace BootstrapTagHelpers.Forms {
-    public enum InputGroupSize {
+    public enum SimpleSize {
         Default,
         [Description("lg")]
         Large,

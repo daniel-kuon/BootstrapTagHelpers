@@ -9,14 +9,13 @@ namespace BootstrapTagHelpers.Forms {
     public class InputGroupTagHelper : BootstrapTagHelper {
         public string PreAddonText { get; set; }
         public string PostAddonText { get; set; }
-        public InputGroupSize Size { get; set; }
+        public SimpleSize Size { get; set; }
         public string HelpContent { get; set; }
-
 
         protected override async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "div";
             output.AddCssClass("input-group");
-            if (Size != InputGroupSize.Default)
+            if (Size != SimpleSize.Default)
                 output.AddCssClass("input-group-" + Size.GetDescription());
             if (!string.IsNullOrEmpty(PreAddonText))
                 output.PreContent.SetHtmlContent(AddonTagHelper.GenerateAddon(PreAddonText));
