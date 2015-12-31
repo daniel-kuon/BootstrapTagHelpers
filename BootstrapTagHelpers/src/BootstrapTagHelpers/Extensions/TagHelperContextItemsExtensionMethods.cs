@@ -124,8 +124,30 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[InputGroupAddonContext] as AddonTagHelper;
         }
 
+        private const string NavContext = "NavContext";
 
+        public static bool HasNavContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(NavContext) && (context.Items[NavContext] is NavPillsTagHelper || context.Items[NavContext] is NavTabsTagHelper);
+        }
 
+        public static void SetNavContext(this TagHelperContext context, NavPillsTagHelper tagHelper) {
+            if (context.Items.ContainsKey(NavContext))
+                context.Items[NavContext] = tagHelper;
+            else
+                context.Items.Add(NavContext, tagHelper);
+        }
+
+        public static void SetNavContext(this TagHelperContext context, NavTabsTagHelper tagHelper) {
+            if (context.Items.ContainsKey(NavContext))
+                context.Items[NavContext] = tagHelper;
+            else
+                context.Items.Add(NavContext, tagHelper);
+        }
+
+        public static void RemoveNavContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(NavContext))
+                context.SetNavContext((NavPillsTagHelper)null);
+        }
 
     }
 }

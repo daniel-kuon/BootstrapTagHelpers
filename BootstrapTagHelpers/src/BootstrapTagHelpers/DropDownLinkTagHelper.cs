@@ -7,6 +7,9 @@ namespace BootstrapTagHelpers {
         [HtmlAttributeNotBound]
         public bool Disabled { get; set; }
 
+        [HtmlAttributeMinimizable]
+        [HtmlAttributeNotBound]
+        public bool Active { get; set; }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             if (Disabled) {

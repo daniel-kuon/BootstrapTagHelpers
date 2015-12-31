@@ -1,11 +1,10 @@
+using System;
 using BootstrapTagHelpers.Extensions;
 using BootstrapTagHelpers.Forms;
+using Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
-    using System;
-    using Microsoft.AspNet.Mvc.Rendering;
-    using Microsoft.AspNet.Razor.TagHelpers;
-
     [OutputElementHint("div")]
     [RestrictChildren("a", "header", "divider")]
     public class DropdownTagHelper : BootstrapTagHelper {
@@ -52,33 +51,45 @@ namespace BootstrapTagHelpers {
         }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            output.TagName = "div";
-            output.AddCssClass("btn-group");
-            if (context.HasInputGroupContext())
-            {
+            bool hasNavContext = context.HasNavContext();
+            if (hasNavContext) {
+                output.TagName = "li";
+                output.Attributes.Add("role", "presentation");
+                Context = null;
+                Splitted = false;
+            }
+            else {
+                output.TagName = "div";
+                output.AddCssClass("btn-group");
+                if (Size.HasValue && Size != BootstrapTagHelpers.Size.Default)
+                    output.AddCssClass("btn-group-" + Size.Value.GetDescription());
+            }
+            if (context.HasInputGroupContext()) {
                 Size = BootstrapTagHelpers.Size.Default;
-                if (!context.HasInputGroupAddonContext())
-                {
+                if (!context.HasInputGroupAddonContext()) {
                     output.TagName = "span";
                     output.AddCssClass("input-group-btn");
                 }
             }
             if (Dropup)
                 output.AddCssClass("dropup");
-            if (Size.HasValue && Size != BootstrapTagHelpers.Size.Default)
-                output.AddCssClass("btn-group-" + Size.Value.GetDescription());
-            var buttonBuilder = new TagBuilder(Href == null ? "button" : "a");
+            var buttonBuilder = new TagBuilder(Href == null && !hasNavContext ? "button" : "a");
             buttonBuilder.InnerHtml.AppendHtml(Text);
-            buttonBuilder.AddCssClass("btn");
-            buttonBuilder.AddCssClass("btn-" + (Context ?? ButtonContext.Default).ToString().ToLower());
+            if (!hasNavContext) {
+                buttonBuilder.AddCssClass("btn");
+                buttonBuilder.AddCssClass("btn-" + (Context ?? ButtonContext.Default).ToString().ToLower());
+                if (Href == null)
+                    buttonBuilder.Attributes.Add("type", "button");
             if (ButtonId != null)
                 buttonBuilder.Attributes.Add("id", ButtonId);
-            if (Href == null)
-                buttonBuilder.Attributes.Add("type", "button");
             else {
                 buttonBuilder.Attributes.Add("href", Href);
                 if (!Splitted)
                     buttonBuilder.Attributes.Add("role", "button");
+            }
+            }
+            else {
+                buttonBuilder.Attributes.Add("href",Href);
             }
             if (Splitted) {
                 output.PreContent.Append(buttonBuilder);
