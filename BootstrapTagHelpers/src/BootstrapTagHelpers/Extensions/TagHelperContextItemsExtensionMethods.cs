@@ -149,5 +149,31 @@ namespace BootstrapTagHelpers.Extensions {
                 context.SetNavContext((NavPillsTagHelper)null);
         }
 
+        private const string ListGroupContext = "ListGroupContext";
+
+        public static bool HasListGroupContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(ListGroupContext) && context.Items[ListGroupContext] is ListGroupTagHelper;
+        }
+
+        public static void SetListGroupContext(this TagHelperContext context, ListGroupTagHelper tagHelper) {
+            if (context.Items.ContainsKey(ListGroupContext))
+                context.Items[ListGroupContext] = tagHelper;
+            else
+                context.Items.Add(ListGroupContext, tagHelper);
+        }
+
+        public static void RemoveListGroupContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(ListGroupContext))
+                context.SetListGroupContext(null);
+        }
+
+        public static ListGroupTagHelper GetListGroupContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(ListGroupContext))
+                return null;
+            return context.Items[ListGroupContext] as ListGroupTagHelper;
+        }
+
+
+
     }
 }
