@@ -6,6 +6,20 @@ namespace BootstrapTagHelpers.Extensions {
     public static class TagHelperContextItemsExtensionMethods {
         private const string ProgressContext = "ProgressContext";
 
+        private const string ButtonToolbarContext = "ButtonToolbarContext";
+
+        private const string ButtonGroupContext = "ButtonGroupContext";
+
+        private const string InputGroupContext = "InputGroupContext";
+
+        private const string InputGroupAddonContext = "InputGroupAddonContext";
+
+        private const string NavContext = "NavContext";
+
+        private const string ListGroupContext = "ListGroupContext";
+
+        private const string MediaListContext = "MediaListContext";
+
         public static bool HasProgressContext(this TagHelperContext context) {
             return context.Items.ContainsKey(ProgressContext) && context.Items[ProgressContext] is ProgressTagHelper;
         }
@@ -28,10 +42,9 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[ProgressContext] as ProgressTagHelper;
         }
 
-        private const string ButtonToolbarContext = "ButtonToolbarContext";
-
         public static bool HasButtonToolbarContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(ButtonToolbarContext) && context.Items[ButtonToolbarContext] is ButtonToolbarTagHelper;
+            return context.Items.ContainsKey(ButtonToolbarContext) &&
+                   context.Items[ButtonToolbarContext] is ButtonToolbarTagHelper;
         }
 
         public static void SetButtonToolbarContext(this TagHelperContext context, ButtonToolbarTagHelper tagHelper) {
@@ -52,10 +65,9 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[ButtonToolbarContext] as ButtonToolbarTagHelper;
         }
 
-        private const string ButtonGroupContext = "ButtonGroupContext";
-
         public static bool HasButtonGroupContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(ButtonGroupContext) && context.Items[ButtonGroupContext] is ButtonGroupTagHelper;
+            return context.Items.ContainsKey(ButtonGroupContext) &&
+                   context.Items[ButtonGroupContext] is ButtonGroupTagHelper;
         }
 
         public static void SetButtonGroupContext(this TagHelperContext context, ButtonGroupTagHelper tagHelper) {
@@ -76,10 +88,9 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[ButtonGroupContext] as ButtonGroupTagHelper;
         }
 
-        private const string InputGroupContext = "InputGroupContext";
-
         public static bool HasInputGroupContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(InputGroupContext) && context.Items[InputGroupContext] is InputGroupTagHelper;
+            return context.Items.ContainsKey(InputGroupContext) &&
+                   context.Items[InputGroupContext] is InputGroupTagHelper;
         }
 
         public static void SetInputGroupContext(this TagHelperContext context, InputGroupTagHelper tagHelper) {
@@ -100,10 +111,9 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[InputGroupContext] as InputGroupTagHelper;
         }
 
-        private const string InputGroupAddonContext = "InputGroupAddonContext";
-
         public static bool HasInputGroupAddonContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(InputGroupAddonContext) && context.Items[InputGroupAddonContext] is AddonTagHelper;
+            return context.Items.ContainsKey(InputGroupAddonContext) &&
+                   context.Items[InputGroupAddonContext] is AddonTagHelper;
         }
 
         public static void SetInputGroupAddonContext(this TagHelperContext context, AddonTagHelper tagHelper) {
@@ -124,10 +134,9 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[InputGroupAddonContext] as AddonTagHelper;
         }
 
-        private const string NavContext = "NavContext";
-
         public static bool HasNavContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(NavContext) && (context.Items[NavContext] is NavPillsTagHelper || context.Items[NavContext] is NavTabsTagHelper);
+            return context.Items.ContainsKey(NavContext) &&
+                   (context.Items[NavContext] is NavPillsTagHelper || context.Items[NavContext] is NavTabsTagHelper);
         }
 
         public static void SetNavContext(this TagHelperContext context, NavPillsTagHelper tagHelper) {
@@ -146,10 +155,8 @@ namespace BootstrapTagHelpers.Extensions {
 
         public static void RemoveNavContext(this TagHelperContext context) {
             if (context.Items.ContainsKey(NavContext))
-                context.SetNavContext((NavPillsTagHelper)null);
+                context.SetNavContext((NavPillsTagHelper) null);
         }
-
-        private const string ListGroupContext = "ListGroupContext";
 
         public static bool HasListGroupContext(this TagHelperContext context) {
             return context.Items.ContainsKey(ListGroupContext) && context.Items[ListGroupContext] is ListGroupTagHelper;
@@ -173,7 +180,20 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[ListGroupContext] as ListGroupTagHelper;
         }
 
+        public static bool HasMediaListContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(MediaListContext) && context.Items[MediaListContext] is MediaListTagHelper;
+        }
 
+        public static void SetMediaListContext(this TagHelperContext context, MediaListTagHelper tagHelper) {
+            if (context.Items.ContainsKey(MediaListContext))
+                context.Items[MediaListContext] = tagHelper;
+            else
+                context.Items.Add(MediaListContext, tagHelper);
+        }
 
+        public static void RemoveMediaListContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(MediaListContext))
+                context.SetMediaListContext(null);
+        }
     }
 }
