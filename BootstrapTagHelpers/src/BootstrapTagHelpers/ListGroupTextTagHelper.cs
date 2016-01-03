@@ -8,7 +8,7 @@ namespace BootstrapTagHelpers {
     [HtmlTargetElement("span", ParentTag = "list-group-button")]
     [HtmlTargetElement("p", ParentTag = "list-group-item")]
     [HtmlTargetElement("span", ParentTag = "list-group-item")]
-    public class ListGroupHeadingTextHelper : BootstrapTagHelper
+    public class ListGroupTextTagHelper : BootstrapTagHelper
     {
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
