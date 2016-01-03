@@ -39,7 +39,7 @@ namespace BootstrapTagHelpers {
             output.TagName = GetTagName();
             output.AddCssClass("list-group-item");
             if (!string.IsNullOrEmpty(BadgeText))
-                output.PostContent.PrependHtml($"<span class=\"badge\">{BadgeText}</span>");
+                output.PreContent.PrependHtml($"<span class=\"badge\">{BadgeText}</span>");
             if (Context != null)
                 output.AddCssClass("list-group-item-" + Context.ToString().ToLower());
             if (Active)
