@@ -47,7 +47,7 @@ namespace BootstrapTagHelpers {
             if (Hover)
                 classes.Add("table-hover");
             if (Responsive) {
-                output.PreElement.Append("<div class=\"table-responsive\">");
+                output.PreElement.AppendHtml("<div class=\"table-responsive\">");
                 output.PostElement.PrependHtml("</div>");
             }
             output.AddCssClass(classes);
