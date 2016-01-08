@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace BootstrapTagHelpers.Forms {
+namespace BootstrapTagHelpers {
     public enum SimpleSize {
         Default,
         [Description("lg")]

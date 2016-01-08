@@ -69,6 +69,15 @@ namespace BootstrapTagHelpers {
         }
         
         /// <summary>
+        ///    Sucht nach einer lokalisierten Zeichenfolge, die 'current' ähnelt.
+        /// </summary>
+        internal static string CurrentPaginationItem {
+            get {
+                return ResourceManager.GetString("CurrentPaginationItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Sucht nach einer lokalisierten Zeichenfolge, die 'Next' ähnelt.
         /// </summary>
         internal static string Next {

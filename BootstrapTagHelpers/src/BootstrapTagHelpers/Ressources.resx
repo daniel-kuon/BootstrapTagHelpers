@@ -120,6 +120,9 @@
   <data name="CloseIconText" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="CurrentPaginationItem" xml:space="preserve">
+    <value>current</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
