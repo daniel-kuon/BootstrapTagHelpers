@@ -1,4 +1,5 @@
 using BootstrapTagHelpers.Forms;
+using BootstrapTagHelpers.Media;
 using BootstrapTagHelpers.Navigation;
 using Microsoft.AspNet.Razor.TagHelpers;
 
@@ -220,6 +221,6 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[PaginationContext] as PaginationTagHelper;
         }
 
-        
+
     }
 }
