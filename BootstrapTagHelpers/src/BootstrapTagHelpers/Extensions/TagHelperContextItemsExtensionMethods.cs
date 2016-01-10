@@ -195,5 +195,31 @@ namespace BootstrapTagHelpers.Extensions {
             if (context.Items.ContainsKey(MediaListContext))
                 context.SetMediaListContext(null);
         }
+
+        private const string PaginationContext = "PaginationContext";
+
+        public static bool HasPaginationContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(PaginationContext) && context.Items[PaginationContext] is PaginationTagHelper;
+        }
+
+        public static void SetPaginationContext(this TagHelperContext context, PaginationTagHelper tagHelper) {
+            if (context.Items.ContainsKey(PaginationContext))
+                context.Items[PaginationContext] = tagHelper;
+            else
+                context.Items.Add(PaginationContext, tagHelper);
+        }
+
+        public static void RemovePaginationContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(PaginationContext))
+                context.SetPaginationContext(null);
+        }
+
+        public static PaginationTagHelper GetPaginationContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(PaginationContext))
+                return null;
+            return context.Items[PaginationContext] as PaginationTagHelper;
+        }
+
+        
     }
 }
