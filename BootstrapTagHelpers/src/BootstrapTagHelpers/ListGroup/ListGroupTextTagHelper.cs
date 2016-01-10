@@ -1,7 +1,7 @@
 using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.ListGroup {
     [HtmlTargetElement("p", ParentTag = "a")]
     [HtmlTargetElement("span", ParentTag = "a")]
     [HtmlTargetElement("p", ParentTag = "list-group-button")]

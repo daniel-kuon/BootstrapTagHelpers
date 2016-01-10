@@ -1,4 +1,4 @@
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.ListGroup {
     public enum ListGroupContext {
         Success,
         Info,

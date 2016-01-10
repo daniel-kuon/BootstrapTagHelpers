@@ -1,7 +1,7 @@
 using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.ListGroup {
     [HtmlTargetElement("list-group-item", ParentTag = "list-group")]
     [OutputElementHint("li")]
     public class ListGroupItemTagHelper : BootstrapTagHelper {

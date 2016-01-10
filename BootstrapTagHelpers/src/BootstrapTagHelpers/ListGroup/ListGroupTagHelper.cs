@@ -2,7 +2,7 @@
 using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.ListGroup {
     [OutputElementHint("ul")]
     [RestrictChildren("a", "list-group-item", "list-group-button")]
     public class ListGroupTagHelper : BootstrapTagHelper {

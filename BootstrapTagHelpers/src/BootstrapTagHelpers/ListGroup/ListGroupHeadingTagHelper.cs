@@ -1,7 +1,7 @@
 using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.ListGroup {
     [HtmlTargetElement("h1", ParentTag = "a")]
     [HtmlTargetElement("h2", ParentTag = "a")]
     [HtmlTargetElement("h3", ParentTag = "a")]
