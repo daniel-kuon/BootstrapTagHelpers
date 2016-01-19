@@ -1,34 +1,41 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 
 namespace BootstrapTagHelpers.Extensions {
-    public static class EnumExtensions
-    {
-        public static string GetDescription<T>(this T enumerationValue)
-            where T : struct
-        {
-            var type = enumerationValue.GetType();
+    public static class EnumExtensions {
+        public static string GetDescription<T>(this T enumerationValue) where T : struct {
+            return
+                enumerationValue.GetAttribute<DescriptionAttribute, T>()?
+                                .Description ?? enumerationValue.ToString();
+        }
+
+        public static string GetDisplayValue<T>(this T enumerationValue) where T : struct {
+            return
+                enumerationValue.GetAttribute<DefaultValueAttribute, T>()?
+                                .Value?.ToString() ?? enumerationValue.ToString();
+        }
+
+        public static T GetAttribute<T, TS>(this TS enumerationValue) where T : Attribute where TS : struct {
+            Type type = enumerationValue.GetType();
             if (!type.IsEnum)
-            {
                 throw new ArgumentException("EnumerationValue must be of Enum type", "enumerationValue");
-            }
+            return
+                type.GetMember(enumerationValue.ToString())
+                    .FirstOrDefault()?
+                    .GetCustomAttribute<T>();
+        }
 
-            //Tries to find a DescriptionAttribute for a potential friendly name
-            //for the enum
-            var memberInfo = type.GetMember(enumerationValue.ToString());
-            if (memberInfo != null && memberInfo.Length > 0)
-            {
-                object[] attrs = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-                if (attrs != null && attrs.Length > 0)
-                {
-                    //Pull out the description value
-                    return ((DescriptionAttribute)attrs[0]).Description;
-                }
-            }
-            //If we have no description attribute, just return the ToString of the enum
-            return enumerationValue.ToString();
-
+        public static IEnumerable<T> GetAttributes<T, TS>(this TS enumerationValue) where T : Attribute where TS : struct {
+            Type type = enumerationValue.GetType();
+            if (!type.IsEnum)
+                throw new ArgumentException("EnumerationValue must be of Enum type", "enumerationValue");
+            return
+                type.GetMember(enumerationValue.ToString())
+                    .FirstOrDefault()?
+                    .GetCustomAttributes<T>();
         }
     }
 }
