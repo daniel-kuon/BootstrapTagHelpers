@@ -132,4 +132,13 @@
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>error</value>
+  </data>
+  <data name="ValidationSuccess" xml:space="preserve">
+    <value>success</value>
+  </data>
+  <data name="ValidationWarning" xml:space="preserve">
+    <value>warning</value>
+  </data>
 </root>

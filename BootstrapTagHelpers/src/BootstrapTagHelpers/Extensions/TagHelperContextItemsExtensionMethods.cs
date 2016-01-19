@@ -222,6 +222,79 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[PaginationContext] as PaginationTagHelper;
         }
 
+        private const string FormContext = "FormContext";
+
+        public static bool HasFormContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(FormContext) && context.Items[FormContext] is FormTagHelper;
+        }
+
+        public static void SetFormContext(this TagHelperContext context, FormTagHelper tagHelper) {
+            if (context.Items.ContainsKey(FormContext))
+                context.Items[FormContext] = tagHelper;
+            else
+                context.Items.Add(FormContext, tagHelper);
+        }
+
+        public static void RemoveFormContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(FormContext))
+                context.SetFormContext(null);
+        }
+
+        public static FormTagHelper GetFormContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(FormContext))
+                return null;
+            return context.Items[FormContext] as FormTagHelper;
+        }
+
+        private const string FormGroupContext = "FormGroupContext";
+
+        public static bool HasFormGroupContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(FormGroupContext) && context.Items[FormGroupContext] is FormGroupTagHelper;
+        }
+
+        public static void SetFormGroupContext(this TagHelperContext context, FormGroupTagHelper tagHelper) {
+            if (context.Items.ContainsKey(FormGroupContext))
+                context.Items[FormGroupContext] = tagHelper;
+            else
+                context.Items.Add(FormGroupContext, tagHelper);
+        }
+
+        public static void RemoveFormGroupContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(FormGroupContext))
+                context.SetFormGroupContext(null);
+        }
+
+        public static FormGroupTagHelper GetFormGroupContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(FormGroupContext))
+                return null;
+            return context.Items[FormGroupContext] as FormGroupTagHelper;
+        }
+
+        private const string LabelContext = "LabelContext";
+
+        public static bool HasLabelContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(LabelContext) && context.Items[LabelContext] is LabelTagHelper;
+        }
+
+        public static void SetLabelContext(this TagHelperContext context, LabelTagHelper tagHelper) {
+            if (context.Items.ContainsKey(LabelContext))
+                context.Items[LabelContext] = tagHelper;
+            else
+                context.Items.Add(LabelContext, tagHelper);
+        }
+
+        public static void RemoveLabelContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(LabelContext))
+                context.SetLabelContext(null);
+        }
+
+        public static LabelTagHelper GetLabelContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(LabelContext))
+                return null;
+            return context.Items[LabelContext] as LabelTagHelper;
+        }
+
+
 
     }
 }

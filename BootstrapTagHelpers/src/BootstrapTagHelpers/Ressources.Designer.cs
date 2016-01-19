@@ -103,5 +103,32 @@ namespace BootstrapTagHelpers {
                 return ResourceManager.GetString("Previous", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///    Sucht nach einer lokalisierten Zeichenfolge, die 'error' ähnelt.
+        /// </summary>
+        internal static string ValidationError {
+            get {
+                return ResourceManager.GetString("ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Sucht nach einer lokalisierten Zeichenfolge, die 'success' ähnelt.
+        /// </summary>
+        internal static string ValidationSuccess {
+            get {
+                return ResourceManager.GetString("ValidationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Sucht nach einer lokalisierten Zeichenfolge, die 'warning' ähnelt.
+        /// </summary>
+        internal static string ValidationWarning {
+            get {
+                return ResourceManager.GetString("ValidationWarning", resourceCulture);
+            }
+        }
     }
 }
