@@ -1,4 +1,5 @@
 using Microsoft.AspNet.Html.Abstractions;
+using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
@@ -28,5 +29,23 @@ namespace BootstrapTagHelpers.Extensions {
             }
         }
 
+        public static void Wrap(this TagHelperContent content,TagBuilder builder) {
+            Wrap(content, builder, new TagBuilder(builder.TagName) {TagRenderMode = TagRenderMode.EndTag});
+        }
+
+        public static void Wrap(TagHelperContent content, IHtmlContent contentStart, IHtmlContent contentEnd) {
+            content.Prepend(contentStart);
+            content.Append(contentEnd);
+        }
+
+        public static void Wrap(TagHelperContent content, string contentStart, string contentEnd) {
+            content.Prepend(contentStart);
+            content.Append(contentEnd);
+        }
+
+        public static void WrapHtml(TagHelperContent content, string contentStart, string contentEnd) {
+            content.PrependHtml(contentStart);
+            content.AppendHtml(contentEnd);
+        }
     }
 }
