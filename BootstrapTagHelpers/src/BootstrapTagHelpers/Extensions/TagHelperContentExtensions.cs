@@ -54,6 +54,14 @@ namespace BootstrapTagHelpers.Extensions {
         }
 
         /// <summary>
+        /// Converts the contents of <see cref="content"/> to a <see cref="string"/> and writes it back to <see cref="content"/>
+        /// </summary>
+        /// <param name="content"></param>
+        public static void Render(this TagHelperContent content) {
+            content.SetHtmlContent(content.GetContent());
+        }
+
+        /// <summary>
         /// Wraps <see cref="builder"/> around <see cref="content"/>. <see cref="TagBuilder.InnerHtml"/> will be ignored.
         /// </summary>
         public static void Wrap(this TagHelperContent content,TagBuilder builder) {
