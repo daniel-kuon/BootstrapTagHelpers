@@ -151,7 +151,7 @@ namespace BootstrapTagHelpers.Extensions {
                 content.Append(output.Content);
                 content.Append(output.PostContent);
                 if (output.TagMode == TagMode.StartTagAndEndTag)
-                    content.Append($"</{output.TagName}>");
+                    content.AppendHtml($"</{output.TagName}>");
             }
             content.Append(output.PostElement);
             return content;
