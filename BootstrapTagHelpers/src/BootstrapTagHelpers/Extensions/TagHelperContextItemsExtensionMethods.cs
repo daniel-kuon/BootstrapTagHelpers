@@ -294,7 +294,28 @@ namespace BootstrapTagHelpers.Extensions {
             return context.Items[LabelContext] as LabelTagHelper;
         }
 
+        private const string CarouselContext = "CarouselContext";
 
+        public static bool HasCarouselContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(CarouselContext) && context.Items[CarouselContext] is CarouselTagHelper;
+        }
 
+        public static void SetCarouselContext(this TagHelperContext context, CarouselTagHelper tagHelper) {
+            if (context.Items.ContainsKey(CarouselContext))
+                context.Items[CarouselContext] = tagHelper;
+            else
+                context.Items.Add(CarouselContext, tagHelper);
+        }
+
+        public static void RemoveCarouselContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(CarouselContext))
+                context.SetCarouselContext(null);
+        }
+
+        public static CarouselTagHelper GetCarouselContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(CarouselContext))
+                return null;
+            return context.Items[CarouselContext] as CarouselTagHelper;
+        }
     }
 }
