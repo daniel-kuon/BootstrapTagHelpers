@@ -32,6 +32,7 @@ namespace BootstrapTagHelpers {
 
         public override void Init(TagHelperContext context) {
             FillMinimizableAttributes(context);
+            AutoGenerateIdAttribute.GenerateIds(this);
             ConvertVirtualUrlAttribute.ConvertUrls(this, ActionContextAccessor);
         }
 
