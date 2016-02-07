@@ -3,7 +3,7 @@ namespace BootstrapTagHelpers.Forms {
 
     using Microsoft.AspNet.Razor.TagHelpers;
 
-    public class SelectTagHelper : BootstrapTagHelper {
+    public class TextareaTagHelper : BootstrapTagHelper {
         protected override bool CopyAttributesIfBootstrapIsDisabled => true;
 
         [CopyToOutput]
@@ -26,24 +26,23 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            FormGroupContext = context.GetFormGroupContext();
-            FormContext = context.GetFormContext();
-            Size = Size ?? FormContext?.ControlSize;
+            this.FormGroupContext = context.GetFormGroupContext();
+            this.FormContext = context.GetFormContext();
+            this.Size = this.Size ?? this.FormContext?.ControlSize;
         }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.AddCssClass("form-control");
-            if (FormGroupContext != null)
-                FormGroupContext.WrapInDivForHorizontalForm(output, !string.IsNullOrEmpty(Label));
-            else if (FormContext != null)
-                FormContext.WrapInDivForHorizontalForm(output, !string.IsNullOrEmpty(Label));
-            if (!string.IsNullOrEmpty(Label))
-                output.PreElement.Prepend(LabelTagHelper.GenerateLabel(Label, FormContext));
-            if (!string.IsNullOrEmpty(HelpText))
-                output.PostElement.PrependHtml(HelpBlockTagHelper.GenerateHelpBlock(HelpText));
-            if (Size != null && Size != BootstrapTagHelpers.Size.Default)
-                output.AddCssClass("input-" + Size.Value.GetDescription());
+            if (this.FormGroupContext != null)
+                this.FormGroupContext.WrapInDivForHorizontalForm(output, !string.IsNullOrEmpty(this.Label));
+            else if (this.FormContext != null)
+                this.FormContext.WrapInDivForHorizontalForm(output, !string.IsNullOrEmpty(this.Label));
+            if (!string.IsNullOrEmpty(this.Label))
+                output.PreElement.Prepend(LabelTagHelper.GenerateLabel(this.Label, this.FormContext));
+            if (!string.IsNullOrEmpty(this.HelpText))
+                output.PostElement.PrependHtml(HelpBlockTagHelper.GenerateHelpBlock(this.HelpText));
+            if (this.Size != null && this.Size != BootstrapTagHelpers.Size.Default)
+                output.AddCssClass("input-" + this.Size.Value.GetDescription());
         }
     }
-
 }
