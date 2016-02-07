@@ -1,16 +1,14 @@
-using BootstrapTagHelpers.Extensions;
-using BootstrapTagHelpers.Navigation;
-using Microsoft.AspNet.Mvc.Infrastructure;
-using Microsoft.AspNet.Mvc.Rendering;
-
 namespace BootstrapTagHelpers {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Razor.TagHelpers;
+
+    using BootstrapTagHelpers.Extensions;
+
+    using Microsoft.AspNet.Mvc.Infrastructure;
     using Microsoft.AspNet.Mvc.ViewFeatures;
+    using Microsoft.AspNet.Razor.TagHelpers;
+
     public abstract class BootstrapTagHelper : TagHelper {
         public const string AttributePrefix = "b-";
         public const string DisableBootstrapAttributeName = AttributePrefix + "disable-bootstrap";
@@ -31,13 +29,12 @@ namespace BootstrapTagHelpers {
         public IActionContextAccessor ActionContextAccessor { get; set; }
 
         public override void Init(TagHelperContext context) {
-            FillMinimizableAttributes(context);
+            HtmlAttributeMinimizableAttribute.FillMinimizableAttributes(this, context);
             AutoGenerateIdAttribute.GenerateIds(this);
             ConvertVirtualUrlAttribute.ConvertUrls(this, ActionContextAccessor);
         }
 
-        public override void Process(TagHelperContext context, TagHelperOutput output)
-        {
+        public override void Process(TagHelperContext context, TagHelperOutput output) {
             Output = output;
             CopyPropertiesToOutput();
             if (!DisableBootstrap) {
@@ -47,9 +44,9 @@ namespace BootstrapTagHelpers {
         }
 
         private void CopyPropertiesToOutput() {
-            foreach (PropertyInfo propertyInfo in GetType().GetProperties().Where(pI=>pI.HasCustomAttribute<CopyToOutputAttribute>())) {
-                object value = propertyInfo.GetValue(this);
-                if (value!=null)
+            foreach (var propertyInfo in GetType().GetProperties().Where(pI => pI.HasCustomAttribute<CopyToOutputAttribute>())) {
+                var value = propertyInfo.GetValue(this);
+                if (value != null)
                     Output.Attributes.Add(propertyInfo.GetHtmlAttributeName(), value);
             }
         }
@@ -64,12 +61,13 @@ namespace BootstrapTagHelpers {
         }
 
         private void RemoveMinimizableAttributes(TagHelperOutput output) {
-            output.Attributes.RemoveAll(GetType()
+            output.Attributes.RemoveAll(
+                                        GetType()
                                             .GetProperties()
                                             .Where(
                                                    pI =>
                                                    pI.GetCustomAttribute<HtmlAttributeMinimizableAttribute>() != null)
-                                            .Select(pI=>pI.GetHtmlAttributeName())
+                                            .Select(pI => pI.GetHtmlAttributeName())
                                             .ToArray());
         }
 
@@ -78,25 +76,6 @@ namespace BootstrapTagHelpers {
 
         protected virtual async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
             BootstrapProcess(context, output);
-        }
-
-        private void FillMinimizableAttributes(TagHelperContext context) {
-            IEnumerable<PropertyInfo> minimizableProperties =
-                GetType()
-                    .GetProperties()
-                    .Where(pI => pI.GetCustomAttribute<HtmlAttributeMinimizableAttribute>() != null);
-            foreach (PropertyInfo property in minimizableProperties) {
-                string attributeName = property.GetHtmlAttributeName();
-                if (!context.AllAttributes.ContainsName(attributeName))
-                    continue;
-                IReadOnlyTagHelperAttribute attribute = context.AllAttributes[attributeName];
-                if (attribute.Value is bool)
-                    property.SetValue(this, attribute.Value);
-                else if (attribute.Minimized)
-                    property.SetValue(this, true);
-                else
-                    property.SetValue(this, !(attribute.Value ?? "").ToString().Equals("false"));
-            }
         }
     }
 }
