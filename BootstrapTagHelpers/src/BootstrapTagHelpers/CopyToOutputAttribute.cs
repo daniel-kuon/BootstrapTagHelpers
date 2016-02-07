@@ -19,13 +19,40 @@ namespace BootstrapTagHelpers {
 
         public string OutputAttributeName { get; set; }
 
+        public bool CopyIfValueIsNull { get; set; }
+
         public CopyToOutputAttribute() {
         }
 
-        public CopyToOutputAttribute(string outputAttributeName) : this(outputAttributeName, null) {
+        public CopyToOutputAttribute(bool copyIfValueIsNull) {
+            this.CopyIfValueIsNull = copyIfValueIsNull;
         }
 
-        public CopyToOutputAttribute(string outputAttributeName, string prefix) : this(outputAttributeName, prefix, null) {
+        public CopyToOutputAttribute(string outputAttributeName) {
+            OutputAttributeName = outputAttributeName;
+        }
+
+        public CopyToOutputAttribute(bool copyIfValueIsNull, string outputAttributeName) {
+            OutputAttributeName = outputAttributeName;
+            this.CopyIfValueIsNull = copyIfValueIsNull;
+        }
+
+        public CopyToOutputAttribute(string prefix, string suffix) {
+            Prefix = prefix;
+            Suffix = suffix;
+        }
+
+        public CopyToOutputAttribute(bool copyIfValueIsNull, string prefix, string suffix) {
+            Prefix = prefix;
+            Suffix = suffix;
+            this.CopyIfValueIsNull = copyIfValueIsNull;
+        }
+
+        public CopyToOutputAttribute(bool copyIfValueIsNull, string outputAttributeName, string prefix, string suffix) {
+            Prefix = prefix;
+            Suffix = suffix;
+            OutputAttributeName = outputAttributeName;
+            this.CopyIfValueIsNull = copyIfValueIsNull;
         }
 
         public CopyToOutputAttribute(string outputAttributeName, string prefix, string suffix) {
@@ -40,9 +67,9 @@ namespace BootstrapTagHelpers {
             if (output == null)
                 throw new ArgumentNullException(nameof(output));
             foreach (var propertyInfo in target.GetType().GetProperties().Where(pI => pI.HasCustomAttribute<CopyToOutputAttribute>())) {
-                var value = propertyInfo.GetValue(target);
                 var attr = propertyInfo.GetCustomAttribute<CopyToOutputAttribute>();
-                if (value != null)
+                var value = propertyInfo.GetValue(target);
+                if (value != null || attr.CopyIfValueIsNull)
                     output.Attributes.Add(attr.Prefix + (attr.OutputAttributeName??propertyInfo.GetHtmlAttributeName()) + attr.Suffix, value);
             }
         }
