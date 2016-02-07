@@ -68,6 +68,8 @@ namespace BootstrapTagHelpers {
                 throw new ArgumentNullException(nameof(output));
             foreach (var propertyInfo in target.GetType().GetProperties().Where(pI => pI.HasCustomAttribute<CopyToOutputAttribute>())) {
                 var value = propertyInfo.GetValue(target);
+                if (propertyInfo.PropertyType.IsAssignableFrom(typeof(bool)))
+                    value = value?.ToString().ToLower();
                 foreach (var attr in propertyInfo.GetCustomAttributes<CopyToOutputAttribute>()) {
                     if (value != null || attr.CopyIfValueIsNull)
                         output.Attributes.Add(attr.Prefix + (attr.OutputAttributeName ?? propertyInfo.GetHtmlAttributeName()) + attr.Suffix, value);
