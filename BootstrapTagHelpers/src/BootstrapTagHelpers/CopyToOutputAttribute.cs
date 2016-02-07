@@ -10,16 +10,8 @@ namespace BootstrapTagHelpers {
     /// <summary>
     ///     Properties marked with this Attribute will be automatically copied to the output of the TagHelper
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class CopyToOutputAttribute : Attribute {
-
-        public string Prefix { get; set; }
-
-        public string Suffix { get; set; }
-
-        public string OutputAttributeName { get; set; }
-
-        public bool CopyIfValueIsNull { get; set; }
 
         public CopyToOutputAttribute() {
         }
@@ -61,16 +53,25 @@ namespace BootstrapTagHelpers {
             OutputAttributeName = outputAttributeName;
         }
 
+        public string Prefix { get; set; }
+
+        public string Suffix { get; set; }
+
+        public string OutputAttributeName { get; set; }
+
+        public bool CopyIfValueIsNull { get; set; }
+
         public static void CopyPropertiesToOutput(object target, TagHelperOutput output) {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
             if (output == null)
                 throw new ArgumentNullException(nameof(output));
             foreach (var propertyInfo in target.GetType().GetProperties().Where(pI => pI.HasCustomAttribute<CopyToOutputAttribute>())) {
-                var attr = propertyInfo.GetCustomAttribute<CopyToOutputAttribute>();
                 var value = propertyInfo.GetValue(target);
-                if (value != null || attr.CopyIfValueIsNull)
-                    output.Attributes.Add(attr.Prefix + (attr.OutputAttributeName??propertyInfo.GetHtmlAttributeName()) + attr.Suffix, value);
+                foreach (var attr in propertyInfo.GetCustomAttributes<CopyToOutputAttribute>()) {
+                    if (value != null || attr.CopyIfValueIsNull)
+                        output.Attributes.Add(attr.Prefix + (attr.OutputAttributeName ?? propertyInfo.GetHtmlAttributeName()) + attr.Suffix, value);
+                }
             }
         }
     }
