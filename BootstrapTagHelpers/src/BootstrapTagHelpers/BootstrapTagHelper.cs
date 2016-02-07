@@ -50,7 +50,7 @@ namespace BootstrapTagHelpers {
             foreach (PropertyInfo propertyInfo in GetType().GetProperties().Where(pI=>pI.HasCustomAttribute<CopyToOutputAttribute>())) {
                 object value = propertyInfo.GetValue(this);
                 if (value!=null)
-                    Output.Attributes.Add(GetAttributeName(propertyInfo), value);
+                    Output.Attributes.Add(propertyInfo.GetHtmlAttributeName(), value);
             }
         }
 
@@ -69,7 +69,7 @@ namespace BootstrapTagHelpers {
                                             .Where(
                                                    pI =>
                                                    pI.GetCustomAttribute<HtmlAttributeMinimizableAttribute>() != null)
-                                            .Select(GetAttributeName)
+                                            .Select(pI=>pI.GetHtmlAttributeName())
                                             .ToArray());
         }
 
@@ -86,7 +86,7 @@ namespace BootstrapTagHelpers {
                     .GetProperties()
                     .Where(pI => pI.GetCustomAttribute<HtmlAttributeMinimizableAttribute>() != null);
             foreach (PropertyInfo property in minimizableProperties) {
-                string attributeName = GetAttributeName(property);
+                string attributeName = property.GetHtmlAttributeName();
                 if (!context.AllAttributes.ContainsName(attributeName))
                     continue;
                 IReadOnlyTagHelperAttribute attribute = context.AllAttributes[attributeName];
@@ -97,13 +97,6 @@ namespace BootstrapTagHelpers {
                 else
                     property.SetValue(this, !(attribute.Value ?? "").ToString().Equals("false"));
             }
-        }
-
-        private string GetAttributeName(PropertyInfo property) {
-            var htmlAttributeNameAttribute = property.GetCustomAttribute<HtmlAttributeNameAttribute>();
-            if (htmlAttributeNameAttribute != null)
-                return htmlAttributeNameAttribute.DictionaryAttributePrefix + htmlAttributeNameAttribute.Name;
-            return Regex.Replace(property.Name, "([A-Z])", "-$1").ToLower().Trim('-');
         }
     }
 }
