@@ -36,24 +36,16 @@ namespace BootstrapTagHelpers {
 
         public override void Process(TagHelperContext context, TagHelperOutput output) {
             Output = output;
-            CopyPropertiesToOutput();
+            CopyToOutputAttribute.CopyPropertiesToOutput(this, output);
             if (!DisableBootstrap) {
                 BootstrapProcess(context, output);
                 RemoveMinimizableAttributes(output);
             }
         }
 
-        private void CopyPropertiesToOutput() {
-            foreach (var propertyInfo in GetType().GetProperties().Where(pI => pI.HasCustomAttribute<CopyToOutputAttribute>())) {
-                var value = propertyInfo.GetValue(this);
-                if (value != null)
-                    Output.Attributes.Add(propertyInfo.GetHtmlAttributeName(), value);
-            }
-        }
-
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output) {
             Output = output;
-            CopyPropertiesToOutput();
+            CopyToOutputAttribute.CopyPropertiesToOutput(this, output);
             if (!DisableBootstrap) {
                 await BootstrapProcessAsync(context, output);
                 RemoveMinimizableAttributes(output);
