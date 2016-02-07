@@ -6,7 +6,6 @@ namespace BootstrapTagHelpers {
     using BootstrapTagHelpers.Extensions;
 
     using Microsoft.AspNet.Mvc.Infrastructure;
-    using Microsoft.AspNet.Mvc.ViewFeatures;
     using Microsoft.AspNet.Razor.TagHelpers;
 
     public abstract class BootstrapTagHelper : TagHelper {
@@ -25,8 +24,9 @@ namespace BootstrapTagHelpers {
         public TagHelperOutput Output { get; set; }
 
         [HtmlAttributeNotBound]
-        [ViewContext]
         public IActionContextAccessor ActionContextAccessor { get; set; }
+
+        protected virtual bool CopyAttributesIfBootstrapIsDisabled => false;
 
         public override void Init(TagHelperContext context) {
             HtmlAttributeMinimizableAttribute.FillMinimizableAttributes(this, context);
@@ -36,7 +36,8 @@ namespace BootstrapTagHelpers {
 
         public override void Process(TagHelperContext context, TagHelperOutput output) {
             Output = output;
-            CopyToOutputAttribute.CopyPropertiesToOutput(this, output);
+            if (!DisableBootstrap || CopyAttributesIfBootstrapIsDisabled)
+                CopyToOutputAttribute.CopyPropertiesToOutput(this, output);
             if (!DisableBootstrap) {
                 BootstrapProcess(context, output);
                 RemoveMinimizableAttributes(output);
@@ -45,7 +46,8 @@ namespace BootstrapTagHelpers {
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output) {
             Output = output;
-            CopyToOutputAttribute.CopyPropertiesToOutput(this, output);
+            if (!DisableBootstrap || CopyAttributesIfBootstrapIsDisabled)
+                CopyToOutputAttribute.CopyPropertiesToOutput(this, output);
             if (!DisableBootstrap) {
                 await BootstrapProcessAsync(context, output);
                 RemoveMinimizableAttributes(output);

@@ -5,6 +5,8 @@ using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
     public class InputTagHelper : BootstrapTagHelper {
+        protected override bool CopyAttributesIfBootstrapIsDisabled => true;
+
         public override int Order => 100001;
 
         [HtmlAttributeName(AttributePrefix + "pre-addon-text")]
