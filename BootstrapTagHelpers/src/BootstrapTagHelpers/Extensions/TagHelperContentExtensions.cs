@@ -65,6 +65,7 @@ namespace BootstrapTagHelpers.Extensions {
         /// Wraps <see cref="builder"/> around <see cref="content"/>. <see cref="TagBuilder.InnerHtml"/> will be ignored.
         /// </summary>
         public static void Wrap(this TagHelperContent content,TagBuilder builder) {
+            builder.TagRenderMode=TagRenderMode.StartTag;
             Wrap(content, builder, new TagBuilder(builder.TagName) {TagRenderMode = TagRenderMode.EndTag});
         }
 
