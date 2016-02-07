@@ -1,4 +1,7 @@
 using BootstrapTagHelpers.Extensions;
+using BootstrapTagHelpers.Navigation;
+using Microsoft.AspNet.Mvc.Infrastructure;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace BootstrapTagHelpers {
     using System.Collections.Generic;
@@ -7,7 +10,7 @@ namespace BootstrapTagHelpers {
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Microsoft.AspNet.Razor.TagHelpers;
-
+    using Microsoft.AspNet.Mvc.ViewFeatures;
     public abstract class BootstrapTagHelper : TagHelper {
         public const string AttributePrefix = "b-";
         public const string DisableBootstrapAttributeName = AttributePrefix + "disable-bootstrap";
@@ -23,8 +26,13 @@ namespace BootstrapTagHelpers {
         [HtmlAttributeNotBound]
         public TagHelperOutput Output { get; set; }
 
+        [HtmlAttributeNotBound]
+        [ViewContext]
+        public IActionContextAccessor ActionContextAccessor { get; set; }
+
         public override void Init(TagHelperContext context) {
             FillMinimizableAttributes(context);
+            ConvertVirtualUrlAttribute.ConvertUrls(this, ActionContextAccessor);
         }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
