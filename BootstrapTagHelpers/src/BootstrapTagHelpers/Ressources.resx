@@ -132,6 +132,9 @@
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="ToggleNavigation" xml:space="preserve">
+    <value>Toggle navigation</value>
+  </data>
   <data name="ValidationError" xml:space="preserve">
     <value>error</value>
   </data>

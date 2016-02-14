@@ -138,7 +138,14 @@ namespace BootstrapTagHelpers.Extensions {
 
         public static bool HasNavContext(this TagHelperContext context) {
             return context.Items.ContainsKey(NavContext) &&
-                   (context.Items[NavContext] is NavPillsTagHelper || context.Items[NavContext] is NavTabsTagHelper);
+                   (context.Items[NavContext] is NavPillsTagHelper || context.Items[NavContext] is NavTabsTagHelper || context.Items[NavContext] is NavbarNavTagHelper);
+        }
+
+        public static void SetNavContext(this TagHelperContext context, NavbarNavTagHelper tagHelper) {
+            if (context.Items.ContainsKey(NavContext))
+                context.Items[NavContext] = tagHelper;
+            else
+                context.Items.Add(NavContext, tagHelper);
         }
 
         public static void SetNavContext(this TagHelperContext context, NavPillsTagHelper tagHelper) {
@@ -316,6 +323,30 @@ namespace BootstrapTagHelpers.Extensions {
             if (!context.Items.ContainsKey(CarouselContext))
                 return null;
             return context.Items[CarouselContext] as CarouselTagHelper;
+        }
+
+        private const string NavbarContext = "NavbarContext";
+
+        public static bool HasNavbarContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(NavbarContext) && context.Items[NavbarContext] is NavbarTagHelper;
+        }
+
+        public static void SetNavbarContext(this TagHelperContext context, NavbarTagHelper tagHelper) {
+            if (context.Items.ContainsKey(NavbarContext))
+                context.Items[NavbarContext] = tagHelper;
+            else
+                context.Items.Add(NavbarContext, tagHelper);
+        }
+
+        public static void RemoveNavbarContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(NavbarContext))
+                context.SetNavbarContext(null);
+        }
+
+        public static NavbarTagHelper GetNavbarContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(NavbarContext))
+                return null;
+            return context.Items[NavbarContext] as NavbarTagHelper;
         }
     }
 }

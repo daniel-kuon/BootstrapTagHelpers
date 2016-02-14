@@ -105,6 +105,15 @@ namespace BootstrapTagHelpers {
         }
         
         /// <summary>
+        ///    Sucht nach einer lokalisierten Zeichenfolge, die 'Toggle navigation' ähnelt.
+        /// </summary>
+        internal static string ToggleNavigation {
+            get {
+                return ResourceManager.GetString("ToggleNavigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Sucht nach einer lokalisierten Zeichenfolge, die 'error' ähnelt.
         /// </summary>
         internal static string ValidationError {

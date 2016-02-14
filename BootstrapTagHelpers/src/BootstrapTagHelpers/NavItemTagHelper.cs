@@ -5,6 +5,7 @@ namespace BootstrapTagHelpers {
     [OutputElementHint("li")]
     [HtmlTargetElement("nav-item", ParentTag = "nav-tabs")]
     [HtmlTargetElement("nav-item", ParentTag = "nav-pills")]
+    [HtmlTargetElement("nav-item", ParentTag = "navbar-nav")]
     public class NavItemTagHelper : BootstrapTagHelper {
         public string Href { get; set; }
 
