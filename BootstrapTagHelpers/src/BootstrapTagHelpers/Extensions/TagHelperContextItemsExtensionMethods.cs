@@ -5,6 +5,8 @@ using BootstrapTagHelpers.Navigation;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
+    using BootstrapTagHelpers.Tabs;
+
     public static class TagHelperContextItemsExtensionMethods {
         private const string ProgressContext = "ProgressContext";
 
@@ -347,6 +349,78 @@ namespace BootstrapTagHelpers.Extensions {
             if (!context.Items.ContainsKey(NavbarContext))
                 return null;
             return context.Items[NavbarContext] as NavbarTagHelper;
+        }
+
+        private const string TabsContext = "TabsContext";
+
+        public static bool HasTabsContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(TabsContext) && context.Items[TabsContext] is TabsTagHelper;
+        }
+
+        public static void SetTabsContext(this TagHelperContext context, TabsTagHelper tagHelper) {
+            if (context.Items.ContainsKey(TabsContext))
+                context.Items[TabsContext] = tagHelper;
+            else
+                context.Items.Add(TabsContext, tagHelper);
+        }
+
+        public static void RemoveTabsContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(TabsContext))
+                context.SetTabsContext(null);
+        }
+
+        public static TabsTagHelper GetTabsContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(TabsContext))
+                return null;
+            return context.Items[TabsContext] as TabsTagHelper;
+        }
+
+        private const string TabsPaneGroupContext = "TabsPaneGroupContext";
+
+        public static bool HasTabsPaneGroupContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(TabsPaneGroupContext) && context.Items[TabsPaneGroupContext] is TabsPaneGroupTagHelper;
+        }
+
+        public static void SetTabsPaneGroupContext(this TagHelperContext context, TabsPaneGroupTagHelper tagHelper) {
+            if (context.Items.ContainsKey(TabsPaneGroupContext))
+                context.Items[TabsPaneGroupContext] = tagHelper;
+            else
+                context.Items.Add(TabsPaneGroupContext, tagHelper);
+        }
+
+        public static void RemoveTabsPaneGroupContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(TabsPaneGroupContext))
+                context.SetTabsPaneGroupContext(null);
+        }
+
+        public static TabsPaneGroupTagHelper GetTabsPaneGroupContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(TabsPaneGroupContext))
+                return null;
+            return context.Items[TabsPaneGroupContext] as TabsPaneGroupTagHelper;
+        }
+
+        private const string TabsPaneContext = "TabsPaneContext";
+
+        public static bool HasTabsPaneContext(this TagHelperContext context) {
+            return context.Items.ContainsKey(TabsPaneContext) && context.Items[TabsPaneContext] is TabsPaneTagHelper;
+        }
+
+        public static void SetTabsPaneContext(this TagHelperContext context, TabsPaneTagHelper tagHelper) {
+            if (context.Items.ContainsKey(TabsPaneContext))
+                context.Items[TabsPaneContext] = tagHelper;
+            else
+                context.Items.Add(TabsPaneContext, tagHelper);
+        }
+
+        public static void RemoveTabsPaneContext(this TagHelperContext context) {
+            if (context.Items.ContainsKey(TabsPaneContext))
+                context.SetTabsPaneContext(null);
+        }
+
+        public static TabsPaneTagHelper GetTabsPaneContext(this TagHelperContext context) {
+            if (!context.Items.ContainsKey(TabsPaneContext))
+                return null;
+            return context.Items[TabsPaneContext] as TabsPaneTagHelper;
         }
     }
 }
