@@ -5,6 +5,9 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
+    using System;
+    using System.Threading.Tasks;
+
     public static class TagHelperOutputExtensions {
         /// <summary>
         ///     Adds an attribute to the Attributes collection. Existing Attributes are overwritten.
@@ -330,6 +333,12 @@ namespace BootstrapTagHelpers.Extensions {
             output.PostElement.PrependHtml(endTag);
         }
 
+        public static async void LoadChildContentAsync(this TagHelperOutput output) {
+                output.Content.SetContent(await output.GetChildContentAsync());
+            }
 
+        public static async Task LoadChildContentAsync(this TagHelperOutput output, bool useCachedResult) {
+            output.Content.SetContent(await output.GetChildContentAsync(useCachedResult));
+        }
     }
 }
