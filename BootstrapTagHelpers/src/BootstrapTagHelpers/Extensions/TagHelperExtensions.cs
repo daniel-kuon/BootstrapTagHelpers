@@ -17,9 +17,9 @@
         public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, TagHelperContent content) {
             return ToTagHelperContent(tagHelper, tagHelper.GetTagName(), content);
         }
-
-        public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, TagHelper content) {
-            return ToTagHelperContent(tagHelper, tagHelper.GetTagName(), content.ToTagHelperContent());
+       
+        public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, string tagName) {
+            return ToTagHelperContent(tagHelper, tagName, null);
         }
 
         public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, string tagName, TagHelperContent content) {
