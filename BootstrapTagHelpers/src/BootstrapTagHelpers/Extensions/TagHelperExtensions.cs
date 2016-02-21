@@ -27,19 +27,19 @@
             return await ToTagHelperContentAsync(tagHelper, tagName, content, context);
         }
 
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(ITagHelper tagHelper, TagHelperContext context) {
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, TagHelperContext context) {
             return await ToTagHelperContentAsync(tagHelper, tagHelper.GetTagName(), context);
         }
 
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(ITagHelper tagHelper, string tagName, TagHelperContext context) {
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, string tagName, TagHelperContext context) {
             return await ToTagHelperContentAsync(tagHelper, tagName, null, context);
         }
 
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(ITagHelper tagHelper, TagHelperContent content, TagHelperContext context) {
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, TagHelperContent content, TagHelperContext context) {
             return await ToTagHelperContentAsync(tagHelper, tagHelper.GetTagName(), content, context);
         }
 
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(ITagHelper tagHelper, string tagName, TagHelperContent content, TagHelperContext context) {
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, string tagName, TagHelperContent content, TagHelperContext context) {
             var output = new TagHelperOutput(tagName, new TagHelperAttributeList(), b => new Task<TagHelperContent>(() => content));
             await tagHelper.ProcessAsync(context, output);
             if (content != null && !output.IsContentModified)
