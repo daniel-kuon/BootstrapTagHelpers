@@ -19,7 +19,7 @@
         }
 
         public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, string tagName) {
-            return ToTagHelperContent(tagHelper, tagName, (TagHelperContent)null);
+            return ToTagHelperContent(tagHelper, tagName, (TagHelperContent) null);
         }
 
         public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, string tagName, TagHelperContent content) {
@@ -42,6 +42,8 @@
         public static TagHelperContent ToTagHelperContent(TagHelper tagHelper, string tagName, TagHelperContent content, TagHelperContext context) {
             var output = new TagHelperOutput(tagName, new TagHelperAttributeList(), b => new Task<TagHelperContent>(() => content));
             tagHelper.Process(context, output);
+            if (content != null && !output.IsContentModified)
+                output.Content.SetContent(content);
             return output.ToTagHelperContent();
         }
 
