@@ -51,5 +51,51 @@
             return tagHelper.GetType().GetCustomAttributes<HtmlTargetElementAttribute>().FirstOrDefault(a => a.Tag != "*")?.Tag
                    ?? Regex.Replace(tagHelper.GetType().Name.Replace("TagHelper", ""), "([A-Z])", "-$1").Trim('-').ToLower();
         }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers) {
+            return await ToTagHelperContentAsync(tagHelpers, (TagHelperContent) null);
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, TagHelperContent content) {
+            var output = new DefaultTagHelperContent();
+            foreach (var tagHelper in tagHelpers) {
+                output.Append(await tagHelper.ToTagHelperContentAsync(content));
+            }
+            return output;
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, string tagName) {
+            return await ToTagHelperContentAsync(tagHelpers, tagName, (TagHelperContent) null);
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, string tagName, TagHelperContent content) {
+            var context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
+            return await ToTagHelperContentAsync(tagHelpers, tagName, content, context);
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, TagHelperContext context) {
+            var output = new DefaultTagHelperContent();
+            foreach (var tagHelper in tagHelpers) {
+                output.Append(await tagHelper.ToTagHelperContentAsync(context));
+            }
+            return output;
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, string tagName, TagHelperContext context) {
+            return await ToTagHelperContentAsync(tagHelpers, tagName, null, context);
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, TagHelperContent content, TagHelperContext context) {
+            return await ToTagHelperContentAsync(tagHelpers, null, content, context);
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, string tagName, TagHelperContent content, TagHelperContext context) {
+            var output = new DefaultTagHelperContent();
+            foreach (var tagHelper in tagHelpers) {
+                output.Append(await tagHelper.ToTagHelperContentAsync(tagName, content, context));
+            }
+            var f = new List<TagHelper>();
+            return output;
+        }
     }
 }
