@@ -18,22 +18,6 @@
             return ToTagHelperContent(tagHelper, tagHelper.GetTagName(), content);
         }
 
-        public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, IEnumerable<TagHelperContent> contents) {
-            var content = new DefaultTagHelperContent();
-            foreach (var tagHelperContent in contents) {
-                content.Append(tagHelperContent);
-            }
-            return ToTagHelperContent(tagHelper, tagHelper.GetTagName(), content);
-        }
-
-        public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, string tagName, IEnumerable<TagHelperContent> contents) {
-            var content = new DefaultTagHelperContent();
-            foreach (var tagHelperContent in contents) {
-                content.Append(tagHelperContent);
-            }
-            return ToTagHelperContent(tagHelper, tagName, content);
-        }
-
         public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, TagHelper content) {
             return ToTagHelperContent(tagHelper, tagHelper.GetTagName(), content.ToTagHelperContent());
         }
