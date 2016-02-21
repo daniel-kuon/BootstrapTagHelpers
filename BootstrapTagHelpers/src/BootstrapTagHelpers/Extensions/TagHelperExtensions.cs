@@ -38,22 +38,6 @@
             return ToTagHelperContent(tagHelper, tagHelper.GetTagName(), content.ToTagHelperContent());
         }
 
-        public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, IEnumerable<TagHelper> contents) {
-            var content = new DefaultTagHelperContent();
-            foreach (var tagHelperContent in contents) {
-                content.Append(tagHelperContent.ToTagHelperContent());
-            }
-            return ToTagHelperContent(tagHelper, tagHelper.GetTagName(), content);
-        }
-
-        public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, string tagName, IEnumerable<TagHelper> contents) {
-            var content = new DefaultTagHelperContent();
-            foreach (var tagHelperContent in contents) {
-                content.Append(tagHelperContent.ToTagHelperContent());
-            }
-            return ToTagHelperContent(tagHelper, tagName, content);
-        }
-
         public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, string tagName, TagHelperContent content) {
             var context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
             var output = new TagHelperOutput(tagName, new TagHelperAttributeList(), b => new Task<TagHelperContent>(() => content));
