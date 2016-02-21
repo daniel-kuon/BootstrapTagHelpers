@@ -3,6 +3,9 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
+    using System;
+    using System.Collections.Generic;
+
     public static class TagHelperContentExtensions {
 
         /// <summary>
@@ -91,6 +94,19 @@ namespace BootstrapTagHelpers.Extensions {
         public static void WrapHtml(TagHelperContent content, string contentStart, string contentEnd) {
             content.PrependHtml(contentStart);
             content.AppendHtml(contentEnd);
+        }
+
+        /// <summary>
+        /// Merges multiple TagHelperContents into a single one
+        /// </summary>
+        public static TagHelperContent ToSingleTagHelperContent(this IEnumerable<TagHelperContent> contents) {
+            if (contents == null)
+                throw new ArgumentNullException(nameof(contents));
+            var content=new DefaultTagHelperContent();
+            foreach (var tagHelperContent in contents) {
+                content.Append(tagHelperContent);
+            }
+            return content;
         }
     }
 }
