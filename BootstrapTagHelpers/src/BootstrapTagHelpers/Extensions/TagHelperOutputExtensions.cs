@@ -174,7 +174,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreContent" /> and <see cref="TagHelperOutput.PostContent" />. All content that is
         ///     inside the <see cref="output" /> will be inside of the <see cref="IHtmlContent" />s.
         /// </summary>
-        public static void WrapContentOutside(TagHelperOutput output, IHtmlContent startTag, IHtmlContent endTag) {
+        public static void WrapContentOutside(this TagHelperOutput output, IHtmlContent startTag, IHtmlContent endTag) {
             output.PreContent.Prepend(startTag);
             output.PostContent.Append(endTag);
         }
@@ -185,7 +185,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreContent" /> and <see cref="TagHelperOutput.PostContent" />. All content that is
         ///     inside the <see cref="output" /> will be inside of the <see cref="string" />s.
         /// </summary>
-        public static void WrapContentOutside(TagHelperOutput output, string startTag, string endTag) {
+        public static void WrapContentOutside(this TagHelperOutput output, string startTag, string endTag) {
             output.PreContent.Prepend(startTag);
             output.PostContent.Append(endTag);
         }
@@ -197,7 +197,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     inside the <see cref="output" /> will be inside of the <see cref="string" />s. <see cref="startTag" /> and
         ///     <see cref="endTag" /> will not be encoded.
         /// </summary>
-        public static void WrapHtmlContentOutside(TagHelperOutput output, string startTag, string endTag) {
+        public static void WrapHtmlContentOutside(this TagHelperOutput output, string startTag, string endTag) {
             output.PreContent.PrependHtml(startTag);
             output.PostContent.AppendHtml(endTag);
         }
@@ -218,7 +218,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagBuilder.InnerHtml" /> will not be included. The current contents of
         ///     <see cref="TagHelperOutput.PreContent" /> and <see cref="TagHelperOutput.PostContent" /> will be outside.
         /// </summary>
-        public static void WrapContentInside(TagHelperOutput output, IHtmlContent startTag, IHtmlContent endTag) {
+        public static void WrapContentInside(this TagHelperOutput output, IHtmlContent startTag, IHtmlContent endTag) {
             output.PreContent.Append(startTag);
             output.PostContent.Prepend(endTag);
         }
@@ -229,7 +229,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagBuilder.InnerHtml" /> will not be included. The current contents of
         ///     <see cref="TagHelperOutput.PreContent" /> and <see cref="TagHelperOutput.PostContent" /> will be outside.
         /// </summary>
-        public static void WrapContentInside(TagHelperOutput output, string startTag, string endTag) {
+        public static void WrapContentInside(this TagHelperOutput output, string startTag, string endTag) {
             output.PreContent.Append(startTag);
             output.PostContent.Prepend(endTag);
         }
@@ -241,7 +241,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreContent" /> and <see cref="TagHelperOutput.PostContent" /> will be outside.
         ///     <see cref="startTag" /> and <see cref="endTag" /> will not be encoded.
         /// </summary>
-        public static void WrapHtmlContentInside(TagHelperOutput output, string startTag, string endTag) {
+        public static void WrapHtmlContentInside(this TagHelperOutput output, string startTag, string endTag) {
             output.PreContent.AppendHtml(startTag);
             output.PostContent.PrependHtml(endTag);
         }
@@ -262,7 +262,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" />. The current contents of
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" /> will be inside.
         /// </summary>
-        public static void WrapOutside(TagHelperOutput output, IHtmlContent startTag, IHtmlContent endTag) {
+        public static void WrapOutside(this TagHelperOutput output, IHtmlContent startTag, IHtmlContent endTag) {
             output.PreElement.Prepend(startTag);
             output.PostElement.Append(endTag);
         }
@@ -272,7 +272,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" />. The current contents of
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" /> will be inside.
         /// </summary>
-        public static void WrapOutside(TagHelperOutput output, string startTag, string endTag) {
+        public static void WrapOutside(this TagHelperOutput output, string startTag, string endTag) {
             output.PreElement.Prepend(startTag);
             output.PostElement.Append(endTag);
         }
@@ -283,7 +283,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" /> will be inside.
         ///     <see cref="startTag" /> and <see cref="endTag" /> will not be encoded.
         /// </summary>
-        public static void WrapHtmlOutside(TagHelperOutput output, string startTag, string endTag) {
+        public static void WrapHtmlOutside(this TagHelperOutput output, string startTag, string endTag) {
             output.PreElement.PrependHtml(startTag);
             output.PostElement.AppendHtml(endTag);
         }
@@ -304,7 +304,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" />. The current contents of
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" /> will be Outside.
         /// </summary>
-        public static void WrapInside(TagHelperOutput output, IHtmlContent startTag, IHtmlContent endTag) {
+        public static void WrapInside(this TagHelperOutput output, IHtmlContent startTag, IHtmlContent endTag) {
             output.PreElement.Append(startTag);
             output.PostElement.Prepend(endTag);
         }
@@ -314,7 +314,7 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" />. The current contents of
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" /> will be outside.
         /// </summary>
-        public static void WrapInside(TagHelperOutput output, string startTag, string endTag) {
+        public static void WrapInside(this TagHelperOutput output, string startTag, string endTag) {
             output.PreElement.Append(startTag);
             output.PostElement.Prepend(endTag);
         }
@@ -325,9 +325,11 @@ namespace BootstrapTagHelpers.Extensions {
         ///     <see cref="TagHelperOutput.PreElement" /> and <see cref="TagHelperOutput.PostElement" /> will be outside.
         ///     <see cref="startTag" /> and <see cref="endTag" /> will not be encoded.
         /// </summary>
-        public static void WrapHtmlInside(TagHelperOutput output, string startTag, string endTag) {
+        public static void WrapHtmlInside(this TagHelperOutput output, string startTag, string endTag) {
             output.PreElement.AppendHtml(startTag);
             output.PostElement.PrependHtml(endTag);
         }
+
+
     }
 }
