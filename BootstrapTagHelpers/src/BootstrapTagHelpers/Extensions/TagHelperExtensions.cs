@@ -55,7 +55,7 @@
         }
 
         public static TagHelperContent ToTagHelperContent(this TagHelper tagHelper, string tagName, TagHelperContent content) {
-            var context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString());
+            var context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
             var output = new TagHelperOutput(tagName, new TagHelperAttributeList(), b => new Task<TagHelperContent>(() => content));
             tagHelper.Process(context, output);
             return output.ToTagHelperContent();
