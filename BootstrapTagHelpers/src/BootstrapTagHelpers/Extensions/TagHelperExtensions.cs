@@ -14,33 +14,35 @@
             return await ToTagHelperContentAsync(tagHelper, (TagHelperContent) null);
         }
 
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, Options options) {
+            return await ToTagHelperContentAsync(
+                                                 tagHelper,
+                                                 options.TagName ?? tagHelper.GetTagName(),
+                                                 options.Content,
+                                                 options.Context ?? new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N")),
+                                                 options.Attributes ?? new List<TagHelperAttribute>(),
+                                                 options.TagMode);
+        }
+
         public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, TagHelperContent content) {
-            return await ToTagHelperContentAsync(tagHelper, tagHelper.GetTagName(), content);
+            return await ToTagHelperContentAsync(tagHelper, new Options {Content = content});
         }
 
         public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, string tagName) {
-            return await ToTagHelperContentAsync(tagHelper, tagName, (TagHelperContent) null);
-        }
-
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, string tagName, TagHelperContent content) {
-            var context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
-            return await ToTagHelperContentAsync(tagHelper, tagName, content, context);
+            return await ToTagHelperContentAsync(tagHelper, new Options {TagName = tagName});
         }
 
         public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, TagHelperContext context) {
-            return await ToTagHelperContentAsync(tagHelper, tagHelper.GetTagName(), context);
+            return await ToTagHelperContentAsync(tagHelper, new Options {Context = context});
         }
 
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, string tagName, TagHelperContext context) {
-            return await ToTagHelperContentAsync(tagHelper, tagName, null, context);
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, IEnumerable<TagHelperAttribute> attributes) {
+            return await ToTagHelperContentAsync(tagHelper, new Options {Attributes = attributes});
         }
 
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, TagHelperContent content, TagHelperContext context) {
-            return await ToTagHelperContentAsync(tagHelper, tagHelper.GetTagName(), content, context);
-        }
-
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, string tagName, TagHelperContent content, TagHelperContext context) {
-            var output = new TagHelperOutput(tagName, new TagHelperAttributeList(), b => new Task<TagHelperContent>(() => content));
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(
+            this ITagHelper tagHelper, string tagName, TagHelperContent content, TagHelperContext context, IEnumerable<TagHelperAttribute> attributes, TagMode tagMode) {
+            var output = new TagHelperOutput(tagName, new TagHelperAttributeList(attributes), b => new Task<TagHelperContent>(() => content)) {TagMode = tagMode};
             await tagHelper.ProcessAsync(context, output);
             if (content != null && !output.IsContentModified)
                 output.Content.SetContent(content);
@@ -53,49 +55,56 @@
         }
 
         public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers) {
-            return await ToTagHelperContentAsync(tagHelpers, (TagHelperContent) null);
+            return await ToTagHelperContentAsync(tagHelpers, new Options());
         }
 
         public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, TagHelperContent content) {
-            var output = new DefaultTagHelperContent();
-            foreach (var tagHelper in tagHelpers) {
-                output.Append(await tagHelper.ToTagHelperContentAsync(content));
-            }
-            return output;
+            return await ToTagHelperContentAsync(tagHelpers, new Options() {Content = content});
         }
 
         public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, string tagName) {
-            return await ToTagHelperContentAsync(tagHelpers, tagName, (TagHelperContent) null);
-        }
-
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, string tagName, TagHelperContent content) {
-            var context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
-            return await ToTagHelperContentAsync(tagHelpers, tagName, content, context);
+            return await ToTagHelperContentAsync(tagHelpers, new Options() {TagName = tagName});
         }
 
         public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, TagHelperContext context) {
+            return await ToTagHelperContentAsync(tagHelpers, new Options() {Context = context});
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, IEnumerable<TagHelperAttribute> attributes) {
+            return await ToTagHelperContentAsync(tagHelpers, new Options() {Attributes = attributes});
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, Options options) {
             var output = new DefaultTagHelperContent();
             foreach (var tagHelper in tagHelpers) {
-                output.Append(await tagHelper.ToTagHelperContentAsync(context));
-            }
-            return output;
-        }
-
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, string tagName, TagHelperContext context) {
-            return await ToTagHelperContentAsync(tagHelpers, tagName, null, context);
-        }
-
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, TagHelperContent content, TagHelperContext context) {
-            return await ToTagHelperContentAsync(tagHelpers, null, content, context);
-        }
-
-        public static async Task<TagHelperContent> ToTagHelperContentAsync(this IEnumerable<ITagHelper> tagHelpers, string tagName, TagHelperContent content, TagHelperContext context) {
-            var output = new DefaultTagHelperContent();
-            foreach (var tagHelper in tagHelpers) {
-                output.Append(await tagHelper.ToTagHelperContentAsync(tagName, content, context));
+                output.Append(await tagHelper.ToTagHelperContentAsync(options));
             }
             var f = new List<TagHelper>();
             return output;
+        }
+
+        public static async Task<TagHelperContent> ToTagHelperContentAsync(
+            this IEnumerable<ITagHelper> tagHelpers, string tagName, TagHelperContent content, TagHelperContext context, IEnumerable<TagHelperAttribute> attributes, TagMode tagMode) {
+            return await ToTagHelperContentAsync(
+                                                 tagHelpers, new Options() {
+                                                                               TagMode = tagMode,
+                                                                               Attributes = attributes as IList<TagHelperAttribute> ?? attributes.ToList(),
+                                                                               TagName = tagName,
+                                                                               Content = content,
+                                                                               Context = context
+                                                                           });
+        }
+
+        public class Options {
+            public string TagName { get; set; }
+
+            public TagMode TagMode { get; set; }
+
+            public TagHelperContent Content { get; set; }
+
+            public TagHelperContext Context { get; set; }
+
+            public IEnumerable<TagHelperAttribute> Attributes { get; set; }
         }
     }
 }
