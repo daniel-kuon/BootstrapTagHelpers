@@ -1,6 +1,8 @@
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Navigation {
+    using BootstrapTagHelpers.Attributes;
+
     [OutputElementHint("nav")]
     public class PagerTagHelper : BootstrapTagHelper {
         public string PrevHref { get; set; }

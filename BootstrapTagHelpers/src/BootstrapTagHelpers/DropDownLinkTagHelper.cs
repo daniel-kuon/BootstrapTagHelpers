@@ -1,4 +1,6 @@
 namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Attributes;
+
     using Microsoft.AspNet.Razor.TagHelpers;
 
     [HtmlTargetElement("a", ParentTag = "dropdown")]

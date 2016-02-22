@@ -5,6 +5,8 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Navigation {
+    using BootstrapTagHelpers.Attributes;
+
     [OutputElementHint("nav")]
     public class NavbarTagHelper : BootstrapTagHelper {
         public string BrandText { get; set; }

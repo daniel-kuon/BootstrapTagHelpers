@@ -1,4 +1,4 @@
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.Attributes {
     using System;
     using System.Linq;
     using System.Reflection;
@@ -21,36 +21,36 @@ namespace BootstrapTagHelpers {
         }
 
         public CopyToOutputAttribute(string outputAttributeName) {
-            OutputAttributeName = outputAttributeName;
+            this.OutputAttributeName = outputAttributeName;
         }
 
         public CopyToOutputAttribute(bool copyIfValueIsNull, string outputAttributeName) {
-            OutputAttributeName = outputAttributeName;
+            this.OutputAttributeName = outputAttributeName;
             this.CopyIfValueIsNull = copyIfValueIsNull;
         }
 
         public CopyToOutputAttribute(string prefix, string suffix) {
-            Prefix = prefix;
-            Suffix = suffix;
+            this.Prefix = prefix;
+            this.Suffix = suffix;
         }
 
         public CopyToOutputAttribute(bool copyIfValueIsNull, string prefix, string suffix) {
-            Prefix = prefix;
-            Suffix = suffix;
+            this.Prefix = prefix;
+            this.Suffix = suffix;
             this.CopyIfValueIsNull = copyIfValueIsNull;
         }
 
         public CopyToOutputAttribute(bool copyIfValueIsNull, string outputAttributeName, string prefix, string suffix) {
-            Prefix = prefix;
-            Suffix = suffix;
-            OutputAttributeName = outputAttributeName;
+            this.Prefix = prefix;
+            this.Suffix = suffix;
+            this.OutputAttributeName = outputAttributeName;
             this.CopyIfValueIsNull = copyIfValueIsNull;
         }
 
         public CopyToOutputAttribute(string outputAttributeName, string prefix, string suffix) {
-            Prefix = prefix;
-            Suffix = suffix;
-            OutputAttributeName = outputAttributeName;
+            this.Prefix = prefix;
+            this.Suffix = suffix;
+            this.OutputAttributeName = outputAttributeName;
         }
 
         public string Prefix { get; set; }

@@ -1,6 +1,7 @@
 namespace BootstrapTagHelpers.Tabs {
     using System.Threading.Tasks;
 
+    using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
     using Microsoft.AspNet.Razor.TagHelpers;

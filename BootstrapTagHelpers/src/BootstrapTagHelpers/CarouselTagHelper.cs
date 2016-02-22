@@ -3,6 +3,7 @@ namespace BootstrapTagHelpers {
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
     using Microsoft.AspNet.Mvc.Rendering;

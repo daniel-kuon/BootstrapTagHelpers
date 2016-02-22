@@ -4,6 +4,8 @@ using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
+    using BootstrapTagHelpers.Attributes;
+
     [HtmlTargetElement("a", Attributes = ButtonAttributeName)]
     [HtmlTargetElement("input", Attributes = TypeAttributeName)]
     [HtmlTargetElement("button")]

@@ -4,6 +4,8 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
+    using BootstrapTagHelpers.Attributes;
+
     public class LabelTagHelper : BootstrapTagHelper {
 
         [HtmlAttributeMinimizable]

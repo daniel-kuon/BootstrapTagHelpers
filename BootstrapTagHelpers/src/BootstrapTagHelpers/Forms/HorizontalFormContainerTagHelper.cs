@@ -2,6 +2,8 @@ using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
+    using BootstrapTagHelpers.Attributes;
+
     public abstract class HorizontalFormContainerTagHelper : BootstrapTagHelper {
         public int? WidthXs { get; set; }
 

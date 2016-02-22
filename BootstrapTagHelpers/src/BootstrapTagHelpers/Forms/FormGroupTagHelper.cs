@@ -2,6 +2,8 @@ using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
+    using BootstrapTagHelpers.Attributes;
+
     [OutputElementHint("div")]
     public class FormGroupTagHelper : BootstrapTagHelper {
         public Size? ControlSize { get; set; }

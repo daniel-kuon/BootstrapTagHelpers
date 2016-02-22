@@ -8,6 +8,8 @@ using Microsoft.AspNet.Mvc.Infrastructure;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Attributes;
+
     [OutputElementHint("nav")]
     [RestrictChildren("item")]
     public class PaginationTagHelper : BootstrapTagHelper {

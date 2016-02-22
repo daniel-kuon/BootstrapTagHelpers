@@ -2,6 +2,8 @@ using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Navigation {
+    using BootstrapTagHelpers.Attributes;
+
     [HtmlTargetElement(ParentTag = "breadcrumbs")]
     [OutputElementHint("li")]
     public class BreadcrumbTagHelper : BootstrapTagHelper

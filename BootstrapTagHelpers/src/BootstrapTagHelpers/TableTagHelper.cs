@@ -2,6 +2,9 @@
 
 namespace BootstrapTagHelpers {
     using System.Collections.Generic;
+
+    using BootstrapTagHelpers.Attributes;
+
     using Microsoft.AspNet.Razor.TagHelpers;
 
     public class TableTagHelper : BootstrapTagHelper {

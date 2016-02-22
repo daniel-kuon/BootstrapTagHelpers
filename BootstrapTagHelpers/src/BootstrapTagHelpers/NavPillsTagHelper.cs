@@ -2,6 +2,8 @@ using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Attributes;
+
     [OutputElementHint("ul")]
     [RestrictChildren("nav-item","dropdown")]
     public class NavPillsTagHelper : BootstrapTagHelper {

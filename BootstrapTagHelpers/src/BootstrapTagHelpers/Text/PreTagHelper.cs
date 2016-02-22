@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Text {
+    using BootstrapTagHelpers.Attributes;
+
     [HtmlTargetElement("pre", Attributes = ScrollableAttributeName)]
     public class PreTagHelper : BootstrapTagHelper {
         public const string ScrollableAttributeName = AttributePrefix + "scrollable";

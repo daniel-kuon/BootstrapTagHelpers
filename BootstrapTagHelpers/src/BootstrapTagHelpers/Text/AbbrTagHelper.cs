@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Text {
+    using BootstrapTagHelpers.Attributes;
+
     [HtmlTargetElement("abbr", Attributes = InitialismAttributeName)]
     public class AbbrTagHelper : BootstrapTagHelper {
         public const string InitialismAttributeName = AttributePrefix + "initialism";

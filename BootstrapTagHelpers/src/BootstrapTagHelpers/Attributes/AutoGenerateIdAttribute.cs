@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using BootstrapTagHelpers.Extensions;
+﻿namespace BootstrapTagHelpers.Attributes {
+    using System;
+    using System.Linq;
+    using System.Reflection;
 
-namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Extensions;
 
     /// <summary>
     /// Can genreate a random Id (Random Guid) if the decoraed string property is null or empty
@@ -13,13 +13,13 @@ namespace BootstrapTagHelpers {
         private string _id;
         public string Prefix { get; set; }
 
-        public string Id => _id ?? (_id = Prefix + Guid.NewGuid().ToString("N"));
+        public string Id => this._id ?? (this._id = this.Prefix + Guid.NewGuid().ToString("N"));
 
         public AutoGenerateIdAttribute() {
         }
 
         public AutoGenerateIdAttribute(string prefix) {
-            Prefix = prefix;
+            this.Prefix = prefix;
         }
 
         public static void GenerateIds(object target) {

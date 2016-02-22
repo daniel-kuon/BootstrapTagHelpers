@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Text {
+    using BootstrapTagHelpers.Attributes;
+
     [HtmlTargetElement("ul", Attributes = UnstyledAttributeName)]
     [HtmlTargetElement("ul", Attributes = InlineAttributeName)]
     [HtmlTargetElement("ol", Attributes = UnstyledAttributeName)]

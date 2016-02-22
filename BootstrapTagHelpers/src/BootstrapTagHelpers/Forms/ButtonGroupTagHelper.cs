@@ -2,6 +2,8 @@ using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
+    using BootstrapTagHelpers.Attributes;
+
     [RestrictChildren("button", "a", "dropdown")]
     [OutputElementHint("div")]
     public class ButtonGroupTagHelper : BootstrapTagHelper {

@@ -3,6 +3,9 @@ using BootstrapTagHelpers.Extensions;
 namespace BootstrapTagHelpers {
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+
+    using BootstrapTagHelpers.Attributes;
+
     using Microsoft.AspNet.Razor.TagHelpers;
     using Microsoft.CodeAnalysis.CSharp;
 

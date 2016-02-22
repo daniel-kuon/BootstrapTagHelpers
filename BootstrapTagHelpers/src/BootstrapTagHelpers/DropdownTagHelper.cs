@@ -5,6 +5,8 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Attributes;
+
     [OutputElementHint("div")]
     [RestrictChildren("a", "header", "divider")]
     public class DropdownTagHelper : BootstrapTagHelper {

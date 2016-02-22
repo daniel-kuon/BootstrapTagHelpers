@@ -3,6 +3,8 @@ using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers
 {
+    using BootstrapTagHelpers.Attributes;
+
     [HtmlTargetElement("*", Attributes = AffixAttributeName)]
     public class AffixExtenderTagHelper : BootstrapTagHelper
     {

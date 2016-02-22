@@ -3,6 +3,8 @@ using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Attributes;
+
     [HtmlTargetElement("item", ParentTag = "pagination")]
     [OutputElementHint("li")]
     public class PaginationItemTagHelper : BootstrapTagHelper {

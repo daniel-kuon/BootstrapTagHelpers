@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Text {
+    using BootstrapTagHelpers.Attributes;
+
     [HtmlTargetElement("dl", Attributes = HorizonzalAttributeName)]
     public class DlTagHelper : BootstrapTagHelper {
         private const string HorizonzalAttributeName = AttributePrefix + "horizontal";

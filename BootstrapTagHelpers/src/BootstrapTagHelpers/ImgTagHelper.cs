@@ -1,6 +1,8 @@
 using BootstrapTagHelpers.Extensions;
 
 namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Attributes;
+
     using Microsoft.AspNet.Razor.TagHelpers;
 
     [HtmlTargetElement("img", Attributes = ResponsiveAttributeName)]

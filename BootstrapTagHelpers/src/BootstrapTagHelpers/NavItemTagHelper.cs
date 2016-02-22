@@ -2,6 +2,8 @@ using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Attributes;
+
     [OutputElementHint("li")]
     [HtmlTargetElement("nav-item", ParentTag = "nav-tabs")]
     [HtmlTargetElement("nav-item", ParentTag = "nav-pills")]

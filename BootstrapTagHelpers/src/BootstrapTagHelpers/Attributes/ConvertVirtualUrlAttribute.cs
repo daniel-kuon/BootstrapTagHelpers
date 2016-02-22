@@ -1,4 +1,4 @@
-namespace BootstrapTagHelpers {
+namespace BootstrapTagHelpers.Attributes {
     using System;
     using System.Linq;
 

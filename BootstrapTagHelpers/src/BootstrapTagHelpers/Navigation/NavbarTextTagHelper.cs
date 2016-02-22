@@ -1,5 +1,6 @@
 namespace BootstrapTagHelpers.Navigation {
 
+    using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
     using Microsoft.AspNet.Razor.TagHelpers;

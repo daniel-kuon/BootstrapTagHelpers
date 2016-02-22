@@ -1,6 +1,8 @@
 using BootstrapTagHelpers.Extensions;
 
 namespace BootstrapTagHelpers.Grid {
+    using BootstrapTagHelpers.Attributes;
+
     using Microsoft.AspNet.Razor.TagHelpers;
 
     [OutputElementHint("div")]

@@ -3,6 +3,8 @@ using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers
 {
+    using BootstrapTagHelpers.Attributes;
+
     [OutputElementHint("div")]
     public class AffixTagHelper : BootstrapTagHelper
     {

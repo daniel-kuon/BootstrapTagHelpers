@@ -4,6 +4,8 @@ using BootstrapTagHelpers.Navigation;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
+    using BootstrapTagHelpers.Attributes;
+
     public class InputTagHelper : BootstrapTagHelper {
         protected override bool CopyAttributesIfBootstrapIsDisabled => true;
 
