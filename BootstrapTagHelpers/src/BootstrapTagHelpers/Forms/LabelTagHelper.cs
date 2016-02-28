@@ -1,30 +1,32 @@
-﻿using BootstrapTagHelpers.Extensions;
+﻿using BootstrapTagHelpers.Attributes;
+using BootstrapTagHelpers.Extensions;
+
 using Microsoft.AspNet.Html.Abstractions;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
-    using BootstrapTagHelpers.Attributes;
 
+    [ContextClass]
     public class LabelTagHelper : BootstrapTagHelper {
 
         [HtmlAttributeMinimizable]
-        [HtmlAttributeName(AttributePrefix+"sr-only")]
+        [HtmlAttributeName(AttributePrefix + "sr-only")]
         [HtmlAttributeNotBound]
         public bool? SrOnly { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormTagHelper FormContext { get; set; }
+
         [HtmlAttributeNotBound]
+        [Context]
         public FormGroupTagHelper FormGroupContext { get; set; }
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            FormContext = context.GetFormContext();
-            FormGroupContext = context.GetFormGroupContext();
             if (FormGroupContext != null)
                 FormGroupContext.HasLabel = true;
-            context.SetLabelContext(this);
             SrOnly = SrOnly ?? FormContext?.LabelsSrOnly;
         }
 
@@ -34,7 +36,7 @@ namespace BootstrapTagHelpers.Forms {
         }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            if (FormContext?.Horizontal??false) {
+            if (FormContext?.Horizontal ?? false) {
                 output.AddCssClass("control-label");
                 if (FormContext.LabelWidthXs != 0)
                     output.AddCssClass("col-xs-" + FormContext.LabelWidthXs);
@@ -45,7 +47,7 @@ namespace BootstrapTagHelpers.Forms {
                 if (FormContext.LabelWidthLg != 0)
                     output.AddCssClass("col-lg-" + FormContext.LabelWidthLg);
             }
-            if (SrOnly??false)
+            if (SrOnly ?? false)
                 output.AddCssClass("sr-only");
         }
 
@@ -78,8 +80,9 @@ namespace BootstrapTagHelpers.Forms {
             WrapInLabel(output, content, controlId, null);
         }
 
-        public static void WrapInLabel(TagHelperOutput output, string content, string controlId,
-                                       FormTagHelper formContext) {
+        public static void WrapInLabel(
+            TagHelperOutput output, string content, string controlId,
+            FormTagHelper formContext) {
             var builder = new TagBuilder("label") {TagRenderMode = TagRenderMode.StartTag};
             if (!string.IsNullOrEmpty(controlId))
                 builder.Attributes.Add("for", controlId);

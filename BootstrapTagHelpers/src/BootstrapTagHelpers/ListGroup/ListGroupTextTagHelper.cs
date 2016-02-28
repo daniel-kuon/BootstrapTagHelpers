@@ -12,7 +12,7 @@ namespace BootstrapTagHelpers.ListGroup {
     {
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            if (context.HasListGroupContext())
+            if (context.HasContextItem<ListGroupTagHelper>())
                 base.Process(context, output);
         }
 

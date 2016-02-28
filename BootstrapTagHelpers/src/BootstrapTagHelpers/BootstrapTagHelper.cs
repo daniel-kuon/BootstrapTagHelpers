@@ -30,6 +30,8 @@ namespace BootstrapTagHelpers {
         protected virtual bool CopyAttributesIfBootstrapIsDisabled => false;
 
         public override void Init(TagHelperContext context) {
+            ContextAttribute.SetContexts(this, context);
+            ContextClassAttribute.SetContext(this, context);
             HtmlAttributeMinimizableAttribute.FillMinimizableAttributes(this, context);
             AutoGenerateIdAttribute.GenerateIds(this);
             ConvertVirtualUrlAttribute.ConvertUrls(this, ActionContextAccessor);

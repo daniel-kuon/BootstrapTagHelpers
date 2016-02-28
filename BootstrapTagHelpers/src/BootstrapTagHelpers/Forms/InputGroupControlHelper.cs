@@ -1,3 +1,4 @@
+using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
 using Microsoft.AspNet.Razor.TagHelpers;
 
@@ -9,12 +10,8 @@ namespace BootstrapTagHelpers.Forms {
     public class InputGroupControlHelper : BootstrapTagHelper {
         public override int Order => 100000;
         [HtmlAttributeNotBound]
+        [Context]
         public InputGroupTagHelper InputGroupContext { get; set; }
-
-        public override void Init(TagHelperContext context) {
-            base.Init(context);
-            InputGroupContext = context.GetInputGroupContext();
-        }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             if (!output.PostElement.IsEmpty)

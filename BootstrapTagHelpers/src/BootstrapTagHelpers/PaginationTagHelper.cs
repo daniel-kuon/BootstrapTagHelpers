@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
+
 using Microsoft.AspNet.Http.Extensions;
 using Microsoft.AspNet.Mvc.Infrastructure;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
-    using BootstrapTagHelpers.Attributes;
 
     [OutputElementHint("nav")]
     [RestrictChildren("item")]
+    [ContextClass]
     public class PaginationTagHelper : BootstrapTagHelper {
         public PaginationTagHelper(IActionContextAccessor actionContextAccessor) {
             CurrentUrl = actionContextAccessor.ActionContext.HttpContext.Request.GetDisplayUrl();
@@ -51,15 +54,15 @@ namespace BootstrapTagHelpers {
 
         protected override async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "nav";
-            output.PreContent.AppendHtml(Size == SimpleSize.Default
+            output.PreContent.AppendHtml(
+                                         Size == SimpleSize.Default
                                              ? "<ul class=\"pagination\">"
                                              : $"<ul class=\"pagination pagination-{Size.GetDescription()}\">");
             ChildDetectionMode = true;
-            context.SetPaginationContext(this);
             await output.GetChildContentAsync(true);
             ChildDetectionMode = false;
             if (!DisableAutoActive && Items.TrueForAll(pI => !pI.Active)) {
-                PaginationItemTagHelper activeItem = Items.FirstOrDefault(ItemHasCurrentUrl);
+                var activeItem = Items.FirstOrDefault(ItemHasCurrentUrl);
                 if (activeItem != null)
                     activeItem.Active = true;
             }
@@ -87,24 +90,23 @@ namespace BootstrapTagHelpers {
             if (MaxDisplayedItems > 0 && Items.Count > MaxDisplayedItems)
                 if (Items.Any(pI => pI.Active)) {
                     MaxDisplayedItems--;
-                    List<PaginationItemTagHelper> itemsBeforeActive =
+                    var itemsBeforeActive =
                         Items.TakeWhile(pI => !pI.Active).Reverse().ToList();
-                    List<PaginationItemTagHelper> itemsAfterActive = Items.SkipWhile(pI => !pI.Active).Skip(1).ToList();
-                    var itemsCountBeforeActive = (int) Math.Floor((decimal) MaxDisplayedItems/2);
-                    var itemsCountAfterActive = (int) Math.Ceiling((decimal) MaxDisplayedItems/2);
+                    var itemsAfterActive = Items.SkipWhile(pI => !pI.Active).Skip(1).ToList();
+                    var itemsCountBeforeActive = (int) Math.Floor((decimal) MaxDisplayedItems / 2);
+                    var itemsCountAfterActive = (int) Math.Ceiling((decimal) MaxDisplayedItems / 2);
                     if (itemsCountAfterActive > itemsAfterActive.Count)
                         itemsCountBeforeActive += itemsCountAfterActive - itemsAfterActive.Count;
                     else if (itemsCountBeforeActive > itemsBeforeActive.Count)
                         itemsCountAfterActive += itemsCountBeforeActive - itemsBeforeActive.Count;
-                    foreach (PaginationItemTagHelper item in itemsBeforeActive.Skip(itemsCountBeforeActive))
+                    foreach (var item in itemsBeforeActive.Skip(itemsCountBeforeActive))
                         item.RenderOutput = false;
-                    foreach (PaginationItemTagHelper item in itemsAfterActive.Skip(itemsCountAfterActive))
+                    foreach (var item in itemsAfterActive.Skip(itemsCountAfterActive))
                         item.RenderOutput = false;
-                }
-                else
-                    foreach (PaginationItemTagHelper item in Items.Skip(MaxDisplayedItems))
+                } else
+                    foreach (var item in Items.Skip(MaxDisplayedItems))
                         item.RenderOutput = false;
-            foreach (PaginationItemTagHelper item in Items.Where(pI => pI.RenderOutput))
+            foreach (var item in Items.Where(pI => pI.RenderOutput))
                 output.Content.AppendHtml(PaginationItemTagHelper.RenderItemTag(item));
         }
 

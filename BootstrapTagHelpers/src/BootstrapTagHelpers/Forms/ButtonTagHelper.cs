@@ -1,10 +1,12 @@
-using System;
-using System.Threading.Tasks;
-using BootstrapTagHelpers.Extensions;
-using Microsoft.AspNet.Razor.TagHelpers;
-
 namespace BootstrapTagHelpers.Forms {
+    using System;
+    using System.Threading.Tasks;
+
     using BootstrapTagHelpers.Attributes;
+    using BootstrapTagHelpers.Extensions;
+    using BootstrapTagHelpers.Navigation;
+
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     [HtmlTargetElement("a", Attributes = ButtonAttributeName)]
     [HtmlTargetElement("input", Attributes = TypeAttributeName)]
@@ -57,27 +59,25 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            if (context.HasButtonGroupContext()) {
-                ButtonGroupTagHelper buttonGroupContext = context.GetButtonGroupContext();
-                Button = true;
-                ButtonGroupJustified = buttonGroupContext.Justified;
-                Size = ButtonGroupJustified ?  buttonGroupContext.Size : BootstrapTagHelpers.Size.Default;
-                if (!Context.HasValue)
-                    Context = buttonGroupContext.Context;
-            }
-            else if (context.HasButtonToolbarContext()) {
-                ButtonToolbarTagHelper buttonToolbarContext = context.GetButtonToolbarContext();
-                Button = true;
-                WrapInButtonGroup = true;
-                if (!Context.HasValue)
-                    Context = buttonToolbarContext.Context;
-                if (!Size.HasValue)
-                    Size = buttonToolbarContext.Size;
+            if (context.HasContextItem<ButtonGroupTagHelper>()) {
+                var buttonGroupContext = context.GetContextItem<ButtonGroupTagHelper>();
+                this.Button = true;
+                this.ButtonGroupJustified = buttonGroupContext.Justified;
+                this.Size = this.ButtonGroupJustified ? buttonGroupContext.Size : BootstrapTagHelpers.Size.Default;
+                if (!this.Context.HasValue)
+                    this.Context = buttonGroupContext.Context;
+            } else if (context.HasContextItem<ButtonToolbarTagHelper>()) {
+                var buttonToolbarContext = context.GetContextItem<ButtonToolbarTagHelper>();
+                this.Button = true;
+                this.WrapInButtonGroup = true;
+                if (!this.Context.HasValue)
+                    this.Context = buttonToolbarContext.Context;
+                if (!this.Size.HasValue)
+                    this.Size = buttonToolbarContext.Size;
             }
         }
 
-        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
-        {
+        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output) {
             Type = Type?.ToLower() ?? "";
             output.TagName = output.TagName.ToLower();
             if (Button || output.TagName == "button" ||
@@ -88,9 +88,9 @@ namespace BootstrapTagHelpers.Forms {
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             output.AddCssClass("btn");
             output.AddCssClass("btn-" + (Context ?? ButtonContext.Default).ToString().ToLower());
-            if (context.HasInputGroupContext()) {
-                Size=BootstrapTagHelpers.Size.Default;
-                if (!context.HasInputGroupAddonContext()) {
+            if (context.HasContextItem<InputGroupTagHelper>()) {
+                this.Size = BootstrapTagHelpers.Size.Default;
+                if (!context.HasContextItem<AddonTagHelper>()) {
                     output.PreElement.PrependHtml("<span class=\"input-group-btn\">");
                     output.PostElement.AppendHtml("</span>");
                 }
@@ -104,8 +104,7 @@ namespace BootstrapTagHelpers.Forms {
                     output.PreElement.SetHtmlContent(
                                                      $"<div class=\"btn-group\" role=\"group\">");
                 output.PostElement.SetHtmlContent("</div>");
-            }
-            else if (Size.HasValue && Size.Value != BootstrapTagHelpers.Size.Default)
+            } else if (Size.HasValue && Size.Value != BootstrapTagHelpers.Size.Default)
                 output.AddCssClass("btn-" + Size.Value.GetDescription());
             if (BlockStyle)
                 output.AddCssClass("btn-block");

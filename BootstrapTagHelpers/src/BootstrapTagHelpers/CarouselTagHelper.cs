@@ -11,6 +11,7 @@ namespace BootstrapTagHelpers {
 
     [OutputElementHint("div")]
     [RestrictChildren("carousel-item")]
+    [ContextClass]
     public class CarouselTagHelper : BootstrapTagHelper {
         private int _itemIndex;
 
@@ -44,11 +45,6 @@ namespace BootstrapTagHelpers {
             Items.Add(item);
             if (_itemIndex++ == ActiveIndex)
                 item.IsActive = true;
-        }
-
-        public override void Init(TagHelperContext context) {
-            context.SetCarouselContext(this);
-            base.Init(context);
         }
 
         protected override async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {

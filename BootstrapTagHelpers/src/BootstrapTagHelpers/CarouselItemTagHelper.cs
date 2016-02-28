@@ -1,15 +1,21 @@
+using System.Threading.Tasks;
+
+using BootstrapTagHelpers.Attributes;
+using BootstrapTagHelpers.Extensions;
+
+using Microsoft.AspNet.Mvc.Infrastructure;
+using Microsoft.AspNet.Razor.TagHelpers;
+
 namespace BootstrapTagHelpers {
-    using System.Threading.Tasks;
 
-    using BootstrapTagHelpers.Attributes;
-    using BootstrapTagHelpers.Extensions;
-
-    using Microsoft.AspNet.Mvc.Infrastructure;
-    using Microsoft.AspNet.Razor.TagHelpers;
-
-    [HtmlTargetElement("carousel-item",ParentTag = "carousel")]
+    [HtmlTargetElement("carousel-item", ParentTag = "carousel")]
     [OutputElementHint("div")]
     public class CarouselItemTagHelper : BootstrapTagHelper {
+
+        public CarouselItemTagHelper(IActionContextAccessor actionContextAccessor) {
+            ActionContextAccessor = actionContextAccessor;
+        }
+
         [ConvertVirtualUrl]
         public string Src { get; set; }
 
@@ -21,11 +27,8 @@ namespace BootstrapTagHelpers {
         public bool IsActive { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public CarouselTagHelper CarouselContext { get; set; }
-
-        public CarouselItemTagHelper(IActionContextAccessor actionContextAccessor) {
-            ActionContextAccessor = actionContextAccessor;
-        }
 
         protected override async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "div";
@@ -42,7 +45,6 @@ namespace BootstrapTagHelpers {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            CarouselContext = context.GetCarouselContext();
             CarouselContext.AddItem(this);
         }
     }

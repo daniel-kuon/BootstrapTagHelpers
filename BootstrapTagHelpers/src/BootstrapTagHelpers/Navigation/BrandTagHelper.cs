@@ -22,12 +22,8 @@
         public string Href { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public NavbarTagHelper NavbarContext { get; set; }
-
-        public override void Init(TagHelperContext context) {
-            base.Init(context);
-            this.NavbarContext = context.GetNavbarContext();
-        }
 
         protected override async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
             output.TagName = "a";

@@ -5,6 +5,7 @@ namespace BootstrapTagHelpers.Forms {
     using BootstrapTagHelpers.Attributes;
 
     [OutputElementHint("div")]
+    [ContextClass]
     public class FormGroupTagHelper : BootstrapTagHelper {
         public Size? ControlSize { get; set; }
 
@@ -19,7 +20,8 @@ namespace BootstrapTagHelpers.Forms {
         public int? LabelWidthLg { get; set; }
 
         [HtmlAttributeNotBound]
-        public FormTagHelper FormContext { get; set; }
+        [Context]
+        public FormTagHelper FormContext { get; set; }=new FormTagHelper();
 
 
         public ValidationContext? ValidationContext { get; set; }
@@ -33,8 +35,7 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            FormContext = context.HasFormContext() ? context.GetFormContext() : new FormTagHelper();
-            context.SetFormContext(new FormTagHelper {
+            context.SetContextItem(new FormTagHelper {
                 ControlSize = ControlSize ?? FormContext.ControlSize,
                 Output = FormContext.Output,
                 Inline = FormContext.Inline,
@@ -45,7 +46,6 @@ namespace BootstrapTagHelpers.Forms {
                 LabelWidthSm = LabelWidthSm ?? FormContext.LabelWidthSm,
                 LabelsSrOnly = FormContext.LabelsSrOnly
             });
-            context.SetFormGroupContext(this);
             Size = Size ?? FormContext.FormGroupSize;
         }
 

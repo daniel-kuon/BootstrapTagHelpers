@@ -1,8 +1,9 @@
-namespace BootstrapTagHelpers.Forms {
-    using BootstrapTagHelpers.Attributes;
-    using BootstrapTagHelpers.Extensions;
+using BootstrapTagHelpers.Attributes;
+using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
+
+namespace BootstrapTagHelpers.Forms {
 
     public class TextareaTagHelper : BootstrapTagHelper {
         protected override bool CopyAttributesIfBootstrapIsDisabled => true;
@@ -17,9 +18,11 @@ namespace BootstrapTagHelpers.Forms {
         public string HelpText { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormTagHelper FormContext { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormGroupTagHelper FormGroupContext { get; set; }
 
         [HtmlAttributeName(AttributePrefix + "size")]
@@ -27,8 +30,6 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            this.FormGroupContext = context.GetFormGroupContext();
-            this.FormContext = context.GetFormContext();
             this.Size = this.Size ?? this.FormContext?.ControlSize;
         }
 

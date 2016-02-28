@@ -22,7 +22,7 @@ namespace BootstrapTagHelpers.ListGroup {
     [HtmlTargetElement("h6", ParentTag = "list-group-item")]
     public class ListGroupHeadingTagHelper : BootstrapTagHelper {
         public override void Process(TagHelperContext context, TagHelperOutput output) {
-            if (context.HasListGroupContext())
+            if (context.HasContextItem<ListGroupTagHelper>())
                 base.Process(context, output);
         }
 

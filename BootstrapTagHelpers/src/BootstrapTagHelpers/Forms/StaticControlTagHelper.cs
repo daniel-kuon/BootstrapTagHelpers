@@ -1,8 +1,9 @@
-namespace BootstrapTagHelpers.Forms {
-    using BootstrapTagHelpers.Attributes;
-    using BootstrapTagHelpers.Extensions;
+using BootstrapTagHelpers.Attributes;
+using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
+
+namespace BootstrapTagHelpers.Forms {
 
     [OutputElementHint("p")]
     public class StaticControlTagHelper : BootstrapTagHelper {
@@ -15,17 +16,17 @@ namespace BootstrapTagHelpers.Forms {
         public string HelpText { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormTagHelper FormContext { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormGroupTagHelper FormGroupContext { get; set; }
 
         public Size? Size { get; set; }
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            this.FormGroupContext = context.GetFormGroupContext();
-            this.FormContext = context.GetFormContext();
             this.Size = this.Size ?? this.FormContext?.ControlSize;
         }
 

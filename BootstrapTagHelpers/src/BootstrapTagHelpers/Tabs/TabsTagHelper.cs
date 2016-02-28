@@ -9,6 +9,7 @@
 
     [OutputElementHint("div")]
     [RestrictChildren("pane", "pane-group")]
+    [ContextClass]
     public class TabsTagHelper : BootstrapTagHelper {
         private int _currentIndex;
 
@@ -27,11 +28,6 @@
 
         [HtmlAttributeNotBound]
         public int CurrentIndex => this._currentIndex++;
-
-        public override void Init(TagHelperContext context) {
-            base.Init(context);
-            context.SetTabsContext(this);
-        }
 
         protected override async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
             await output.GetChildContentAsync();

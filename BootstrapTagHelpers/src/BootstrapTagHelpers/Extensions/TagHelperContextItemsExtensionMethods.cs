@@ -1,426 +1,141 @@
-using BootstrapTagHelpers.Forms;
-using BootstrapTagHelpers.ListGroup;
-using BootstrapTagHelpers.Media;
-using BootstrapTagHelpers.Navigation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
-    using BootstrapTagHelpers.Tabs;
 
     public static class TagHelperContextItemsExtensionMethods {
-        private const string ProgressContext = "ProgressContext";
 
-        private const string ButtonToolbarContext = "ButtonToolbarContext";
-
-        private const string ButtonGroupContext = "ButtonGroupContext";
-
-        private const string InputGroupContext = "InputGroupContext";
-
-        private const string InputGroupAddonContext = "InputGroupAddonContext";
-
-        private const string NavContext = "NavContext";
-
-        private const string ListGroupContext = "ListGroupContext";
-
-        private const string MediaListContext = "MediaListContext";
-
-        public static bool HasProgressContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(ProgressContext) && context.Items[ProgressContext] is ProgressTagHelper;
+        public static bool HasContextItem<T>(this TagHelperContext context) {
+            return HasContextItem<T>(context, true);
         }
 
-        public static void SetProgressContext(this TagHelperContext context, ProgressTagHelper tagHelper) {
-            if (context.Items.ContainsKey(ProgressContext))
-                context.Items[ProgressContext] = tagHelper;
+        public static bool HasContextItem<T>(this TagHelperContext context, bool useInherited) {
+            return context.HasContextItem(typeof(T), useInherited);
+        }
+
+        public static bool HasContextItem(this TagHelperContext context, Type type) {
+            return HasContextItem(context, type, true);
+        }
+
+        public static bool HasContextItem(this TagHelperContext context, Type type, bool useInherited) {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            var contextItem = GetContextItem(context, type, useInherited);
+            return contextItem != null && type.IsInstanceOfType(contextItem);
+        }
+
+        public static bool HasContextItem<T>(this TagHelperContext context, string key) {
+            return HasContextItem(context, typeof(T), key);
+        }
+
+        public static bool HasContextItem(this TagHelperContext context, Type type, string key) {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            return context.Items.ContainsKey(key) && type.IsInstanceOfType(context.Items[key]);
+        }
+
+        public static T GetContextItem<T>(this TagHelperContext context) where T : class {
+            return GetContextItem<T>(context, true);
+        }
+
+        public static T GetContextItem<T>(this TagHelperContext context, bool useInherited) where T : class {
+            return GetContextItem(context, typeof(T), useInherited) as T;
+        }
+
+        public static object GetContextItem(this TagHelperContext context, Type type) {
+            return GetContextItem(context, type, true);
+        }
+
+        public static T GetContextItem<T>(this TagHelperContext context, string key) where T : class {
+            return GetContextItem(context, typeof(T), key) as T;
+        }
+
+        public static object GetContextItem(this TagHelperContext context, Type type, string key) {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            return context.Items.ContainsKey(key) && type.IsInstanceOfType(context.Items[key]) ? context.Items[key] : null;
+        }
+
+        public static object GetContextItem(this TagHelperContext context, Type type, bool useInherit) {
+            if (context.Items.ContainsKey(type))
+                return context.Items.First(kVP => kVP.Key.Equals(type)).Value;
+            if (useInherit)
+                return context.Items.FirstOrDefault(kVP => kVP.Key is Type && type.IsAssignableFrom((Type) kVP.Key)).Value;
+            return null;
+        }
+
+        public static void SetContextItem<T>(this TagHelperContext context, T contextItem) {
+            SetContextItem(context, typeof(T), contextItem);
+        }
+
+        public static void SetContextItem(this TagHelperContext context, Type type, object contextItem) {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            if (context.Items.ContainsKey(type))
+                context.Items[type] = contextItem;
             else
-                context.Items.Add(ProgressContext, tagHelper);
+                context.Items.Add(type, contextItem);
         }
 
-        public static void RemoveProgressContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(ProgressContext))
-                context.SetProgressContext(null);
-        }
-
-        public static ProgressTagHelper GetProgressContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(ProgressContext))
-                return null;
-            return context.Items[ProgressContext] as ProgressTagHelper;
-        }
-
-        public static bool HasButtonToolbarContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(ButtonToolbarContext) &&
-                   context.Items[ButtonToolbarContext] is ButtonToolbarTagHelper;
-        }
-
-        public static void SetButtonToolbarContext(this TagHelperContext context, ButtonToolbarTagHelper tagHelper) {
-            if (context.Items.ContainsKey(ButtonToolbarContext))
-                context.Items[ButtonToolbarContext] = tagHelper;
+        public static void SetContextItem(this TagHelperContext context, string key, object contextItem) {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            if (context.Items.ContainsKey(key))
+                context.Items[key] = contextItem;
             else
-                context.Items.Add(ButtonToolbarContext, tagHelper);
+                context.Items.Add(key, contextItem);
         }
 
-        public static void RemoveButtonToolbarContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(ButtonToolbarContext))
-                context.SetButtonToolbarContext(null);
+        public static void RemoveContextItem<T>(this TagHelperContext context) {
+            RemoveContextItem<T>(context, true);
         }
 
-        public static ButtonToolbarTagHelper GetButtonToolbarContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(ButtonToolbarContext))
-                return null;
-            return context.Items[ButtonToolbarContext] as ButtonToolbarTagHelper;
+        public static void RemoveContextItem<T>(this TagHelperContext context, bool useInherited) {
+            RemoveContextItem(context, typeof(T), useInherited);
         }
 
-        public static bool HasButtonGroupContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(ButtonGroupContext) &&
-                   context.Items[ButtonGroupContext] is ButtonGroupTagHelper;
+        public static void RemoveContextItem(this TagHelperContext context, Type type) {
+            RemoveContextItem(context, type, true);
         }
 
-        public static void SetButtonGroupContext(this TagHelperContext context, ButtonGroupTagHelper tagHelper) {
-            if (context.Items.ContainsKey(ButtonGroupContext))
-                context.Items[ButtonGroupContext] = tagHelper;
-            else
-                context.Items.Add(ButtonGroupContext, tagHelper);
+        public static void RemoveContextItem(this TagHelperContext context, Type type, bool useInherited) {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            if (context.Items.ContainsKey(type))
+                context.Items.Remove(type);
+            else if (useInherited) {
+                var key = context.Items.FirstOrDefault(kVP => kVP.Key is Type && ((Type) kVP.Key).IsAssignableFrom(type));
+                if (!key.Equals(default(KeyValuePair<object, object>)))
+                    context.Items.Remove(key);
+            }
         }
 
-        public static void RemoveButtonGroupContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(ButtonGroupContext))
-                context.SetButtonGroupContext(null);
-        }
-
-        public static ButtonGroupTagHelper GetButtonGroupContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(ButtonGroupContext))
-                return null;
-            return context.Items[ButtonGroupContext] as ButtonGroupTagHelper;
-        }
-
-        public static bool HasInputGroupContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(InputGroupContext) &&
-                   context.Items[InputGroupContext] is InputGroupTagHelper;
-        }
-
-        public static void SetInputGroupContext(this TagHelperContext context, InputGroupTagHelper tagHelper) {
-            if (context.Items.ContainsKey(InputGroupContext))
-                context.Items[InputGroupContext] = tagHelper;
-            else
-                context.Items.Add(InputGroupContext, tagHelper);
-        }
-
-        public static void RemoveInputGroupContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(InputGroupContext))
-                context.SetInputGroupContext(null);
-        }
-
-        public static InputGroupTagHelper GetInputGroupContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(InputGroupContext))
-                return null;
-            return context.Items[InputGroupContext] as InputGroupTagHelper;
-        }
-
-        public static bool HasInputGroupAddonContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(InputGroupAddonContext) &&
-                   context.Items[InputGroupAddonContext] is AddonTagHelper;
-        }
-
-        public static void SetInputGroupAddonContext(this TagHelperContext context, AddonTagHelper tagHelper) {
-            if (context.Items.ContainsKey(InputGroupAddonContext))
-                context.Items[InputGroupAddonContext] = tagHelper;
-            else
-                context.Items.Add(InputGroupAddonContext, tagHelper);
-        }
-
-        public static void RemoveInputGroupAddonContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(InputGroupAddonContext))
-                context.SetInputGroupAddonContext(null);
-        }
-
-        public static AddonTagHelper GetInputGroupAddonContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(InputGroupAddonContext))
-                return null;
-            return context.Items[InputGroupAddonContext] as AddonTagHelper;
-        }
-
-        public static bool HasNavContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(NavContext) &&
-                   (context.Items[NavContext] is NavPillsTagHelper || context.Items[NavContext] is NavTabsTagHelper || context.Items[NavContext] is NavbarNavTagHelper);
-        }
-
-        public static void SetNavContext(this TagHelperContext context, NavbarNavTagHelper tagHelper) {
-            if (context.Items.ContainsKey(NavContext))
-                context.Items[NavContext] = tagHelper;
-            else
-                context.Items.Add(NavContext, tagHelper);
-        }
-
-        public static void SetNavContext(this TagHelperContext context, NavPillsTagHelper tagHelper) {
-            if (context.Items.ContainsKey(NavContext))
-                context.Items[NavContext] = tagHelper;
-            else
-                context.Items.Add(NavContext, tagHelper);
-        }
-
-        public static void SetNavContext(this TagHelperContext context, NavTabsTagHelper tagHelper) {
-            if (context.Items.ContainsKey(NavContext))
-                context.Items[NavContext] = tagHelper;
-            else
-                context.Items.Add(NavContext, tagHelper);
-        }
-
-        public static void RemoveNavContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(NavContext))
-                context.SetNavContext((NavPillsTagHelper) null);
-        }
-
-        public static bool HasListGroupContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(ListGroupContext) && context.Items[ListGroupContext] is ListGroupTagHelper;
-        }
-
-        public static void SetListGroupContext(this TagHelperContext context, ListGroupTagHelper tagHelper) {
-            if (context.Items.ContainsKey(ListGroupContext))
-                context.Items[ListGroupContext] = tagHelper;
-            else
-                context.Items.Add(ListGroupContext, tagHelper);
-        }
-
-        public static void RemoveListGroupContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(ListGroupContext))
-                context.SetListGroupContext(null);
-        }
-
-        public static ListGroupTagHelper GetListGroupContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(ListGroupContext))
-                return null;
-            return context.Items[ListGroupContext] as ListGroupTagHelper;
-        }
-
-        public static bool HasMediaListContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(MediaListContext) && context.Items[MediaListContext] is MediaListTagHelper;
-        }
-
-        public static void SetMediaListContext(this TagHelperContext context, MediaListTagHelper tagHelper) {
-            if (context.Items.ContainsKey(MediaListContext))
-                context.Items[MediaListContext] = tagHelper;
-            else
-                context.Items.Add(MediaListContext, tagHelper);
-        }
-
-        public static void RemoveMediaListContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(MediaListContext))
-                context.SetMediaListContext(null);
-        }
-
-        private const string PaginationContext = "PaginationContext";
-
-        public static bool HasPaginationContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(PaginationContext) && context.Items[PaginationContext] is PaginationTagHelper;
-        }
-
-        public static void SetPaginationContext(this TagHelperContext context, PaginationTagHelper tagHelper) {
-            if (context.Items.ContainsKey(PaginationContext))
-                context.Items[PaginationContext] = tagHelper;
-            else
-                context.Items.Add(PaginationContext, tagHelper);
-        }
-
-        public static void RemovePaginationContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(PaginationContext))
-                context.SetPaginationContext(null);
-        }
-
-        public static PaginationTagHelper GetPaginationContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(PaginationContext))
-                return null;
-            return context.Items[PaginationContext] as PaginationTagHelper;
-        }
-
-        private const string FormContext = "FormContext";
-
-        public static bool HasFormContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(FormContext) && context.Items[FormContext] is FormTagHelper;
-        }
-
-        public static void SetFormContext(this TagHelperContext context, FormTagHelper tagHelper) {
-            if (context.Items.ContainsKey(FormContext))
-                context.Items[FormContext] = tagHelper;
-            else
-                context.Items.Add(FormContext, tagHelper);
-        }
-
-        public static void RemoveFormContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(FormContext))
-                context.SetFormContext(null);
-        }
-
-        public static FormTagHelper GetFormContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(FormContext))
-                return null;
-            return context.Items[FormContext] as FormTagHelper;
-        }
-
-        private const string FormGroupContext = "FormGroupContext";
-
-        public static bool HasFormGroupContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(FormGroupContext) && context.Items[FormGroupContext] is FormGroupTagHelper;
-        }
-
-        public static void SetFormGroupContext(this TagHelperContext context, FormGroupTagHelper tagHelper) {
-            if (context.Items.ContainsKey(FormGroupContext))
-                context.Items[FormGroupContext] = tagHelper;
-            else
-                context.Items.Add(FormGroupContext, tagHelper);
-        }
-
-        public static void RemoveFormGroupContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(FormGroupContext))
-                context.SetFormGroupContext(null);
-        }
-
-        public static FormGroupTagHelper GetFormGroupContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(FormGroupContext))
-                return null;
-            return context.Items[FormGroupContext] as FormGroupTagHelper;
-        }
-
-        private const string LabelContext = "LabelContext";
-
-        public static bool HasLabelContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(LabelContext) && context.Items[LabelContext] is LabelTagHelper;
-        }
-
-        public static void SetLabelContext(this TagHelperContext context, LabelTagHelper tagHelper) {
-            if (context.Items.ContainsKey(LabelContext))
-                context.Items[LabelContext] = tagHelper;
-            else
-                context.Items.Add(LabelContext, tagHelper);
-        }
-
-        public static void RemoveLabelContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(LabelContext))
-                context.SetLabelContext(null);
-        }
-
-        public static LabelTagHelper GetLabelContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(LabelContext))
-                return null;
-            return context.Items[LabelContext] as LabelTagHelper;
-        }
-
-        private const string CarouselContext = "CarouselContext";
-
-        public static bool HasCarouselContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(CarouselContext) && context.Items[CarouselContext] is CarouselTagHelper;
-        }
-
-        public static void SetCarouselContext(this TagHelperContext context, CarouselTagHelper tagHelper) {
-            if (context.Items.ContainsKey(CarouselContext))
-                context.Items[CarouselContext] = tagHelper;
-            else
-                context.Items.Add(CarouselContext, tagHelper);
-        }
-
-        public static void RemoveCarouselContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(CarouselContext))
-                context.SetCarouselContext(null);
-        }
-
-        public static CarouselTagHelper GetCarouselContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(CarouselContext))
-                return null;
-            return context.Items[CarouselContext] as CarouselTagHelper;
-        }
-
-        private const string NavbarContext = "NavbarContext";
-
-        public static bool HasNavbarContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(NavbarContext) && context.Items[NavbarContext] is NavbarTagHelper;
-        }
-
-        public static void SetNavbarContext(this TagHelperContext context, NavbarTagHelper tagHelper) {
-            if (context.Items.ContainsKey(NavbarContext))
-                context.Items[NavbarContext] = tagHelper;
-            else
-                context.Items.Add(NavbarContext, tagHelper);
-        }
-
-        public static void RemoveNavbarContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(NavbarContext))
-                context.SetNavbarContext(null);
-        }
-
-        public static NavbarTagHelper GetNavbarContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(NavbarContext))
-                return null;
-            return context.Items[NavbarContext] as NavbarTagHelper;
-        }
-
-        private const string TabsContext = "TabsContext";
-
-        public static bool HasTabsContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(TabsContext) && context.Items[TabsContext] is TabsTagHelper;
-        }
-
-        public static void SetTabsContext(this TagHelperContext context, TabsTagHelper tagHelper) {
-            if (context.Items.ContainsKey(TabsContext))
-                context.Items[TabsContext] = tagHelper;
-            else
-                context.Items.Add(TabsContext, tagHelper);
-        }
-
-        public static void RemoveTabsContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(TabsContext))
-                context.SetTabsContext(null);
-        }
-
-        public static TabsTagHelper GetTabsContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(TabsContext))
-                return null;
-            return context.Items[TabsContext] as TabsTagHelper;
-        }
-
-        private const string TabsPaneGroupContext = "TabsPaneGroupContext";
-
-        public static bool HasTabsPaneGroupContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(TabsPaneGroupContext) && context.Items[TabsPaneGroupContext] is TabsPaneGroupTagHelper;
-        }
-
-        public static void SetTabsPaneGroupContext(this TagHelperContext context, TabsPaneGroupTagHelper tagHelper) {
-            if (context.Items.ContainsKey(TabsPaneGroupContext))
-                context.Items[TabsPaneGroupContext] = tagHelper;
-            else
-                context.Items.Add(TabsPaneGroupContext, tagHelper);
-        }
-
-        public static void RemoveTabsPaneGroupContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(TabsPaneGroupContext))
-                context.SetTabsPaneGroupContext(null);
-        }
-
-        public static TabsPaneGroupTagHelper GetTabsPaneGroupContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(TabsPaneGroupContext))
-                return null;
-            return context.Items[TabsPaneGroupContext] as TabsPaneGroupTagHelper;
-        }
-
-        private const string TabsPaneContext = "TabsPaneContext";
-
-        public static bool HasTabsPaneContext(this TagHelperContext context) {
-            return context.Items.ContainsKey(TabsPaneContext) && context.Items[TabsPaneContext] is TabsPaneTagHelper;
-        }
-
-        public static void SetTabsPaneContext(this TagHelperContext context, TabsPaneTagHelper tagHelper) {
-            if (context.Items.ContainsKey(TabsPaneContext))
-                context.Items[TabsPaneContext] = tagHelper;
-            else
-                context.Items.Add(TabsPaneContext, tagHelper);
-        }
-
-        public static void RemoveTabsPaneContext(this TagHelperContext context) {
-            if (context.Items.ContainsKey(TabsPaneContext))
-                context.SetTabsPaneContext(null);
-        }
-
-        public static TabsPaneTagHelper GetTabsPaneContext(this TagHelperContext context) {
-            if (!context.Items.ContainsKey(TabsPaneContext))
-                return null;
-            return context.Items[TabsPaneContext] as TabsPaneTagHelper;
+        public static void RemoveContextItem(this TagHelperContext context, string key) {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
+            if (context.Items.ContainsKey(key))
+                context.Items.Remove(key);
         }
     }
 }

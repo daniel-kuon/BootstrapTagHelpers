@@ -1,10 +1,12 @@
-﻿using BootstrapTagHelpers.Extensions;
+﻿using BootstrapTagHelpers.Attributes;
+using BootstrapTagHelpers.Extensions;
+
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
-    using BootstrapTagHelpers.Attributes;
 
+    [ContextClass]
     public class FormTagHelper : BootstrapTagHelper {
         [HtmlAttributeName(AttributePrefix + "label-width-xs")]
         public int LabelWidthXs { get; set; }
@@ -25,11 +27,9 @@ namespace BootstrapTagHelpers.Forms {
         public SimpleSize FormGroupSize { get; set; }
 
         [HtmlAttributeNotBound]
-[HtmlAttributeMinimizable]
-[HtmlAttributeName(AttributePrefix+"labels-sr-only")]
+        [HtmlAttributeMinimizable]
+        [HtmlAttributeName(AttributePrefix + "labels-sr-only")]
         public bool LabelsSrOnly { get; set; }
-
-
 
         [HtmlAttributeName(AttributePrefix + "horizontal")]
         [HtmlAttributeMinimizable]
@@ -40,11 +40,6 @@ namespace BootstrapTagHelpers.Forms {
         [HtmlAttributeMinimizable]
         [HtmlAttributeNotBound]
         public bool Inline { get; set; }
-
-        public override void Init(TagHelperContext context) {
-            base.Init(context);
-            context.SetFormContext(this);
-        }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             if (Horizontal)
@@ -82,17 +77,17 @@ namespace BootstrapTagHelpers.Forms {
         }
 
         public FormTagHelper Clone() {
-            return new FormTagHelper() {
-                Horizontal = Horizontal,
-                ControlSize = ControlSize,
-                LabelWidthXs = LabelWidthXs,
-                FormGroupSize = FormGroupSize,
-                Inline = Inline,
-                LabelWidthLg = LabelWidthLg,
-                LabelWidthMd = LabelWidthMd,
-                LabelWidthSm = LabelWidthSm,
-                LabelsSrOnly = LabelsSrOnly
-            };
+            return new FormTagHelper {
+                                         Horizontal = Horizontal,
+                                         ControlSize = ControlSize,
+                                         LabelWidthXs = LabelWidthXs,
+                                         FormGroupSize = FormGroupSize,
+                                         Inline = Inline,
+                                         LabelWidthLg = LabelWidthLg,
+                                         LabelWidthMd = LabelWidthMd,
+                                         LabelWidthSm = LabelWidthSm,
+                                         LabelsSrOnly = LabelsSrOnly
+                                     };
         }
     }
 }

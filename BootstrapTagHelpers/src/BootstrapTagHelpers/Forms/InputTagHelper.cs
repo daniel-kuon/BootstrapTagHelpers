@@ -1,10 +1,12 @@
 using System;
+
+using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
 using BootstrapTagHelpers.Navigation;
+
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
-    using BootstrapTagHelpers.Attributes;
 
     public class InputTagHelper : BootstrapTagHelper {
         protected override bool CopyAttributesIfBootstrapIsDisabled => true;
@@ -27,15 +29,18 @@ namespace BootstrapTagHelpers.Forms {
         public string Label { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public InputGroupTagHelper InputGroupContext { get; set; }
 
         [CopyToOutput]
         public string Id { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormTagHelper FormContext { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormGroupTagHelper FormGroupContext { get; set; }
 
         protected bool IsInLabel { get; set; }
@@ -45,10 +50,7 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            FormContext = context.GetFormContext();
-            FormGroupContext = context.GetFormGroupContext();
-            InputGroupContext = context.GetInputGroupContext();
-            IsInLabel = context.HasLabelContext();
+            this.IsInLabel = context.HasContextItem<LabelTagHelper>();
             Size = Size ?? FormContext?.ControlSize;
             if (FormGroupContext != null)
                 FormGroupContext.HasLabel = FormGroupContext.HasLabel || !string.IsNullOrEmpty(Label);
@@ -60,8 +62,8 @@ namespace BootstrapTagHelpers.Forms {
                        (output.Attributes.ContainsName("type")
                             ? output.Attributes["name"].Value.ToString()
                             : "text");
-            bool isCheckControl = Type.Equals("checkbox", StringComparison.CurrentCultureIgnoreCase) ||
-                                  Type.Equals("radio", StringComparison.CurrentCultureIgnoreCase);
+            var isCheckControl = Type.Equals("checkbox", StringComparison.CurrentCultureIgnoreCase) ||
+                                 Type.Equals("radio", StringComparison.CurrentCultureIgnoreCase);
             if (isCheckControl)
                 ProcessCheckControl(context, output);
             else
@@ -72,36 +74,36 @@ namespace BootstrapTagHelpers.Forms {
             output.AddCssClass("form-control");
             if (!string.IsNullOrEmpty(PostAddonText) || !string.IsNullOrEmpty(PreAddonText)) {
                 if ((Size ?? BootstrapTagHelpers.Size.Default) != BootstrapTagHelpers.Size.Default) {
-                    Size size = Size == BootstrapTagHelpers.Size.Large
-                                    ? BootstrapTagHelpers.Size.Large
-                                    : BootstrapTagHelpers.Size.Small;
+                    var size = Size == BootstrapTagHelpers.Size.Large
+                                   ? BootstrapTagHelpers.Size.Large
+                                   : BootstrapTagHelpers.Size.Small;
                     output.PreElement.PrependHtml($"<div class=\"input-group input-group-{size.GetDescription()}\">");
-                }
-                else
+                } else
                     output.PreElement.PrependHtml("<div class=\"input-group\">");
                 if (!string.IsNullOrEmpty(PreAddonText))
                     output.PreElement.AppendHtml(AddonTagHelper.GenerateAddon(PreAddonText));
                 if (!string.IsNullOrEmpty(PostAddonText))
                     output.PostElement.AppendHtml(AddonTagHelper.GenerateAddon(PostAddonText));
                 output.PostElement.AppendHtml("</div>");
-            }
-            else if (Size != null && Size != BootstrapTagHelpers.Size.Default)
+            } else if (Size != null && Size != BootstrapTagHelpers.Size.Default)
                 output.AddCssClass("input-" + Size.Value.GetDescription());
             if (!string.IsNullOrEmpty(HelpText))
                 if (InputGroupContext != null)
                     InputGroupContext.Output.PostElement.PrependHtml(HelpBlockTagHelper.GenerateHelpBlock(HelpText));
                 else
                     output.PostElement.AppendHtml(HelpBlockTagHelper.GenerateHelpBlock(HelpText));
-            if (InputGroupContext==null)
-            if (FormGroupContext != null)
-                FormGroupContext.WrapInDivForHorizontalForm(output, !string.IsNullOrEmpty(Label));
-            else if (FormContext != null)
-                FormContext.WrapInDivForHorizontalForm(output, !string.IsNullOrEmpty(Label));
+            if (InputGroupContext == null)
+                if (FormGroupContext != null)
+                    FormGroupContext.WrapInDivForHorizontalForm(output, !string.IsNullOrEmpty(Label));
+                else if (FormContext != null)
+                    FormContext.WrapInDivForHorizontalForm(output, !string.IsNullOrEmpty(Label));
             if (!string.IsNullOrEmpty(Label))
                 if (InputGroupContext == null)
                     output.PreElement.Prepend(LabelTagHelper.GenerateLabel(Label, Id, FormContext));
                 else
-                    InputGroupContext.Output.PreElement.Prepend(LabelTagHelper.GenerateLabel(Label, Id,
+                    InputGroupContext.Output.PreElement.Prepend(
+                                                                LabelTagHelper.GenerateLabel(
+                                                                                             Label, Id,
                                                                                              FormContext));
             if (FormGroupContext != null && FormGroupContext.HasFeedback &&
                 FormGroupContext.ValidationContext != null) {
@@ -130,24 +132,24 @@ namespace BootstrapTagHelpers.Forms {
         }
 
         private void ProcessCheckControl(TagHelperContext context, TagHelperOutput output) {
-            if (InputGroupContext != null) {
-                output.PreElement.Append(Label);
-                if (!context.HasInputGroupAddonContext()) {
+            if (this.InputGroupContext != null) {
+                output.PreElement.Append(this.Label);
+                if (!context.HasContextItem<AddonTagHelper>()) {
                     output.PreElement.AppendHtml("<span class=\"input-group-addon\">");
                     output.PostElement.PrependHtml("</span>");
                 }
-            }
-            else if (IsInLabel)
-                output.PostElement.Append(Label);
+            } else if (this.IsInLabel)
+                output.PostElement.Append(this.Label);
             else
-                LabelTagHelper.WrapInLabel(output, Label, null, FormContext);
+                LabelTagHelper.WrapInLabel(output, this.Label, null, this.FormContext);
             if (!string.IsNullOrEmpty(HelpText))
                 if (InputGroupContext != null)
                     InputGroupContext.Output.PostElement.AppendHtml(HelpBlockTagHelper.GenerateHelpBlock(HelpText));
                 else
                     output.PostElement.AppendHtml(HelpBlockTagHelper.GenerateHelpBlock(HelpText));
             if (!IsInLabel) {
-                output.PreElement.PrependHtml(FormContext?.Inline ?? false
+                output.PreElement.PrependHtml(
+                                              FormContext?.Inline ?? false
                                                   ? $"<div class=\"{Type.ToLower()}-inline\">"
                                                   : $"<div class=\"{Type.ToLower()}\">");
                 output.PostElement.AppendHtml("</div>");

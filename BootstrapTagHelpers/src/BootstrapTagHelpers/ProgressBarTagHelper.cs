@@ -1,6 +1,8 @@
 using BootstrapTagHelpers.Extensions;
 
 namespace BootstrapTagHelpers {
+    using BootstrapTagHelpers.Attributes;
+
     using Microsoft.AspNet.Razor.TagHelpers;
 
     [HtmlTargetElement(ProgressBarTagName)]
@@ -17,18 +19,19 @@ namespace BootstrapTagHelpers {
         [HtmlAttributeName(ContextAttributeName)]
         public ProgressBarContext? Context { get; set; }
 
+        [Context]
+         protected ProgressTagHelper ProgressContext { get; set; }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            if (context.HasProgressContext()) {
-                ProgressTagHelper progressContext = context.GetProgressContext();
+            if (ProgressContext!=null) {
                 if (!context.AllAttributes.ContainsName(AnimatedAttributeName))
-                    Animated = progressContext.Animated;
+                    Animated = ProgressContext.Animated;
                 if (!context.AllAttributes.ContainsName(StripedAttributeName))
-                    Striped = progressContext.Striped;
+                    Striped = ProgressContext.Striped;
                 if (!context.AllAttributes.ContainsName(DisplayValueAttributeName))
-                    DisplayValue = progressContext.DisplayValue;
+                    DisplayValue = ProgressContext.DisplayValue;
                 if (!context.AllAttributes.ContainsName(SrTextAttributeName))
-                    SrText = progressContext.SrText;
+                    SrText = ProgressContext.SrText;
             }
             else {
                 output.PreElement.SetHtmlContent("<div class=\"progress\">");

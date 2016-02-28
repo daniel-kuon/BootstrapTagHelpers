@@ -1,13 +1,15 @@
+using System.Threading.Tasks;
+
+using BootstrapTagHelpers.Attributes;
+using BootstrapTagHelpers.Extensions;
+
+using Microsoft.AspNet.Razor.TagHelpers;
+
 namespace BootstrapTagHelpers.Tabs {
-    using System.Threading.Tasks;
-
-    using BootstrapTagHelpers.Attributes;
-    using BootstrapTagHelpers.Extensions;
-
-    using Microsoft.AspNet.Razor.TagHelpers;
 
     [HtmlTargetElement("pane", ParentTag = "tabs")]
     [HtmlTargetElement("pane", ParentTag = "pane-group")]
+    [ContextClass]
     public class TabsPaneTagHelper : BootstrapTagHelper {
 
         [HtmlAttributeNotBound]
@@ -25,6 +27,7 @@ namespace BootstrapTagHelpers.Tabs {
 
         protected override bool CopyAttributesIfBootstrapIsDisabled => true;
 
+        [Context]
         protected TabsTagHelper TabsContext { get; set; }
 
         [HtmlAttributeNotBound]
@@ -32,17 +35,14 @@ namespace BootstrapTagHelpers.Tabs {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            context.SetTabsPaneContext(this);
-            this.TabsContext = context.GetTabsContext();
             if (this.TabsContext.ActiveIndex == this.TabsContext.CurrentIndex)
                 this.Active = true;
-            if (context.HasTabsPaneGroupContext()) {
-                var paneGroupContext = context.GetTabsPaneGroupContext();
+            if (context.HasContextItem<TabsPaneTagHelper>()) {
+                var paneGroupContext = context.GetContextItem<TabsPaneGroupTagHelper>();
                 paneGroupContext.Panes.Add(this);
                 if (this.Active)
                     paneGroupContext.Active = true;
-            }
-            else
+            } else
                 this.TabsContext.Panes.Add(this);
             this.DataToggleTarget = this.TabsContext.Pills ? "pill" : "tab";
         }
@@ -66,8 +66,8 @@ namespace BootstrapTagHelpers.Tabs {
 
         public virtual void WrapHeaderHtml() {
             this.HeaderHtml = this.Active
-                             ? $"<li role=\"presentation\" class=\"active\"><a href=\"#{this.Id}\" aria-controls=\"{this.Id}\" role=\"tab\" data-toggle=\"{(this.TabsContext.Pills ? "pill" : "tab")}\">{this.HeaderHtml}</a></li>"
-                             : $"<li role=\"presentation\"><a href=\"#{this.Id}\" aria-controls=\"{this.Id}\" role=\"tab\" data-toggle=\"{(this.TabsContext.Pills ? "pill" : "tab")}\">{this.HeaderHtml}</a></li>";
+                                  ? $"<li role=\"presentation\" class=\"active\"><a href=\"#{this.Id}\" aria-controls=\"{this.Id}\" role=\"tab\" data-toggle=\"{(this.TabsContext.Pills ? "pill" : "tab")}\">{this.HeaderHtml}</a></li>"
+                                  : $"<li role=\"presentation\"><a href=\"#{this.Id}\" aria-controls=\"{this.Id}\" role=\"tab\" data-toggle=\"{(this.TabsContext.Pills ? "pill" : "tab")}\">{this.HeaderHtml}</a></li>";
         }
     }
 }

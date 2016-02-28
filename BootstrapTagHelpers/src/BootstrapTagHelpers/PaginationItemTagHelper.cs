@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
-using BootstrapTagHelpers.Extensions;
+
+using BootstrapTagHelpers.Attributes;
+
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
-    using BootstrapTagHelpers.Attributes;
 
     [HtmlTargetElement("item", ParentTag = "pagination")]
     [OutputElementHint("li")]
@@ -24,12 +25,8 @@ namespace BootstrapTagHelpers {
         [HtmlAttributeNotBound]
         public string Content { get; set; }
 
+        [Context]
         protected PaginationTagHelper PaginationContext { get; set; }
-
-        public override void Init(TagHelperContext context) {
-            base.Init(context);
-            PaginationContext = context.GetPaginationContext();
-        }
 
         protected override async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
             output.SuppressOutput();
@@ -47,7 +44,7 @@ namespace BootstrapTagHelpers {
                 cssClass += "disabled";
             if (active)
                 cssClass += " active";
-            string ret = cssClass == "" ? "<li>" : $"<li class=\"{cssClass.Trim()}\">";
+            var ret = cssClass == "" ? "<li>" : $"<li class=\"{cssClass.Trim()}\">";
             ret += "<a ";
             if (disabled)
                 ret += "data-";

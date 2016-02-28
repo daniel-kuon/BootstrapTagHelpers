@@ -1,14 +1,20 @@
-using BootstrapTagHelpers.Extensions;
-using Microsoft.AspNet.Razor.TagHelpers;
-
 namespace BootstrapTagHelpers.Forms {
     using BootstrapTagHelpers.Attributes;
+    using BootstrapTagHelpers.Extensions;
+    using BootstrapTagHelpers.Navigation;
+
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     [RestrictChildren("button", "a", "dropdown")]
     [OutputElementHint("div")]
+    [ContextClass]
     public class ButtonGroupTagHelper : BootstrapTagHelper {
+        [Context]
+        protected ButtonToolbarTagHelper ButtonToolbarContext { get; set; }
+
         public Size? Size { get; set; }
         public ButtonContext? Context { get; set; }
+
         [HtmlAttributeMinimizable]
         [HtmlAttributeNotBound]
         public bool Vertical { get; set; }
@@ -19,39 +25,34 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            if (context.HasButtonToolbarContext()) {
-                ButtonToolbarTagHelper buttonToolbarContext = context.GetButtonToolbarContext();
+            if (ButtonToolbarContext!=null) {
                 Vertical = false;
                 Justified = false;
                 if (!Size.HasValue)
-                    Size = buttonToolbarContext.Size;
+                    Size = ButtonToolbarContext.Size;
                 if (!Context.HasValue)
-                    Context = buttonToolbarContext.Context;
+                    Context = ButtonToolbarContext.Context;
             }
         }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            context.SetButtonGroupContext(this);
             output.Attributes.Add("role", "group");
-            if (context.HasInputGroupContext())
-            {
+            if (context.HasContextItem<InputGroupTagHelper>()) {
                 Size = BootstrapTagHelpers.Size.Default;
-                if (!context.HasInputGroupAddonContext())
-                {
+                if (!context.HasContextItem<AddonTagHelper>()) {
                     output.TagName = "span";
                     output.AddCssClass("input-group-btn");
                 }
-                context.RemoveInputGroupContext();
-            }
-            else {
+                context.RemoveContextItem<InputGroupTagHelper>();
+            } else {
                 output.TagName = "div";
-                if (Vertical)
+                if (this.Vertical)
                     output.AddCssClass("btn-group-vertical");
                 else
                     output.AddCssClass("btn-group");
-                if (Size.HasValue)
-                    output.AddCssClass("btn-group-" + Size.Value.GetDescription());
-                if (Justified)
+                if (this.Size.HasValue)
+                    output.AddCssClass("btn-group-" + this.Size.Value.GetDescription());
+                if (this.Justified)
                     output.AddCssClass("btn-group-justified");
             }
         }

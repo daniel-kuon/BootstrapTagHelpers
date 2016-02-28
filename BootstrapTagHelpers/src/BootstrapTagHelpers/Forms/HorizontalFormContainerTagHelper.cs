@@ -14,10 +14,12 @@ namespace BootstrapTagHelpers.Forms {
         public int? WidthLg { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormTagHelper FormContext { get; set; }
 
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormGroupTagHelper FormGroupContext { get; set; }
 
         [HtmlAttributeNotBound]
@@ -27,10 +29,8 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            FormContext = context.GetFormContext();
-            FormGroupContext = context.GetFormGroupContext();
             if (FormContext != null)
-                context.SetFormContext(new FormTagHelper {
+                context.SetContextItem(new FormTagHelper {
                     LabelWidthLg = FormContext.LabelWidthLg,
                     LabelWidthMd = FormContext.LabelWidthMd,
                     LabelWidthSm = FormContext.LabelWidthSm,
@@ -42,8 +42,8 @@ namespace BootstrapTagHelpers.Forms {
                     LabelsSrOnly = FormContext.LabelsSrOnly
                 });
             if (FormGroupContext != null)
-                context.SetFormGroupContext(new FormGroupTagHelper {
-                    FormContext = context.GetFormContext(),
+                context.SetContextItem(new FormGroupTagHelper {
+                    FormContext = context.GetContextItem<FormTagHelper>(),
                     Size = FormGroupContext.Size,
                     ControlSize = FormGroupContext.ControlSize,
                     HasFeedback = FormGroupContext.HasFeedback,

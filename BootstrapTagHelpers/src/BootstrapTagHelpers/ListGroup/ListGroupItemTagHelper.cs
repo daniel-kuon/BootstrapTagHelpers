@@ -1,8 +1,9 @@
+using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
+
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.ListGroup {
-    using BootstrapTagHelpers.Attributes;
 
     [HtmlTargetElement("list-group-item", ParentTag = "list-group")]
     [OutputElementHint("li")]
@@ -10,6 +11,7 @@ namespace BootstrapTagHelpers.ListGroup {
         public ListGroupContext? Context { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public ListGroupTagHelper ListGroupContext { get; set; }
 
         public string BadgeText { get; set; }
@@ -24,11 +26,9 @@ namespace BootstrapTagHelpers.ListGroup {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            ListGroupContext = context.GetListGroupContext();
             if (Context == null)
                 Context = ListGroupContext.Context;
         }
-
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
             if (ListGroupContext.ChildDetectionMode)

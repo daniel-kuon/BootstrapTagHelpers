@@ -1,12 +1,16 @@
+using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
+
 using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
+
     [OutputElementHint("p")]
     public class FormControlStaticTagHelper : BootstrapTagHelper {
         public string Label { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormTagHelper FormContext { get; set; }
 
         [HtmlAttributeNotBound]
@@ -14,8 +18,6 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            FormGroupContext = context.GetFormGroupContext();
-            FormContext = context.GetFormContext();
         }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {

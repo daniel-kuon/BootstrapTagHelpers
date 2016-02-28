@@ -6,6 +6,7 @@ namespace BootstrapTagHelpers {
 
     [OutputElementHint("ul")]
     [RestrictChildren("nav-item", "dropdown")]
+    [ContextClass]
     public class NavTabsTagHelper : BootstrapTagHelper {
         [HtmlAttributeMinimizable]
         [HtmlAttributeNotBound]
@@ -17,7 +18,6 @@ namespace BootstrapTagHelpers {
             output.AddCssClass("nav-tabs");
             if (Justified)
                 output.AddCssClass("nav-justified");
-            context.SetNavContext(this);
         }
     }
 }

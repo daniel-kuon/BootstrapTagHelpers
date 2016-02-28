@@ -6,6 +6,7 @@ namespace BootstrapTagHelpers {
     using Microsoft.AspNet.Razor.TagHelpers;
 
     [RestrictChildren(ProgressBarTagHelper.ProgressBarTagName)]
+    [ContextClass]
     public class ProgressTagHelper : BootstrapTagHelper {
         public const string DisplayValueAttributeName = AttributePrefix + "display-value";
         public const string StripedAttributeName = AttributePrefix + "striped";
@@ -32,7 +33,6 @@ namespace BootstrapTagHelpers {
 
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            context.SetProgressContext(this);
             output.TagName = "div";
             output.AddCssClass("progress");
         }

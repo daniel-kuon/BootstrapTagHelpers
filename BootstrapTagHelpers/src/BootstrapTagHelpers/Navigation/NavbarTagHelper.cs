@@ -8,6 +8,7 @@ namespace BootstrapTagHelpers.Navigation {
     using BootstrapTagHelpers.Attributes;
 
     [OutputElementHint("nav")]
+    [ContextClass]
     public class NavbarTagHelper : BootstrapTagHelper {
         public string BrandText { get; set; }
         public string BrandHref { get; set; }
@@ -28,11 +29,6 @@ namespace BootstrapTagHelpers.Navigation {
 
         [HtmlAttributeNotBound]
         public string BrandContent { get; set; }
-
-        public override void Init(TagHelperContext context) {
-            base.Init(context);
-            context.SetNavbarContext(this);
-        }
 
         protected override async Task BootstrapProcessAsync(TagHelperContext context, TagHelperOutput output) {
             BrandContent = $"<a class=\"navbar-brand\" href=\"{BrandHref}\">{BrandText}</a>";

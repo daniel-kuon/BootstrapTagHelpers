@@ -17,9 +17,11 @@ namespace BootstrapTagHelpers.Forms {
         public string HelpText { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormTagHelper FormContext { get; set; }
 
         [HtmlAttributeNotBound]
+        [Context]
         public FormGroupTagHelper FormGroupContext { get; set; }
 
         [HtmlAttributeName(AttributePrefix + "size")]
@@ -27,8 +29,6 @@ namespace BootstrapTagHelpers.Forms {
 
         public override void Init(TagHelperContext context) {
             base.Init(context);
-            FormGroupContext = context.GetFormGroupContext();
-            FormContext = context.GetFormContext();
             Size = Size ?? FormContext?.ControlSize;
         }
 
