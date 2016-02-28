@@ -333,7 +333,7 @@ namespace BootstrapTagHelpers.Extensions {
             output.PostElement.PrependHtml(endTag);
         }
 
-        public static async void LoadChildContentAsync(this TagHelperOutput output) {
+        public static async Task LoadChildContentAsync(this TagHelperOutput output) {
                 output.Content.SetContent(await output.GetChildContentAsync());
             }
 
