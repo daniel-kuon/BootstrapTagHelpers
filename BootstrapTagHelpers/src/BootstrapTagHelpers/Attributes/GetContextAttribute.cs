@@ -38,7 +38,7 @@
                 throw new ArgumentNullException(nameof(target));
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
-            foreach (var propertyInfo in target.GetType().GetProperties().Where(pI => pI.HasCustomAttribute<ContextAttribute>())) {
+            foreach (var propertyInfo in target.GetType().GetProperties(BindingFlags.Instance|BindingFlags.Static|BindingFlags.Public|BindingFlags.NonPublic).Where(pI => pI.HasCustomAttribute<ContextAttribute>())) {
                 var attr = propertyInfo.GetCustomAttribute<ContextAttribute>();
                 if (string.IsNullOrEmpty(attr.Key)) {
                     propertyInfo.SetValue(target, context.GetContextItem(propertyInfo.PropertyType, attr.UseInherited));
