@@ -13,11 +13,11 @@ namespace BootstrapTagHelpers {
 
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            output.TagName = "Buttton";
+            output.TagName = "button";
             output.AddCssClass("close");
             output.MergeAttribute("type", "button");
             output.AddAriaAttribute("label", Text);
-            output.Content.SetContent("<span aria-hidden=\"true\">&times;</span>");
+            output.Content.SetHtmlContent("<span aria-hidden=\"true\">&times;</span>");
             output.TagMode=TagMode.StartTagAndEndTag;
         }
     }
