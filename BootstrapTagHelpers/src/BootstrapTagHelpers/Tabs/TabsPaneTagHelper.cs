@@ -37,7 +37,7 @@ namespace BootstrapTagHelpers.Tabs {
             base.Init(context);
             if (this.TabsContext.ActiveIndex == this.TabsContext.CurrentIndex)
                 this.Active = true;
-            if (context.HasContextItem<TabsPaneTagHelper>()) {
+            if (context.HasContextItem<TabsPaneGroupTagHelper>()) {
                 var paneGroupContext = context.GetContextItem<TabsPaneGroupTagHelper>();
                 paneGroupContext.Panes.Add(this);
                 if (this.Active)
