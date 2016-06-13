@@ -3,7 +3,7 @@ namespace BootstrapTagHelpers.Navigation {
     using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [HtmlTargetElement("p", ParentTag = "navbar")]
     [HtmlTargetElement("*", ParentTag = "navbar", Attributes = NavbarTextAttributeName)]

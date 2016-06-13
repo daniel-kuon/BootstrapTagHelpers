@@ -1,532 +1,533 @@
+using BootstrapTagHelpers.Attributes;
+
 namespace BootstrapTagHelpers {
-    using System.ComponentModel;
 
     public enum Glyphicons {
-        [Description("glyphicon-asterisk")]
+        [DisplayValue("glyphicon-asterisk")]
         Asterisk,
-        [Description("glyphicon-plus")]
+        [DisplayValue("glyphicon-plus")]
         Plus,
-        [Description("glyphicon-euro")]
+        [DisplayValue("glyphicon-euro")]
         Euro,
-        [Description("glyphicon-eur")]
+        [DisplayValue("glyphicon-eur")]
         Eur,
-        [Description("glyphicon-minus")]
+        [DisplayValue("glyphicon-minus")]
         Minus,
-        [Description("glyphicon-cloud")]
+        [DisplayValue("glyphicon-cloud")]
         Cloud,
-        [Description("glyphicon-envelope")]
+        [DisplayValue("glyphicon-envelope")]
         Envelope,
-        [Description("glyphicon-pencil")]
+        [DisplayValue("glyphicon-pencil")]
         Pencil,
-        [Description("glyphicon-glass")]
+        [DisplayValue("glyphicon-glass")]
         Glass,
-        [Description("glyphicon-music")]
+        [DisplayValue("glyphicon-music")]
         Music,
-        [Description("glyphicon-search")]
+        [DisplayValue("glyphicon-search")]
         Search,
-        [Description("glyphicon-heart")]
+        [DisplayValue("glyphicon-heart")]
         Heart,
-        [Description("glyphicon-star")]
+        [DisplayValue("glyphicon-star")]
         Star,
-        [Description("glyphicon-star-empty")]
+        [DisplayValue("glyphicon-star-empty")]
         StarEmpty,
-        [Description("glyphicon-user")]
+        [DisplayValue("glyphicon-user")]
         User,
-        [Description("glyphicon-film")]
+        [DisplayValue("glyphicon-film")]
         Film,
-        [Description("glyphicon-th-large")]
+        [DisplayValue("glyphicon-th-large")]
         ThLarge,
-        [Description("glyphicon-th")]
+        [DisplayValue("glyphicon-th")]
         Th,
-        [Description("glyphicon-th-list")]
+        [DisplayValue("glyphicon-th-list")]
         ThList,
-        [Description("glyphicon-ok")]
+        [DisplayValue("glyphicon-ok")]
         Ok,
-        [Description("glyphicon-remove")]
+        [DisplayValue("glyphicon-remove")]
         Remove,
-        [Description("glyphicon-zoom-in")]
+        [DisplayValue("glyphicon-zoom-in")]
         ZoomIn,
-        [Description("glyphicon-zoom-out")]
+        [DisplayValue("glyphicon-zoom-out")]
         ZoomOut,
-        [Description("glyphicon-off")]
+        [DisplayValue("glyphicon-off")]
         Off,
-        [Description("glyphicon-signal")]
+        [DisplayValue("glyphicon-signal")]
         Signal,
-        [Description("glyphicon-cog")]
+        [DisplayValue("glyphicon-cog")]
         Cog,
-        [Description("glyphicon-trash")]
+        [DisplayValue("glyphicon-trash")]
         Trash,
-        [Description("glyphicon-home")]
+        [DisplayValue("glyphicon-home")]
         Home,
-        [Description("glyphicon-file")]
+        [DisplayValue("glyphicon-file")]
         File,
-        [Description("glyphicon-time")]
+        [DisplayValue("glyphicon-time")]
         Time,
-        [Description("glyphicon-road")]
+        [DisplayValue("glyphicon-road")]
         Road,
-        [Description("glyphicon-download-alt")]
+        [DisplayValue("glyphicon-download-alt")]
         DownloadAlt,
-        [Description("glyphicon-download")]
+        [DisplayValue("glyphicon-download")]
         Download,
-        [Description("glyphicon-upload")]
+        [DisplayValue("glyphicon-upload")]
         Upload,
-        [Description("glyphicon-inbox")]
+        [DisplayValue("glyphicon-inbox")]
         Inbox,
-        [Description("glyphicon-play-circle")]
+        [DisplayValue("glyphicon-play-circle")]
         PlayCircle,
-        [Description("glyphicon-repeat")]
+        [DisplayValue("glyphicon-repeat")]
         Repeat,
-        [Description("glyphicon-refresh")]
+        [DisplayValue("glyphicon-refresh")]
         Refresh,
-        [Description("glyphicon-list-alt")]
+        [DisplayValue("glyphicon-list-alt")]
         ListAlt,
-        [Description("glyphicon-lock")]
+        [DisplayValue("glyphicon-lock")]
         Lock,
-        [Description("glyphicon-flag")]
+        [DisplayValue("glyphicon-flag")]
         Flag,
-        [Description("glyphicon-headphones")]
+        [DisplayValue("glyphicon-headphones")]
         Headphones,
-        [Description("glyphicon-volume-off")]
+        [DisplayValue("glyphicon-volume-off")]
         VolumeOff,
-        [Description("glyphicon-volume-down")]
+        [DisplayValue("glyphicon-volume-down")]
         VolumeDown,
-        [Description("glyphicon-volume-up")]
+        [DisplayValue("glyphicon-volume-up")]
         VolumeUp,
-        [Description("glyphicon-qrcode")]
+        [DisplayValue("glyphicon-qrcode")]
         Qrcode,
-        [Description("glyphicon-barcode")]
+        [DisplayValue("glyphicon-barcode")]
         Barcode,
-        [Description("glyphicon-tag")]
+        [DisplayValue("glyphicon-tag")]
         Tag,
-        [Description("glyphicon-tags")]
+        [DisplayValue("glyphicon-tags")]
         Tags,
-        [Description("glyphicon-book")]
+        [DisplayValue("glyphicon-book")]
         Book,
-        [Description("glyphicon-bookmark")]
+        [DisplayValue("glyphicon-bookmark")]
         Bookmark,
-        [Description("glyphicon-print")]
+        [DisplayValue("glyphicon-print")]
         Print,
-        [Description("glyphicon-camera")]
+        [DisplayValue("glyphicon-camera")]
         Camera,
-        [Description("glyphicon-font")]
+        [DisplayValue("glyphicon-font")]
         Font,
-        [Description("glyphicon-bold")]
+        [DisplayValue("glyphicon-bold")]
         Bold,
-        [Description("glyphicon-italic")]
+        [DisplayValue("glyphicon-italic")]
         Italic,
-        [Description("glyphicon-text-height")]
+        [DisplayValue("glyphicon-text-height")]
         TextHeight,
-        [Description("glyphicon-text-width")]
+        [DisplayValue("glyphicon-text-width")]
         TextWidth,
-        [Description("glyphicon-align-left")]
+        [DisplayValue("glyphicon-align-left")]
         AlignLeft,
-        [Description("glyphicon-align-center")]
+        [DisplayValue("glyphicon-align-center")]
         AlignCenter,
-        [Description("glyphicon-align-right")]
+        [DisplayValue("glyphicon-align-right")]
         AlignRight,
-        [Description("glyphicon-align-justify")]
+        [DisplayValue("glyphicon-align-justify")]
         AlignJustify,
-        [Description("glyphicon-list")]
+        [DisplayValue("glyphicon-list")]
         List,
-        [Description("glyphicon-indent-left")]
+        [DisplayValue("glyphicon-indent-left")]
         IndentLeft,
-        [Description("glyphicon-indent-right")]
+        [DisplayValue("glyphicon-indent-right")]
         IndentRight,
-        [Description("glyphicon-facetime-video")]
+        [DisplayValue("glyphicon-facetime-video")]
         FacetimeVideo,
-        [Description("glyphicon-picture")]
+        [DisplayValue("glyphicon-picture")]
         Picture,
-        [Description("glyphicon-map-marker")]
+        [DisplayValue("glyphicon-map-marker")]
         MapMarker,
-        [Description("glyphicon-adjust")]
+        [DisplayValue("glyphicon-adjust")]
         Adjust,
-        [Description("glyphicon-tint")]
+        [DisplayValue("glyphicon-tint")]
         Tint,
-        [Description("glyphicon-edit")]
+        [DisplayValue("glyphicon-edit")]
         Edit,
-        [Description("glyphicon-share")]
+        [DisplayValue("glyphicon-share")]
         Share,
-        [Description("glyphicon-check")]
+        [DisplayValue("glyphicon-check")]
         Check,
-        [Description("glyphicon-move")]
+        [DisplayValue("glyphicon-move")]
         Move,
-        [Description("glyphicon-step-backward")]
+        [DisplayValue("glyphicon-step-backward")]
         StepBackward,
-        [Description("glyphicon-fast-backward")]
+        [DisplayValue("glyphicon-fast-backward")]
         FastBackward,
-        [Description("glyphicon-backward")]
+        [DisplayValue("glyphicon-backward")]
         Backward,
-        [Description("glyphicon-play")]
+        [DisplayValue("glyphicon-play")]
         Play,
-        [Description("glyphicon-pause")]
+        [DisplayValue("glyphicon-pause")]
         Pause,
-        [Description("glyphicon-stop")]
+        [DisplayValue("glyphicon-stop")]
         Stop,
-        [Description("glyphicon-forward")]
+        [DisplayValue("glyphicon-forward")]
         Forward,
-        [Description("glyphicon-fast-forward")]
+        [DisplayValue("glyphicon-fast-forward")]
         FastForward,
-        [Description("glyphicon-step-forward")]
+        [DisplayValue("glyphicon-step-forward")]
         StepForward,
-        [Description("glyphicon-eject")]
+        [DisplayValue("glyphicon-eject")]
         Eject,
-        [Description("glyphicon-chevron-left")]
+        [DisplayValue("glyphicon-chevron-left")]
         ChevronLeft,
-        [Description("glyphicon-chevron-right")]
+        [DisplayValue("glyphicon-chevron-right")]
         ChevronRight,
-        [Description("glyphicon-plus-sign")]
+        [DisplayValue("glyphicon-plus-sign")]
         PlusSign,
-        [Description("glyphicon-minus-sign")]
+        [DisplayValue("glyphicon-minus-sign")]
         MinusSign,
-        [Description("glyphicon-remove-sign")]
+        [DisplayValue("glyphicon-remove-sign")]
         RemoveSign,
-        [Description("glyphicon-ok-sign")]
+        [DisplayValue("glyphicon-ok-sign")]
         OkSign,
-        [Description("glyphicon-question-sign")]
+        [DisplayValue("glyphicon-question-sign")]
         QuestionSign,
-        [Description("glyphicon-info-sign")]
+        [DisplayValue("glyphicon-info-sign")]
         InfoSign,
-        [Description("glyphicon-screenshot")]
+        [DisplayValue("glyphicon-screenshot")]
         Screenshot,
-        [Description("glyphicon-remove-circle")]
+        [DisplayValue("glyphicon-remove-circle")]
         RemoveCircle,
-        [Description("glyphicon-ok-circle")]
+        [DisplayValue("glyphicon-ok-circle")]
         OkCircle,
-        [Description("glyphicon-ban-circle")]
+        [DisplayValue("glyphicon-ban-circle")]
         BanCircle,
-        [Description("glyphicon-arrow-left")]
+        [DisplayValue("glyphicon-arrow-left")]
         ArrowLeft,
-        [Description("glyphicon-arrow-right")]
+        [DisplayValue("glyphicon-arrow-right")]
         ArrowRight,
-        [Description("glyphicon-arrow-up")]
+        [DisplayValue("glyphicon-arrow-up")]
         ArrowUp,
-        [Description("glyphicon-arrow-down")]
+        [DisplayValue("glyphicon-arrow-down")]
         ArrowDown,
-        [Description("glyphicon-share-alt")]
+        [DisplayValue("glyphicon-share-alt")]
         ShareAlt,
-        [Description("glyphicon-resize-full")]
+        [DisplayValue("glyphicon-resize-full")]
         ResizeFull,
-        [Description("glyphicon-resize-small")]
+        [DisplayValue("glyphicon-resize-small")]
         ResizeSmall,
-        [Description("glyphicon-exclamation-sign")]
+        [DisplayValue("glyphicon-exclamation-sign")]
         ExclamationSign,
-        [Description("glyphicon-gift")]
+        [DisplayValue("glyphicon-gift")]
         Gift,
-        [Description("glyphicon-leaf")]
+        [DisplayValue("glyphicon-leaf")]
         Leaf,
-        [Description("glyphicon-fire")]
+        [DisplayValue("glyphicon-fire")]
         Fire,
-        [Description("glyphicon-eye-open")]
+        [DisplayValue("glyphicon-eye-open")]
         EyeOpen,
-        [Description("glyphicon-eye-close")]
+        [DisplayValue("glyphicon-eye-close")]
         EyeClose,
-        [Description("glyphicon-warning-sign")]
+        [DisplayValue("glyphicon-warning-sign")]
         WarningSign,
-        [Description("glyphicon-plane")]
+        [DisplayValue("glyphicon-plane")]
         Plane,
-        [Description("glyphicon-calendar")]
+        [DisplayValue("glyphicon-calendar")]
         Calendar,
-        [Description("glyphicon-random")]
+        [DisplayValue("glyphicon-random")]
         Random,
-        [Description("glyphicon-comment")]
+        [DisplayValue("glyphicon-comment")]
         Comment,
-        [Description("glyphicon-magnet")]
+        [DisplayValue("glyphicon-magnet")]
         Magnet,
-        [Description("glyphicon-chevron-up")]
+        [DisplayValue("glyphicon-chevron-up")]
         ChevronUp,
-        [Description("glyphicon-chevron-down")]
+        [DisplayValue("glyphicon-chevron-down")]
         ChevronDown,
-        [Description("glyphicon-retweet")]
+        [DisplayValue("glyphicon-retweet")]
         Retweet,
-        [Description("glyphicon-shopping-cart")]
+        [DisplayValue("glyphicon-shopping-cart")]
         ShoppingCart,
-        [Description("glyphicon-folder-close")]
+        [DisplayValue("glyphicon-folder-close")]
         FolderClose,
-        [Description("glyphicon-folder-open")]
+        [DisplayValue("glyphicon-folder-open")]
         FolderOpen,
-        [Description("glyphicon-resize-vertical")]
+        [DisplayValue("glyphicon-resize-vertical")]
         ResizeVertical,
-        [Description("glyphicon-resize-horizontal")]
+        [DisplayValue("glyphicon-resize-horizontal")]
         ResizeHorizontal,
-        [Description("glyphicon-hdd")]
+        [DisplayValue("glyphicon-hdd")]
         Hdd,
-        [Description("glyphicon-bullhorn")]
+        [DisplayValue("glyphicon-bullhorn")]
         Bullhorn,
-        [Description("glyphicon-bell")]
+        [DisplayValue("glyphicon-bell")]
         Bell,
-        [Description("glyphicon-certificate")]
+        [DisplayValue("glyphicon-certificate")]
         Certificate,
-        [Description("glyphicon-thumbs-up")]
+        [DisplayValue("glyphicon-thumbs-up")]
         ThumbsUp,
-        [Description("glyphicon-thumbs-down")]
+        [DisplayValue("glyphicon-thumbs-down")]
         ThumbsDown,
-        [Description("glyphicon-hand-right")]
+        [DisplayValue("glyphicon-hand-right")]
         HandRight,
-        [Description("glyphicon-hand-left")]
+        [DisplayValue("glyphicon-hand-left")]
         HandLeft,
-        [Description("glyphicon-hand-up")]
+        [DisplayValue("glyphicon-hand-up")]
         HandUp,
-        [Description("glyphicon-hand-down")]
+        [DisplayValue("glyphicon-hand-down")]
         HandDown,
-        [Description("glyphicon-circle-arrow-right")]
+        [DisplayValue("glyphicon-circle-arrow-right")]
         CircleArrowRight,
-        [Description("glyphicon-circle-arrow-left")]
+        [DisplayValue("glyphicon-circle-arrow-left")]
         CircleArrowLeft,
-        [Description("glyphicon-circle-arrow-up")]
+        [DisplayValue("glyphicon-circle-arrow-up")]
         CircleArrowUp,
-        [Description("glyphicon-circle-arrow-down")]
+        [DisplayValue("glyphicon-circle-arrow-down")]
         CircleArrowDown,
-        [Description("glyphicon-globe")]
+        [DisplayValue("glyphicon-globe")]
         Globe,
-        [Description("glyphicon-wrench")]
+        [DisplayValue("glyphicon-wrench")]
         Wrench,
-        [Description("glyphicon-tasks")]
+        [DisplayValue("glyphicon-tasks")]
         Tasks,
-        [Description("glyphicon-filter")]
+        [DisplayValue("glyphicon-filter")]
         Filter,
-        [Description("glyphicon-briefcase")]
+        [DisplayValue("glyphicon-briefcase")]
         Briefcase,
-        [Description("glyphicon-fullscreen")]
+        [DisplayValue("glyphicon-fullscreen")]
         Fullscreen,
-        [Description("glyphicon-dashboard")]
+        [DisplayValue("glyphicon-dashboard")]
         Dashboard,
-        [Description("glyphicon-paperclip")]
+        [DisplayValue("glyphicon-paperclip")]
         Paperclip,
-        [Description("glyphicon-heart-empty")]
+        [DisplayValue("glyphicon-heart-empty")]
         HeartEmpty,
-        [Description("glyphicon-link")]
+        [DisplayValue("glyphicon-link")]
         Link,
-        [Description("glyphicon-phone")]
+        [DisplayValue("glyphicon-phone")]
         Phone,
-        [Description("glyphicon-pushpin")]
+        [DisplayValue("glyphicon-pushpin")]
         Pushpin,
-        [Description("glyphicon-usd")]
+        [DisplayValue("glyphicon-usd")]
         Usd,
-        [Description("glyphicon-gbp")]
+        [DisplayValue("glyphicon-gbp")]
         Gbp,
-        [Description("glyphicon-sort")]
+        [DisplayValue("glyphicon-sort")]
         Sort,
-        [Description("glyphicon-sort-by-alphabet")]
+        [DisplayValue("glyphicon-sort-by-alphabet")]
         SortByAlphabet,
-        [Description("glyphicon-sort-by-alphabet-alt")]
+        [DisplayValue("glyphicon-sort-by-alphabet-alt")]
         SortByAlphabetAlt,
-        [Description("glyphicon-sort-by-order")]
+        [DisplayValue("glyphicon-sort-by-order")]
         SortByOrder,
-        [Description("glyphicon-sort-by-order-alt")]
+        [DisplayValue("glyphicon-sort-by-order-alt")]
         SortByOrderAlt,
-        [Description("glyphicon-sort-by-attributes")]
+        [DisplayValue("glyphicon-sort-by-attributes")]
         SortByAttributes,
-        [Description("glyphicon-sort-by-attributes-alt")]
+        [DisplayValue("glyphicon-sort-by-attributes-alt")]
         SortByAttributesAlt,
-        [Description("glyphicon-unchecked")]
+        [DisplayValue("glyphicon-unchecked")]
         Unchecked,
-        [Description("glyphicon-expand")]
+        [DisplayValue("glyphicon-expand")]
         Expand,
-        [Description("glyphicon-collapse-down")]
+        [DisplayValue("glyphicon-collapse-down")]
         CollapseDown,
-        [Description("glyphicon-collapse-up")]
+        [DisplayValue("glyphicon-collapse-up")]
         CollapseUp,
-        [Description("glyphicon-log-in")]
+        [DisplayValue("glyphicon-log-in")]
         LogIn,
-        [Description("glyphicon-flash")]
+        [DisplayValue("glyphicon-flash")]
         Flash,
-        [Description("glyphicon-log-out")]
+        [DisplayValue("glyphicon-log-out")]
         LogOut,
-        [Description("glyphicon-new-window")]
+        [DisplayValue("glyphicon-new-window")]
         NewWindow,
-        [Description("glyphicon-record")]
+        [DisplayValue("glyphicon-record")]
         Record,
-        [Description("glyphicon-save")]
+        [DisplayValue("glyphicon-save")]
         Save,
-        [Description("glyphicon-open")]
+        [DisplayValue("glyphicon-open")]
         Open,
-        [Description("glyphicon-saved")]
+        [DisplayValue("glyphicon-saved")]
         Saved,
-        [Description("glyphicon-import")]
+        [DisplayValue("glyphicon-import")]
         Import,
-        [Description("glyphicon-export")]
+        [DisplayValue("glyphicon-export")]
         Export,
-        [Description("glyphicon-send")]
+        [DisplayValue("glyphicon-send")]
         Send,
-        [Description("glyphicon-floppy-disk")]
+        [DisplayValue("glyphicon-floppy-disk")]
         FloppyDisk,
-        [Description("glyphicon-floppy-saved")]
+        [DisplayValue("glyphicon-floppy-saved")]
         FloppySaved,
-        [Description("glyphicon-floppy-remove")]
+        [DisplayValue("glyphicon-floppy-remove")]
         FloppyRemove,
-        [Description("glyphicon-floppy-save")]
+        [DisplayValue("glyphicon-floppy-save")]
         FloppySave,
-        [Description("glyphicon-floppy-open")]
+        [DisplayValue("glyphicon-floppy-open")]
         FloppyOpen,
-        [Description("glyphicon-credit-card")]
+        [DisplayValue("glyphicon-credit-card")]
         CreditCard,
-        [Description("glyphicon-transfer")]
+        [DisplayValue("glyphicon-transfer")]
         Transfer,
-        [Description("glyphicon-cutlery")]
+        [DisplayValue("glyphicon-cutlery")]
         Cutlery,
-        [Description("glyphicon-header")]
+        [DisplayValue("glyphicon-header")]
         Header,
-        [Description("glyphicon-compressed")]
+        [DisplayValue("glyphicon-compressed")]
         Compressed,
-        [Description("glyphicon-earphone")]
+        [DisplayValue("glyphicon-earphone")]
         Earphone,
-        [Description("glyphicon-phone-alt")]
+        [DisplayValue("glyphicon-phone-alt")]
         PhoneAlt,
-        [Description("glyphicon-tower")]
+        [DisplayValue("glyphicon-tower")]
         Tower,
-        [Description("glyphicon-stats")]
+        [DisplayValue("glyphicon-stats")]
         Stats,
-        [Description("glyphicon-sd-video")]
+        [DisplayValue("glyphicon-sd-video")]
         SdVideo,
-        [Description("glyphicon-hd-video")]
+        [DisplayValue("glyphicon-hd-video")]
         HdVideo,
-        [Description("glyphicon-subtitles")]
+        [DisplayValue("glyphicon-subtitles")]
         Subtitles,
-        [Description("glyphicon-sound-stereo")]
+        [DisplayValue("glyphicon-sound-stereo")]
         SoundStereo,
-        [Description("glyphicon-sound-dolby")]
+        [DisplayValue("glyphicon-sound-dolby")]
         SoundDolby,
-        [Description("glyphicon-sound-5-1")]
+        [DisplayValue("glyphicon-sound-5-1")]
         Sound51,
-        [Description("glyphicon-sound-6-1")]
+        [DisplayValue("glyphicon-sound-6-1")]
         Sound61,
-        [Description("glyphicon-sound-7-1")]
+        [DisplayValue("glyphicon-sound-7-1")]
         Sound71,
-        [Description("glyphicon-copyright-mark")]
+        [DisplayValue("glyphicon-copyright-mark")]
         CopyrightMark,
-        [Description("glyphicon-registration-mark")]
+        [DisplayValue("glyphicon-registration-mark")]
         RegistrationMark,
-        [Description("glyphicon-cloud-download")]
+        [DisplayValue("glyphicon-cloud-download")]
         CloudDownload,
-        [Description("glyphicon-cloud-upload")]
+        [DisplayValue("glyphicon-cloud-upload")]
         CloudUpload,
-        [Description("glyphicon-tree-conifer")]
+        [DisplayValue("glyphicon-tree-conifer")]
         TreeConifer,
-        [Description("glyphicon-tree-deciduous")]
+        [DisplayValue("glyphicon-tree-deciduous")]
         TreeDeciduous,
-        [Description("glyphicon-cd")]
+        [DisplayValue("glyphicon-cd")]
         Cd,
-        [Description("glyphicon-save-file")]
+        [DisplayValue("glyphicon-save-file")]
         SaveFile,
-        [Description("glyphicon-open-file")]
+        [DisplayValue("glyphicon-open-file")]
         OpenFile,
-        [Description("glyphicon-level-up")]
+        [DisplayValue("glyphicon-level-up")]
         LevelUp,
-        [Description("glyphicon-copy")]
+        [DisplayValue("glyphicon-copy")]
         Copy,
-        [Description("glyphicon-paste")]
+        [DisplayValue("glyphicon-paste")]
         Paste,
-        [Description("glyphicon-alert")]
+        [DisplayValue("glyphicon-alert")]
         Alert,
-        [Description("glyphicon-equalizer")]
+        [DisplayValue("glyphicon-equalizer")]
         Equalizer,
-        [Description("glyphicon-king")]
+        [DisplayValue("glyphicon-king")]
         King,
-        [Description("glyphicon-queen")]
+        [DisplayValue("glyphicon-queen")]
         Queen,
-        [Description("glyphicon-pawn")]
+        [DisplayValue("glyphicon-pawn")]
         Pawn,
-        [Description("glyphicon-bishop")]
+        [DisplayValue("glyphicon-bishop")]
         Bishop,
-        [Description("glyphicon-knight")]
+        [DisplayValue("glyphicon-knight")]
         Knight,
-        [Description("glyphicon-baby-formula")]
+        [DisplayValue("glyphicon-baby-formula")]
         BabyFormula,
-        [Description("glyphicon-tent")]
+        [DisplayValue("glyphicon-tent")]
         Tent,
-        [Description("glyphicon-blackboard")]
+        [DisplayValue("glyphicon-blackboard")]
         Blackboard,
-        [Description("glyphicon-bed")]
+        [DisplayValue("glyphicon-bed")]
         Bed,
-        [Description("glyphicon-apple")]
+        [DisplayValue("glyphicon-apple")]
         Apple,
-        [Description("glyphicon-erase")]
+        [DisplayValue("glyphicon-erase")]
         Erase,
-        [Description("glyphicon-hourglass")]
+        [DisplayValue("glyphicon-hourglass")]
         Hourglass,
-        [Description("glyphicon-lamp")]
+        [DisplayValue("glyphicon-lamp")]
         Lamp,
-        [Description("glyphicon-duplicate")]
+        [DisplayValue("glyphicon-duplicate")]
         Duplicate,
-        [Description("glyphicon-piggy-bank")]
+        [DisplayValue("glyphicon-piggy-bank")]
         PiggyBank,
-        [Description("glyphicon-scissors")]
+        [DisplayValue("glyphicon-scissors")]
         Scissors,
-        [Description("glyphicon-bitcoin")]
+        [DisplayValue("glyphicon-bitcoin")]
         Bitcoin,
-        [Description("glyphicon-btc")]
+        [DisplayValue("glyphicon-btc")]
         Btc,
-        [Description("glyphicon-xbt")]
+        [DisplayValue("glyphicon-xbt")]
         Xbt,
-        [Description("glyphicon-yen")]
+        [DisplayValue("glyphicon-yen")]
         Yen,
-        [Description("glyphicon-jpy")]
+        [DisplayValue("glyphicon-jpy")]
         Jpy,
-        [Description("glyphicon-ruble")]
+        [DisplayValue("glyphicon-ruble")]
         Ruble,
-        [Description("glyphicon-rub")]
+        [DisplayValue("glyphicon-rub")]
         Rub,
-        [Description("glyphicon-scale")]
+        [DisplayValue("glyphicon-scale")]
         Scale,
-        [Description("glyphicon-ice-lolly")]
+        [DisplayValue("glyphicon-ice-lolly")]
         IceLolly,
-        [Description("glyphicon-ice-lolly-tasted")]
+        [DisplayValue("glyphicon-ice-lolly-tasted")]
         IceLollyTasted,
-        [Description("glyphicon-education")]
+        [DisplayValue("glyphicon-education")]
         Education,
-        [Description("glyphicon-option-horizontal")]
+        [DisplayValue("glyphicon-option-horizontal")]
         OptionHorizontal,
-        [Description("glyphicon-option-vertical")]
+        [DisplayValue("glyphicon-option-vertical")]
         OptionVertical,
-        [Description("glyphicon-menu-hamburger")]
+        [DisplayValue("glyphicon-menu-hamburger")]
         MenuHamburger,
-        [Description("glyphicon-modal-window")]
+        [DisplayValue("glyphicon-modal-window")]
         ModalWindow,
-        [Description("glyphicon-oil")]
+        [DisplayValue("glyphicon-oil")]
         Oil,
-        [Description("glyphicon-grain")]
+        [DisplayValue("glyphicon-grain")]
         Grain,
-        [Description("glyphicon-sunglasses")]
+        [DisplayValue("glyphicon-sunglasses")]
         Sunglasses,
-        [Description("glyphicon-text-size")]
+        [DisplayValue("glyphicon-text-size")]
         TextSize,
-        [Description("glyphicon-text-color")]
+        [DisplayValue("glyphicon-text-color")]
         TextColor,
-        [Description("glyphicon-text-background")]
+        [DisplayValue("glyphicon-text-background")]
         TextBackground,
-        [Description("glyphicon-object-align-top")]
+        [DisplayValue("glyphicon-object-align-top")]
         ObjectAlignTop,
-        [Description("glyphicon-object-align-bottom")]
+        [DisplayValue("glyphicon-object-align-bottom")]
         ObjectAlignBottom,
-        [Description("glyphicon-object-align-horizontal")]
+        [DisplayValue("glyphicon-object-align-horizontal")]
         ObjectAlignHorizontal,
-        [Description("glyphicon-object-align-left")]
+        [DisplayValue("glyphicon-object-align-left")]
         ObjectAlignLeft,
-        [Description("glyphicon-object-align-vertical")]
+        [DisplayValue("glyphicon-object-align-vertical")]
         ObjectAlignVertical,
-        [Description("glyphicon-object-align-right")]
+        [DisplayValue("glyphicon-object-align-right")]
         ObjectAlignRight,
-        [Description("glyphicon-triangle-right")]
+        [DisplayValue("glyphicon-triangle-right")]
         TriangleRight,
-        [Description("glyphicon-triangle-left")]
+        [DisplayValue("glyphicon-triangle-left")]
         TriangleLeft,
-        [Description("glyphicon-triangle-bottom")]
+        [DisplayValue("glyphicon-triangle-bottom")]
         TriangleBottom,
-        [Description("glyphicon-triangle-top")]
+        [DisplayValue("glyphicon-triangle-top")]
         TriangleTop,
-        [Description("glyphicon-console")]
+        [DisplayValue("glyphicon-console")]
         Console,
-        [Description("glyphicon-superscript")]
+        [DisplayValue("glyphicon-superscript")]
         Superscript,
-        [Description("glyphicon-subscript")]
+        [DisplayValue("glyphicon-subscript")]
         Subscript,
-        [Description("glyphicon-menu-left")]
+        [DisplayValue("glyphicon-menu-left")]
         MenuLeft,
-        [Description("glyphicon-menu-right")]
+        [DisplayValue("glyphicon-menu-right")]
         MenuRight,
-        [Description("glyphicon-menu-down")]
+        [DisplayValue("glyphicon-menu-down")]
         MenuDown,
-        [Description("glyphicon-menu-up")]
+        [DisplayValue("glyphicon-menu-up")]
         MenuUp
     }
 }

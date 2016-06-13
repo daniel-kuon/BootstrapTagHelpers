@@ -1,17 +1,18 @@
+using BootstrapTagHelpers.Attributes;
+
 namespace BootstrapTagHelpers.Navigation {
-    using System.ComponentModel;
 
     public enum NavbarPosition {
-        [Description("navbar-fixed-top")]
+        [DisplayValue("navbar-fixed-top")]
         FixedTop,
 
-        [Description("navbar-fixed-bottom")]
+        [DisplayValue("navbar-fixed-bottom")]
         FixedBottom,
 
-        [Description("navbar-static-top")]
+        [DisplayValue("navbar-static-top")]
         StaticTop,
 
-        [Description("navbar-static-bottom")]
+        [DisplayValue("navbar-static-bottom")]
         StaticBottom
     }
 }

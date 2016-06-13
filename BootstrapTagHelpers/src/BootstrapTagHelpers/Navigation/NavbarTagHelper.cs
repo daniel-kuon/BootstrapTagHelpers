@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using BootstrapTagHelpers.Extensions;
-using Microsoft.AspNet.Mvc.Infrastructure;
-using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Navigation {
     using BootstrapTagHelpers.Attributes;

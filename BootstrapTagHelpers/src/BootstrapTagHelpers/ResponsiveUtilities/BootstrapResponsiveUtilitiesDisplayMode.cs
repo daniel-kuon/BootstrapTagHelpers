@@ -1,13 +1,14 @@
+using BootstrapTagHelpers.Attributes;
+
 namespace BootstrapTagHelpers.ResponsiveUtilities {
-    using System.ComponentModel;
 
     public enum BootstrapResponsiveUtilitiesDisplayMode
     {
-        [Description("block")]
+        [DisplayValue("block")]
         Block,
-        [Description("inline-block")]
+        [DisplayValue("inline-block")]
         InlineBlock,
-        [Description("inline")]
+        [DisplayValue("inline")]
         Inline
     }
 }

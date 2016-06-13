@@ -3,7 +3,7 @@
 namespace BootstrapTagHelpers.ResponsiveUtilities {
     using BootstrapTagHelpers.Attributes;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [OutputElementHint("div")]
     public class SrOnlyTagHelper : BootstrapTagHelper {

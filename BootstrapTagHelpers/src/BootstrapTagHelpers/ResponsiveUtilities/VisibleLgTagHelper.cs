@@ -1,7 +1,7 @@
 using BootstrapTagHelpers.Extensions;
 
 namespace BootstrapTagHelpers.ResponsiveUtilities {
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [OutputElementHint("div")]
     public class VisibleLgTagHelper : BootstrapTagHelper {

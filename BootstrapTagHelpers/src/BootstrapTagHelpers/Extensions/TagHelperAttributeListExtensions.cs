@@ -1,5 +1,5 @@
 using System.Linq;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
     public static class TagHelperAttributeListExtensions {

@@ -6,8 +6,8 @@ namespace BootstrapTagHelpers {
     using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Mvc.Rendering;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [OutputElementHint("div")]
     [RestrictChildren("carousel-item")]
@@ -53,12 +53,12 @@ namespace BootstrapTagHelpers {
             output.AddCssClass("slide");
             output.Attributes.AddDataAttribute("ride", "carousel");
             output.PreContent.AppendHtml("<ol class=\"carousel-indicators\">");
-            output.Content.SetContent(await output.GetChildContentAsync());
+            output.Content.SetHtmlContent(await output.GetChildContentAsync());
             if (!Items.Any(i => i.IsActive)) {
                 _itemIndex = 0;
                 Items.Clear();
                 ActiveIndex = 0;
-                output.Content.SetContent(await output.GetChildContentAsync(false));
+                output.Content.SetHtmlContent(await output.GetChildContentAsync(false));
             }
             for (var i = 0; i < Items.Count; i++) {
                 var item = Items[i];

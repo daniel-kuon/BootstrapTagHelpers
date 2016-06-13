@@ -1,22 +1,22 @@
 {
-  "version": "0.1",
+  "version": "0.3-beta",
   "description": "Collection of TagHelpers for Twitter Bootstrap",
   "authors": [ "Daniel Kuon" ],
-  "tags": [ "Bootstrap", "TagHelper", "ASP.Net" ],
-  "projectUrl": "https://github.com/daniel-kuon/BootstrapTagHelpers",
-  "licenseUrl": "https://raw.githubusercontent.com/daniel-kuon/BootstrapTagHelpers/master/LICENSE",
+  "packOptions": {
+    "tags": [ "Bootstrap", "TagHelper", "ASP.Net" ],
+    "projectUrl": "https://github.com/daniel-kuon/BootstrapTagHelpers",
+    "licenseUrl": "https://raw.githubusercontent.com/daniel-kuon/BootstrapTagHelpers/master/LICENSE"
+  },
 
   "dependencies": {
-    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
-    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
-    "TagHelpers": "1.0.0-rc1-build75"
+    "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
+    "NETStandard.Library": "1.5.0-rc2-24027",
+    "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0-rc2-final"
   },
 
   "frameworks": {
-    "dnx451": {
-      "frameworkAssemblies": {
-        "System.ComponentModel.DataAnnotations": "4.0.0.0"
-      }
+    "netstandard1.5": {
+      "imports": "dnxcore50"
     }
   },
   "title": "BootstrapTagHelpers"

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+
 namespace BootstrapTagHelpers {
     using System.Linq;
     using System.Reflection;
@@ -6,8 +8,7 @@ namespace BootstrapTagHelpers {
     using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Mvc.Infrastructure;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     public abstract class BootstrapTagHelper : TagHelper {
         public const string AttributePrefix = "b-";

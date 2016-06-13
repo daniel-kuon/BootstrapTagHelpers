@@ -6,7 +6,7 @@ namespace BootstrapTagHelpers {
 
     using BootstrapTagHelpers.Attributes;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.CodeAnalysis.CSharp;
 
     [OutputElementHint("div")]

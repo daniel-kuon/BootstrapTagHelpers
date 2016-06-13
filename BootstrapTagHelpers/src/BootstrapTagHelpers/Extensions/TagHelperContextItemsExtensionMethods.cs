@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using Microsoft.AspNet.Razor.TagHelpers;
+using System.Reflection;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
 

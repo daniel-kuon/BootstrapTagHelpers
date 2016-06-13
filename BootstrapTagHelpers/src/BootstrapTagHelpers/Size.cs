@@ -1,16 +1,20 @@
-namespace BootstrapTagHelpers {
-    using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using BootstrapTagHelpers.Attributes;
 
-    public enum Size {
+namespace BootstrapTagHelpers {
+
+    public enum Size
+    {
         Default,
 
-        [Description("lg")]
-        Large,
+        [DisplayValue("lg")]
 
-        [Description("sm")]
+Large,
+
+        [DisplayValue("sm")]
         Small,
 
-        [Description("xs")]
+        [DisplayValue("xs")]
         ExtraSmall
     }
 }

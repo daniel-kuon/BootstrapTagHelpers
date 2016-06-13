@@ -1,11 +1,11 @@
-using System.ComponentModel;
+using BootstrapTagHelpers.Attributes;
 
 namespace BootstrapTagHelpers {
     public enum SimpleSize {
         Default,
-        [Description("lg")]
+        [DisplayValue("lg")]
         Large,
-        [Description("sm")]
+        [DisplayValue("sm")]
         Small
     }
 }

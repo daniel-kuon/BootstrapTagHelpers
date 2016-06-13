@@ -5,7 +5,7 @@ namespace BootstrapTagHelpers {
 
     using BootstrapTagHelpers.Attributes;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     public class TableTagHelper : BootstrapTagHelper {
         public const string StripedAttributeName = AttributePrefix + "striped";

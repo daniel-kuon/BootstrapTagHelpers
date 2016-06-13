@@ -1,12 +1,13 @@
-﻿namespace BootstrapTagHelpers.Navigation {
+﻿using Microsoft.AspNetCore.Html;
+
+namespace BootstrapTagHelpers.Navigation {
     using System.Threading.Tasks;
 
     using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Html.Abstractions;
-    using Microsoft.AspNet.Mvc.Infrastructure;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     [OutputElementHint("a")]
@@ -29,7 +30,7 @@
             output.TagName = "a";
             output.AddCssClass("navbar-brand");
             IHtmlContent tagHelperContent = await output.GetChildContentAsync();
-            output.Content.SetContent(tagHelperContent);
+            output.Content.SetHtmlContent(tagHelperContent);
             this.NavbarContext.BrandContent = output.ToTagHelperContent().GetContent();
             output.SuppressOutput();
         }

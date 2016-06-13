@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
 
-using Microsoft.AspNet.Http.Extensions;
-using Microsoft.AspNet.Mvc.Infrastructure;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
 

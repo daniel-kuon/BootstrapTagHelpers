@@ -5,7 +5,7 @@ namespace BootstrapTagHelpers.Attributes {
 
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
     ///     Properties marked with this Attribute will be automatically copied to the output of the TagHelper

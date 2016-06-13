@@ -1,6 +1,6 @@
 using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Forms {
     /// <summary>
@@ -14,9 +14,9 @@ namespace BootstrapTagHelpers.Forms {
         public InputGroupTagHelper InputGroupContext { get; set; }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            if (!output.PostElement.IsEmpty)
+            if (!output.PostElement.IsEmptyOrWhiteSpace)
                 InputGroupContext.Output.PostElement.AppendHtml(output.PostElement.GetContent());
-            if (!output.PreElement.IsEmpty)
+            if (!output.PreElement.IsEmptyOrWhiteSpace)
                 InputGroupContext.Output.PreElement.PrependHtml(output.PreElement.GetContent());
             base.BootstrapProcess(context, output);
         }

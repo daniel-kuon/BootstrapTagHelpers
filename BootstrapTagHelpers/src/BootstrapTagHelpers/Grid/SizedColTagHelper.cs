@@ -2,7 +2,7 @@ using BootstrapTagHelpers.Extensions;
 
 namespace BootstrapTagHelpers.Grid {
     using System.Collections.Generic;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     public abstract class SizedColTagHelper : BootstrapTagHelper {
         protected abstract int Size { get; }

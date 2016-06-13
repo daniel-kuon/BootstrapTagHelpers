@@ -1,4 +1,4 @@
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Navigation {
     using BootstrapTagHelpers.Attributes;

@@ -1,6 +1,6 @@
-using Microsoft.AspNet.Html.Abstractions;
-using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
     using System;
@@ -12,7 +12,7 @@ namespace BootstrapTagHelpers.Extensions {
         /// Prepends <see cref="value"/> to the current contens of <see cref="content"/>
         /// </summary>
         public static void Prepend(this TagHelperContent content, string value) {
-            if (content.IsEmpty)
+            if (content.IsEmptyOrWhiteSpace)
                 content.SetContent(value);
             else
                 content.SetContent(value + content.GetContent());
@@ -22,7 +22,7 @@ namespace BootstrapTagHelpers.Extensions {
         /// Prepends <see cref="value"/> to the current contens of <see cref="content"/> without encoding it
         /// </summary>
         public static void PrependHtml(this TagHelperContent content, string value) {
-            if (content.IsEmpty)
+            if (content.IsEmptyOrWhiteSpace)
                 content.SetHtmlContent(value);
             else
                 content.SetHtmlContent(value + content.GetContent());
@@ -32,11 +32,11 @@ namespace BootstrapTagHelpers.Extensions {
         /// Prepends <see cref="value"/> to the current contens of <see cref="content"/>
         /// </summary>
         public static void Prepend(this TagHelperContent content, IHtmlContent value) {
-            if (content.IsEmpty)
-                content.SetContent(value);
+            if (content.IsEmptyOrWhiteSpace)
+                content.SetHtmlContent(value);
             else {
                 string currentContent = content.GetContent();
-                content.SetContent(value);
+                content.SetHtmlContent(value);
                 content.AppendHtml(currentContent);
             }
         }
@@ -53,7 +53,7 @@ namespace BootstrapTagHelpers.Extensions {
         /// Appends <see cref="output"/> to the current contens of <see cref="content"/>
         /// </summary>
         public static void Append(this TagHelperContent content, TagHelperOutput output) {
-            content.Append(output.ToTagHelperContent());
+            content.AppendHtml(output.ToTagHelperContent());
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace BootstrapTagHelpers.Extensions {
         /// </summary>
         public static void Wrap(TagHelperContent content, IHtmlContent contentStart, IHtmlContent contentEnd) {
             content.Prepend(contentStart);
-            content.Append(contentEnd);
+            content.AppendHtml(contentEnd);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace BootstrapTagHelpers.Extensions {
                 throw new ArgumentNullException(nameof(contents));
             var content=new DefaultTagHelperContent();
             foreach (var tagHelperContent in contents) {
-                content.Append(tagHelperContent);
+                content.AppendHtml(tagHelperContent);
             }
             return content;
         }

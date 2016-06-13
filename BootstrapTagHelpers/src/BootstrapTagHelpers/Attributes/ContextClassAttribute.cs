@@ -4,7 +4,7 @@
 
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class ContextClassAttribute : Attribute {
@@ -37,7 +37,7 @@
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
             var targetType = target.GetType();
-            var attr = targetType.GetCustomAttribute<ContextClassAttribute>();
+            var attr = targetType.GetTypeInfo().GetCustomAttribute<ContextClassAttribute>();
             if (attr != null) {
                 if (string.IsNullOrEmpty(attr.Key))
                     context.SetContextItem(attr.Type ?? targetType, target);

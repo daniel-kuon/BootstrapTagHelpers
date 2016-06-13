@@ -3,7 +3,7 @@ namespace BootstrapTagHelpers.Forms {
     using BootstrapTagHelpers.Extensions;
     using BootstrapTagHelpers.Navigation;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [RestrictChildren("button", "a", "dropdown")]
     [OutputElementHint("div")]

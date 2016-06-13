@@ -2,7 +2,7 @@
     using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [HtmlTargetElement("*", Attributes = TooltipTextAttributeName)]
     public class ToolTipTagHelper : BootstrapTagHelper {

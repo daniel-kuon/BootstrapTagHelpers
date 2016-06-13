@@ -3,7 +3,7 @@ using BootstrapTagHelpers.Extensions;
 namespace BootstrapTagHelpers {
     using BootstrapTagHelpers.Attributes;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [HtmlTargetElement("img", Attributes = ResponsiveAttributeName)]
     [HtmlTargetElement("img", Attributes = CircleAttributeName)]

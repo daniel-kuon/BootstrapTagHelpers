@@ -1,10 +1,10 @@
-﻿using System.ComponentModel;
+﻿using BootstrapTagHelpers.Attributes;
 
 namespace BootstrapTagHelpers {
     public enum ResponsiveEmbedFormat {
-        [Description("4by3")]
+        [DisplayValue("4by3")]
         FourByThree,
-        [Description("16by9")]
+        [DisplayValue("16by9")]
         Widescreen
 
     }

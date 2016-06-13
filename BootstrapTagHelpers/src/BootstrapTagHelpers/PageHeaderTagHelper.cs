@@ -1,7 +1,7 @@
 using BootstrapTagHelpers.Extensions;
 
 namespace BootstrapTagHelpers {
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [OutputElementHint("div")]
     public class PageHeaderTagHelper : BootstrapTagHelper {

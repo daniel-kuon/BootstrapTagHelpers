@@ -1,4 +1,4 @@
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.ListGroup {
     [HtmlTargetElement("list-group-button", ParentTag = "list-group")]

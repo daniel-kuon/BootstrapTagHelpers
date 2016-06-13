@@ -5,8 +5,8 @@ using BootstrapTagHelpers.Extensions;
 using BootstrapTagHelpers.Forms;
 using BootstrapTagHelpers.Navigation;
 
-using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
 
@@ -54,7 +54,7 @@ namespace BootstrapTagHelpers {
         }
 
         protected override void BootstrapProcess(TagHelperContext context, TagHelperOutput output) {
-            var hasNavContext = context.HasContextItem<NavPillsTagHelper>() || context.HasContextItem<NavTabsTagHelper>();
+            var hasNavContext = context.HasContextItem<NavPillsTagHelper>() || context.HasContextItem<NavTabsTagHelper>() || context.HasContextItem<NavbarTagHelper>();
             if (hasNavContext) {
                 output.TagName = "li";
                 output.Attributes.Add("role", "presentation");
@@ -93,7 +93,7 @@ namespace BootstrapTagHelpers {
                 buttonBuilder.Attributes.Add("href", Href);
             }
             if (Splitted) {
-                output.PreContent.Append(buttonBuilder);
+                output.PreContent.AppendHtml(buttonBuilder);
                 buttonBuilder = new TagBuilder("button") {
                                                              Attributes = {
                                                                               {"type", "button"},
@@ -107,7 +107,7 @@ namespace BootstrapTagHelpers {
             buttonBuilder.Attributes.Add("aria-haspopup", "true");
             buttonBuilder.Attributes.Add("aria-expanded", "false");
             buttonBuilder.InnerHtml.AppendHtml("<span class=\"caret\">");
-            output.PreContent.Append(buttonBuilder);
+            output.PreContent.AppendHtml(buttonBuilder);
             output.PreContent.AppendHtml(
                                          RightAligned
                                              ? "<ul class=\"dropdown-menu dropdown-menu-right\">"

@@ -2,7 +2,7 @@ namespace BootstrapTagHelpers.Forms {
     using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     public class SelectTagHelper : BootstrapTagHelper {
         protected override bool CopyAttributesIfBootstrapIsDisabled => true;

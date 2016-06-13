@@ -6,7 +6,7 @@ namespace BootstrapTagHelpers.Forms {
     using BootstrapTagHelpers.Extensions;
     using BootstrapTagHelpers.Navigation;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [HtmlTargetElement("a", Attributes = ButtonAttributeName)]
     [HtmlTargetElement("input", Attributes = TypeAttributeName)]
@@ -51,6 +51,7 @@ namespace BootstrapTagHelpers.Forms {
         [HtmlAttributeName(DisabledAttributeName)]
         [HtmlAttributeNotBound]
         [HtmlAttributeMinimizable]
+        [CopyToOutput]
         public bool Disabled { get; set; }
 
         private bool WrapInButtonGroup { get; set; }

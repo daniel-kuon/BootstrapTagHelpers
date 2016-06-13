@@ -4,7 +4,7 @@
     using System.Reflection;
     using System.Text.RegularExpressions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     public static class MemberInfoExtensions {
         public static bool HasCustomAttribute<T>(this MemberInfo memberInfo) {

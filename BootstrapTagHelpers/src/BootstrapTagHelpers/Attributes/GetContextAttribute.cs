@@ -5,7 +5,7 @@
 
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [AttributeUsage(AttributeTargets.Property)]
     public class ContextAttribute : Attribute {
@@ -41,7 +41,9 @@
             foreach (var propertyInfo in target.GetType().GetProperties(BindingFlags.Instance|BindingFlags.Static|BindingFlags.Public|BindingFlags.NonPublic).Where(pI => pI.HasCustomAttribute<ContextAttribute>())) {
                 var attr = propertyInfo.GetCustomAttribute<ContextAttribute>();
                 if (string.IsNullOrEmpty(attr.Key)) {
-                    propertyInfo.SetValue(target, context.GetContextItem(propertyInfo.PropertyType, attr.UseInherited));
+                    var contextItem = context.GetContextItem(propertyInfo.PropertyType, attr.UseInherited);
+                    if (contextItem!=null)
+                        propertyInfo.SetValue(target, contextItem);
                     if (attr.RemoveContext)
                         context.RemoveContextItem(propertyInfo.PropertyType, attr.UseInherited);
                 } else {

@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
 
-using Microsoft.AspNet.Mvc.Infrastructure;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
 
@@ -36,8 +36,8 @@ namespace BootstrapTagHelpers {
             if (IsActive)
                 output.AddCssClass("active");
             output.PreContent.PrependHtml($"<img src=\"{Src}\" alt=\"{Alt}\" />");
-            output.Content.SetContent(await output.GetChildContentAsync());
-            if (!output.Content.IsEmpty) {
+            output.Content.SetHtmlContent(await output.GetChildContentAsync());
+            if (!output.Content.IsEmptyOrWhiteSpace) {
                 output.PreContent.AppendHtml("<div class=\"carousel-caption\">");
                 output.PostContent.PrependHtml("</div>");
             }

@@ -1,7 +1,7 @@
 using BootstrapTagHelpers.Attributes;
 using BootstrapTagHelpers.Extensions;
 
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.ListGroup {
 

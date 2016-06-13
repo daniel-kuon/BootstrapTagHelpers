@@ -2,7 +2,7 @@ namespace BootstrapTagHelpers.Navigation {
     using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [HtmlTargetElement("button", ParentTag = "navbar")]
     [HtmlTargetElement("input", Attributes = TypeAttributeName, ParentTag = "navbar")]

@@ -2,7 +2,7 @@ using BootstrapTagHelpers.Extensions;
 
 namespace BootstrapTagHelpers {
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [OutputElementHint("div")]
     public class ThumbnailTagHelper : BootstrapTagHelper {
@@ -19,7 +19,7 @@ namespace BootstrapTagHelpers {
             if (Href!=null)
                 output.Attributes.Add("href",Href);
             TagHelperContent content = (await output.GetChildContentAsync(true));
-            if (!content.IsEmpty && !content.IsWhiteSpace) {
+            if (!content.IsEmptyOrWhiteSpace) {
                 output.PreContent.AppendHtml("<div class=\"caption\">");
                 output.PostContent.SetHtmlContent("</div>");
             }

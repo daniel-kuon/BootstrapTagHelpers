@@ -1,5 +1,5 @@
 using BootstrapTagHelpers.Extensions;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Panel {
     [HtmlTargetElement("h1", ParentTag = "footer")]

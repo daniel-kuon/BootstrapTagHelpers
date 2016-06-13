@@ -3,7 +3,7 @@
 namespace BootstrapTagHelpers.Grid {
     using System.Collections.Generic;
     using System.Linq;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [OutputElementHint("div")]
     public class BsColTagHelper : BootstrapTagHelper {

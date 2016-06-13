@@ -1,5 +1,5 @@
 namespace BootstrapTagHelpers.Grid {
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [OutputElementHint("div")]
     public class Lg2TagHelper : SizedColTagHelper {

@@ -2,7 +2,7 @@ namespace BootstrapTagHelpers {
     using BootstrapTagHelpers.Attributes;
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [HtmlTargetElement("*", Attributes = ScrollSpayTargetAttributeName)]
     public class ScrollSpyTagHelper : BootstrapTagHelper {

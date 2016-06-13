@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers.Extensions {
 
@@ -17,17 +17,17 @@ namespace BootstrapTagHelpers.Extensions {
 
         public static async Task<TagHelperContent> ToTagHelperContentAsync(this ITagHelper tagHelper, Options options) {
             if (options.Context == null)
-                options.Context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
+                options.Context = new TagHelperContext(new TagHelperAttributeList(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
             if (options.Attributes == null)
                 options.Attributes = new List<TagHelperAttribute>();
             if (options.TagName == null)
                 options.TagName = tagHelper.GetTagName();
-            var output = new TagHelperOutput(options.TagName, new TagHelperAttributeList(options.Attributes), b => Task<TagHelperContent>.Factory.StartNew(() => options.Content)) {TagMode = options.TagMode};
+            var output = new TagHelperOutput(options.TagName, new TagHelperAttributeList(options.Attributes), (b,e) => Task<TagHelperContent>.Factory.StartNew(() => options.Content)) {TagMode = options.TagMode};
             if (options.InitTagHelper)
                 tagHelper.Init(options.Context);
             await tagHelper.ProcessAsync(options.Context, output);
             if (options.Content != null && !output.IsContentModified)
-                output.Content.SetContent(options.Content);
+                output.Content.SetHtmlContent(options.Content);
             return output.ToTagHelperContent();
         }
 
@@ -57,12 +57,12 @@ namespace BootstrapTagHelpers.Extensions {
 
         public static async Task RunTagHelperAsync(this ITagHelper tagHelper, Options options) {
             if (options.Context == null)
-                options.Context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
+                options.Context = new TagHelperContext(new TagHelperAttributeList(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
             if (options.Attributes == null)
                 options.Attributes = new List<TagHelperAttribute>();
             if (options.TagName == null)
                 options.TagName = tagHelper.GetTagName();
-            var output = new TagHelperOutput(options.TagName, new TagHelperAttributeList(options.Attributes), b => Task.Factory.StartNew(() => options.Content)) {TagMode = options.TagMode};
+            var output = new TagHelperOutput(options.TagName, new TagHelperAttributeList(options.Attributes), (b,e) => Task.Factory.StartNew(() => options.Content)) {TagMode = options.TagMode};
             if (options.InitTagHelper)
                 tagHelper.Init(options.Context);
             await tagHelper.ProcessAsync(options.Context, output);
@@ -89,7 +89,7 @@ namespace BootstrapTagHelpers.Extensions {
         }
 
         public static string GetTagName(this ITagHelper tagHelper) {
-            return tagHelper.GetType().GetCustomAttributes<HtmlTargetElementAttribute>().FirstOrDefault(a => a.Tag != "*")?.Tag
+            return tagHelper.GetType().GetTypeInfo().GetCustomAttributes<HtmlTargetElementAttribute>().FirstOrDefault(a => a.Tag != "*")?.Tag
                    ?? Regex.Replace(tagHelper.GetType().Name.Replace("TagHelper", ""), "([A-Z])", "-$1").Trim('-').ToLower();
         }
 
@@ -97,8 +97,8 @@ namespace BootstrapTagHelpers.Extensions {
             var tagHelperList = tagHelpers as IList<ITagHelper> ?? tagHelpers.ToList();
             return
                 tagHelperList.OrderBy(tH => tH.Order)
-                             .FirstOrDefault(tH => tH.GetType().HasCustomAttribute<HtmlTargetElementAttribute>())?
-                             .GetType()
+                             .FirstOrDefault(tH => tH.GetType().GetTypeInfo().HasCustomAttribute<HtmlTargetElementAttribute>())?
+                             .GetType().GetTypeInfo()
                              .GetCustomAttributes<HtmlTargetElementAttribute>()
                              .FirstOrDefault(a => a.Tag != "*")?.Tag
                 ?? Regex.Replace(tagHelperList.Min(tH => tH.Order).GetType().Name.Replace("TagHelper", ""), "([A-Z])", "-$1").Trim('-').ToLower();
@@ -138,12 +138,12 @@ namespace BootstrapTagHelpers.Extensions {
         {
             var tagHelperList = tagHelpers as List<ITagHelper> ?? tagHelpers.ToList();
             if (options.Context == null)
-                options.Context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
+                options.Context = new TagHelperContext(new TagHelperAttributeList(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
             if (options.Attributes == null)
                 options.Attributes = new List<TagHelperAttribute>();
             if (options.TagName == null)
                 options.TagName = tagHelpers.GetTagName();
-            var output = new TagHelperOutput(options.TagName, new TagHelperAttributeList(options.Attributes), b => Task.Factory.StartNew(() => options.Content)) { TagMode = options.TagMode };
+            var output = new TagHelperOutput(options.TagName, new TagHelperAttributeList(options.Attributes), (b,e) => Task.Factory.StartNew(() => options.Content)) { TagMode = options.TagMode };
             if (options.InitTagHelper)
                 tagHelperList.ForEach(tH => tH.Init(options.Context));
             foreach (var tagHelper in tagHelperList)
@@ -151,7 +151,7 @@ namespace BootstrapTagHelpers.Extensions {
                 await tagHelper.ProcessAsync(options.Context, output);
             }
             if (options.Content != null && !output.IsContentModified)
-                output.Content.SetContent(options.Content);
+                output.Content.SetHtmlContent(options.Content);
             return output.ToTagHelperContent();
         }
 
@@ -189,12 +189,12 @@ namespace BootstrapTagHelpers.Extensions {
         {
             var tagHelperList = tagHelpers as List<ITagHelper> ?? tagHelpers.ToList();
             if (options.Context == null)
-                options.Context = new TagHelperContext(new List<IReadOnlyTagHelperAttribute>(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
+                options.Context = new TagHelperContext(new TagHelperAttributeList(), new Dictionary<object, object>(), Guid.NewGuid().ToString("N"));
             if (options.Attributes == null)
                 options.Attributes = new List<TagHelperAttribute>();
             if (options.TagName == null)
                 options.TagName = tagHelpers.GetTagName();
-            var output = new TagHelperOutput(options.TagName, new TagHelperAttributeList(options.Attributes), b => Task.Factory.StartNew(() => options.Content)) { TagMode = options.TagMode };
+            var output = new TagHelperOutput(options.TagName, new TagHelperAttributeList(options.Attributes), (b,e) => Task.Factory.StartNew(() => options.Content)) { TagMode = options.TagMode };
             if (options.InitTagHelper)
                 tagHelperList.ForEach(tH => tH.Init(options.Context));
             foreach (var tagHelper in tagHelperList)

@@ -3,7 +3,7 @@ using BootstrapTagHelpers.Extensions;
 namespace BootstrapTagHelpers.ResponsiveUtilities {
     using BootstrapTagHelpers.Attributes;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [HtmlTargetElement("*", Attributes = HiddenXsAttributeName)]
     [HtmlTargetElement("*", Attributes = HiddenSmAttributeName)]

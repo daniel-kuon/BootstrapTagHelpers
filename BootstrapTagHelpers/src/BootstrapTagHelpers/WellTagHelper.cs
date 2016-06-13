@@ -1,6 +1,6 @@
 ﻿using BootstrapTagHelpers.Extensions;
 using BootstrapTagHelpers.Forms;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BootstrapTagHelpers {
     [OutputElementHint("div")]

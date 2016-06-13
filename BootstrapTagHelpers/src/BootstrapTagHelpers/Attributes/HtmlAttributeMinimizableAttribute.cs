@@ -6,7 +6,7 @@ namespace BootstrapTagHelpers.Attributes {
 
     using BootstrapTagHelpers.Extensions;
 
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [AttributeUsage(AttributeTargets.Property)]
     public class HtmlAttributeMinimizableAttribute : Attribute {
@@ -26,7 +26,7 @@ namespace BootstrapTagHelpers.Attributes {
                 string attributeName = property.GetHtmlAttributeName();
                 if (!context.AllAttributes.ContainsName(attributeName))
                     continue;
-                IReadOnlyTagHelperAttribute attribute = context.AllAttributes[attributeName];
+                TagHelperAttribute attribute = context.AllAttributes[attributeName];
                 if (attribute.Value is bool)
                     property.SetValue(target, attribute.Value);
                 else if (attribute.Minimized)
