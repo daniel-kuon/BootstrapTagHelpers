@@ -1,4 +1,5 @@
-namespace BootstrapTagHelpers.Attributes {
+namespace BootstrapTagHelpers.Attributes
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -9,7 +10,8 @@ namespace BootstrapTagHelpers.Attributes {
     using Microsoft.AspNetCore.Razor.TagHelpers;
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class HtmlAttributeMinimizableAttribute : Attribute {
+    public class HtmlAttributeMinimizableAttribute : Attribute
+    {
 
         public static void FillMinimizableAttributes(object target, TagHelperContext context)
         {
@@ -29,7 +31,7 @@ namespace BootstrapTagHelpers.Attributes {
                 TagHelperAttribute attribute = context.AllAttributes[attributeName];
                 if (attribute.Value is bool)
                     property.SetValue(target, attribute.Value);
-                else if (attribute.Minimized)
+                else if (attribute.ValueStyle == HtmlAttributeValueStyle.Minimized)
                     property.SetValue(target, true);
                 else
                     property.SetValue(target, !(attribute.Value ?? "").ToString().Equals("false"));

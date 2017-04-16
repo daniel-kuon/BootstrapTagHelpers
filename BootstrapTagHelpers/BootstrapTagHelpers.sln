@@ -1,22 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25402.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6AE6737-CDF4-4F8C-A343-632C6FF4E970}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1284106-CA74-466C-8385-ABAFE034749F}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BootstrapTagHelpers", "src\BootstrapTagHelpers\BootstrapTagHelpers.xproj", "{F4055DDC-E8B4-48F4-8495-DF868FBFF229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootstrapTagHelpers", "src\BootstrapTagHelpers\BootstrapTagHelpers.csproj", "{F4055DDC-E8B4-48F4-8495-DF868FBFF229}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BootstrapTagHelpersDemo", "src\BootstrapTagHelpersDemo\BootstrapTagHelpersDemo.xproj", "{58C34C18-2653-4EFA-AF26-223EF0550F40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootstrapTagHelpersDemo", "src\BootstrapTagHelpersDemo\BootstrapTagHelpersDemo.xproj", "{58C34C18-2653-4EFA-AF26-223EF0550F40}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BootstrapTagHelpersTest", "src\BootstrapTagHelpersTest\BootstrapTagHelpersTest.xproj", "{08C19231-85AB-4593-A69C-6715F7FB496E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.xproj", "{F3F60041-42C9-4C79-8176-9F1492371A02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{F3F60041-42C9-4C79-8176-9F1492371A02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

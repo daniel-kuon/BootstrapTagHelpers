@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Collection of TagHelpers for Twitter Bootstrap</Description>
+    <AssemblyTitle>BootstrapTagHelpers</AssemblyTitle>
+    <VersionPrefix>0.4-beta</VersionPrefix>
+    <Authors>Daniel Kuon</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>BootstrapTagHelpers</AssemblyName>
+    <PackageId>BootstrapTagHelpers</PackageId>
+    <PackageTags>Bootstrap;TagHelper;ASP.Net</PackageTags>
+    <PackageProjectUrl>https://github.com/daniel-kuon/BootstrapTagHelpers</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/daniel-kuon/BootstrapTagHelpers/master/LICENSE</PackageLicenseUrl>
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="1.0.3" />
+  </ItemGroup>
+
+</Project>
